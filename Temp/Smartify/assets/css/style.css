@@ -515,7 +515,7 @@ input {
   background-color: #E3E6F3;
 }
 .sticky-nav.menu_fixed.style-1 {
-  background-color: #252525;
+  background-color: #233b6e;
   padding: 20px 0;
 }
 
@@ -1248,17 +1248,18 @@ body.offcanvas-open {
   padding: 10px 15px;
   line-height: 26px;
   border: none;
-  background: #000;
+  background: #233B6E;
   border-radius: 0px;
   width: auto;
   height: auto;
 }
 .offcanvas .inner .foot .buttons a:hover {
-  background-color: #266bf9;
-  color: #fff;
+  background-color: rgb(227, 230, 243);
+  color: #233B6E;
+border: 1px solid #233B6E;
 }
 .offcanvas .inner .foot .buttons .current-btn {
-  background-color: #266bf9;
+  background-color: #233b6e;
   color: #fff;
 }
 .offcanvas .inner .foot .sub-total {
@@ -1846,7 +1847,7 @@ body.offcanvas-open {
 }
 .hero-slide-content.hero-slide-content-2 .price .amount {
   font-size: 48px;
-  color: #266bf9;
+  color: #233b6e;
   display: block;
   margin: 15px 0 60px;
 }
@@ -2362,7 +2363,7 @@ body.offcanvas-open {
   background-color: #000000;
 }
 .product .badges span.sale {
-  background: #266bf9;
+  background: #233b6e;
 }
 .product .actions {
   position: absolute;
@@ -4371,7 +4372,7 @@ body.offcanvas-open {
           align-items: center;
   border-radius: 50%;
   margin-right: 30px;
-  background-color: #266bf9;
+  background-color: #233b6e;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (max-width: 479px) {
   .single-feature .feature-icon {
@@ -7176,7 +7177,7 @@ body.offcanvas-open {
   text-transform: capitalize;
   display: inline-block;
   margin-left: 10px;
-  background: #266bf9;
+  background: #233B6E;
   color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -7194,7 +7195,9 @@ body.offcanvas-open {
   letter-spacing: 1px;
 }
 .product-details-content .pro-details-quality .pro-details-cart .add-cart:hover {
-  background-color: #000000;
+  background-color: rgb(227, 230, 243);
+  color: #233B6E;
+border: 1px solid #233B6E;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .product-details-content .pro-details-quality .pro-details-cart .add-cart {
@@ -7877,9 +7880,9 @@ body.offcanvas-open {
 .cart-shiping-update-wrapper .cart-shiping-update > a,
 .cart-shiping-update-wrapper .cart-clear > button,
 .cart-shiping-update-wrapper .cart-clear > a {
-  background-color: #f2f2f2;
+  background-color: #233B6E;
   border-radius: 0px;
-  color: #000000;
+  color: white;
   display: inline-block;
   font-size: 14px;
   font-weight: 600;
@@ -7905,18 +7908,20 @@ body.offcanvas-open {
 
 .cart-shiping-update-wrapper .cart-shiping-update > a:hover,
 .cart-shiping-update-wrapper .cart-clear > button:hover {
-  background-color: #266bf9;
-  color: #fff;
+  background-color: rgb(227, 230, 243);
+  color: #233B6E;
+border: 1px solid #233B6E;
 }
 
 .cart-shiping-update-wrapper .cart-clear > a {
-  background-color: #266bf9;
+  background-color: #233B6E;
   color: #fff;
 }
 
 .cart-shiping-update-wrapper .cart-clear > a:hover {
-  background-color: #000000;
-  color: #fff;
+  background-color: rgb(227, 230, 243);
+  color: #233B6E;
+border: 1px solid #233B6E;
 }
 
 .cart-tax,
@@ -8031,7 +8036,7 @@ body.offcanvas-open {
   border-radius: 0px;
 }
 .discount-code-wrapper .discount-code button.cart-btn-2 {
-  background: #266bf9;
+  background: #233B6E;
   border-radius: 0px;
   color: #fff;
   display: inline-block;
@@ -8042,8 +8047,9 @@ body.offcanvas-open {
   text-transform: uppercase;
 }
 .discount-code-wrapper .discount-code button.cart-btn-2:hover {
-  color: #fff;
-  background: #000000;
+  background-color: rgb(227, 230, 243);
+  color: #233B6E;
+border: 1px solid #233B6E;
 }
 
 .grand-totall h5 {
@@ -8092,7 +8098,7 @@ body.offcanvas-open {
   float: right;
 }
 .grand-totall .grand-totall-title {
-  color: #266bf9;
+  color: green;
   font-size: 20px;
   font-weight: 600;
   margin: 0 0 25px;
@@ -8101,7 +8107,7 @@ body.offcanvas-open {
   float: right;
 }
 .grand-totall a {
-  background-color: #266bf9;
+  background-color: #233B6E;
   border-radius: 0px;
   color: #fff;
   display: block;
@@ -8116,8 +8122,9 @@ body.offcanvas-open {
   transition: all 0.3s ease 0s;
 }
 .grand-totall a:hover {
-  background-color: #000000;
-}
+  background-color: rgb(227, 230, 243);
+  color: #233B6E;
+border: 1px solid #233B6E;}
 
 .billing-info-wrap h3 {
   font-weight: 600;
@@ -8303,7 +8310,7 @@ body.offcanvas-open {
 }
 .your-order-area .your-order-wrap .your-order-product-info .your-order-total ul li {
   font-weight: 600;
-  color: #266bf9;
+  color: green;
   font-size: 16px;
   list-style: outside none none;
   font-family: "Poppins", sans-serif;
@@ -8343,7 +8350,7 @@ body.offcanvas-open {
   margin-top: 25px;
 }
 .your-order-area .Place-order a {
-  background-color: #266bf9;
+  background-color: #233B6E;
   color: #fff;
   display: block;
   font-weight: 600;
@@ -8356,8 +8363,9 @@ body.offcanvas-open {
   z-index: 9;
 }
 .your-order-area .Place-order a:hover {
-  background-color: #000000;
-}
+  background-color: rgb(227, 230, 243);
+  color: #233B6E;
+border: 1px solid #233B6E;}
 
 .open-toggle, .open-toggle2 {
   display: none;
@@ -8634,13 +8642,14 @@ Pages - My Account
 .dashboard_tab_button li .nav-link {
   font-weight: 600;
   color: #fff;
-  background-color: #000000;
+  background-color: #233b6e;
   font-size: 16px;
   text-transform: uppercase;
   display: block;
 }
 .dashboard_tab_button li .nav-link.active {
-  background-color: #266bf9;
+  background-color: #f5f5f5;
+  color: #233b6e;
 }
 
 .dashboard_content h4 {
@@ -8955,7 +8964,7 @@ Pages - My Account
 .empty-text-contant a.empty-cart-btn {
   padding: 15px 25px;
   display: inline-block;
-  background: #266bf9;
+  background: #233B6E;
   color: #fff;
   font-size: 14px;
   font-weight: 500;
@@ -8965,8 +8974,9 @@ Pages - My Account
   text-transform: uppercase;
 }
 .empty-text-contant a.empty-cart-btn:hover {
-  background-color: #000000;
-}
+  background-color: rgb(227, 230, 243);
+  color: #233B6E;
+border: 1px solid #233B6E;}
 .empty-text-contant a.empty-cart-btn:hover i {
   -webkit-transform: translate(-5px, 0px);
           transform: translate(-5px, 0px);
@@ -9471,7 +9481,7 @@ Pages - My Account
 
 .btn_cmpted .shop-btn {
   width: 210px;
-  background: #266bf9;
+  background: #233B6E;
   text-transform: capitalize;
   height: 50px;
   line-height: 50px;
@@ -9483,8 +9493,9 @@ Pages - My Account
   font-size: 16px;
 }
 .btn_cmpted .shop-btn:hover {
-  background-color: #1d1d1d;
-}
+  background-color: rgb(227, 230, 243);
+  color: #233B6E;
+border: 1px solid #233B6E;}
 
 .cntct.typewriter-effect a {
   font-size: 20px;
@@ -9566,7 +9577,7 @@ Pages - My Account
 }
 
 .contact-wrapper {
-  background-color: #f5f5f5;
+  background-color: #e3e6f3;
   padding: 110px 120px 0px 120px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -9773,7 +9784,7 @@ Pages - My Account
       -ms-flex-pack: center;
           justify-content: center;
   border-radius: 15px;
-  background-color: #266bf9;
+  background-color: #233B6E;
   color: #fff;
   border: 0;
   outline: 0;
@@ -9781,8 +9792,9 @@ Pages - My Account
   margin: auto;
 }
 .contact-form button:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: white;
+  border: 1px solid #233B6E;
+  color: #233B6E;
 }
 @media only screen and (max-width: 767px) {
   .contact-form button {
