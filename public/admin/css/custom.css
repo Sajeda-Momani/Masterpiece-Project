@@ -1,0 +1,39 @@
+.w-4 {
+  width: 1rem;
+}
+.h-4 {
+  height: 1rem;
+}
+
+.w-6 {
+  width: 1.5rem;
+}
+.h-6 {
+  height: 1.5rem;
+}
+
+.dropzone {
+  background: white;
+  border-radius: 5px;
+  border: 2px dashed rgb(0, 135, 247);
+  border-image: none;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.iconBx.ml-2 {
+  margin-left: 30% !important;
+}
+.custom-icon-size {
+  font-size: 25px;
+  
+}
+.nav-sidebar .nav-item>.nav-link {
+  margin-bottom: 3%;
+}
+.bac{
+  background-color:transparent ;
+  border-color: transparent;
+  box-shadow: none;
+}
