@@ -12,8 +12,9 @@ class OrderItemController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $orderitems = OrderItem::all();
+        return view('admin.order-detail', ['orderitems' => $orderitems]);
+    }    
 
     /**
      * Show the form for creating a new resource.

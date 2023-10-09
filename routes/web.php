@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
@@ -7,6 +8,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\OrderItemController;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
 
@@ -87,10 +91,7 @@ Route::get('/wishlist', function () {
 
 // ///////////////// Dashboard ///////////////////
 
-Route::get('/dashboard', function () {
-    return view('Admin.dashboard');
-})->name('Admin.dashboard');
-
+Route::get('/dashboard', [CustomerController::class, 'Recent']);
 
 Route::resource('/categories', CategoryController::class);
 Route::resource('/products', ProductController::class);
@@ -98,27 +99,10 @@ Route::resource('/admins', AdminController::class);
 Route::resource('/contacts', ContactController::class);
 Route::resource('/coupons', CouponController::class);
 Route::resource('/customers', CustomerController::class);
-
-
-// Route::get('/users', function () {
-//     return view('Admin.users');
-// })->name('Admin.users');
-
 Route::resource('/orders', OrderController::class);
+Route::resource('/ordersitem', OrderItemController::class);
+Route::resource('/reviews', ReviewController::class);
+Route::resource('/address', AddressController::class);
+Route::resource('/paymant', PaymentController::class);
 
 
-Route::get('/subcategory', function () {
-    return view('Admin.subcategory');
-})->name('Admin.subcategory');
-
-
-Route::get('/brands', function () {
-    return view('Admin.brands');
-})->name('Admin.brands');
-
-
-
-
-Route::get('/pages', function () {
-    return view('Admin.pages');
-})->name('Admin.pages');

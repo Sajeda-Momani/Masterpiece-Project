@@ -12,8 +12,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $paymants = Payment::all();
+        return view('admin.payment', ['paymants' => $paymants]);    }
 
     /**
      * Show the form for creating a new resource.

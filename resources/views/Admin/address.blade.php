@@ -8,9 +8,7 @@
 					<div class="container-fluid my-2">
 						<div class="row mb-2">
 							<div class="col-sm-6">
-								<h1>Orders</h1>
-							</div>
-							<div class="col-sm-6 text-right">
+								<h1>Address</h1>
 							</div>
 						</div>
 					</div>
@@ -38,31 +36,25 @@
 								<table class="table table-hover text-nowrap">
 									<thead>
 										<tr>
-											<th>Orders #</th>											
-                                            <th>Image</th>
-                                            <th>Customer</th>
-                                            <th>Email</th>
-											<th>Status</th>
-                                            <th>Total</th>
-                                            <th>Date Purchased</th>
+											<th width="60">ID</th>
+											<th width="100">Customer Name</th>
+											<th width="100">Customer Address</th>
+                                            <th width="100">Customer Phone Number</th>
+											<th width="100">Notes</th>
 										</tr>
 									</thead>
 									<tbody>
-										@foreach ($orders as $order)
-                                        <tr>
-											<td><a href="/ordersitem/{{ $order->id }}">{{ $order->id }}</a></td>
-                                            <td>{{ $order->customer->image  }}</td>
-											<td>{{ $order->customer->name  }}</td>
-                                            <td>{{ $order->customer->email  }}</td>
-                                            <td>
-                                                <span class="status {{ $order->statusClass }}">{{ $order->status }}</span>
-                                            </td>
-											<td>${{ number_format($order->total_price, 2) }}</td>
-                                            <td>{{ $order->order_date }}</td>
+										@foreach ($addresses as $address)
 
-                                        </tr>
-                                    @endforeach
-										
+										<tr>
+											<td>{{ $address->customer->name }}</td>
+											<td>{{ $address->customer->name }}</td>
+											<td>{{ $address->city }}, {{ $address->town }},{{ $address->street }},{{ $address->department_number }}</td>
+											<td>{{ $address->phone }}</td>
+											<td>{{ $address->additional_information }}</td>
+											
+										</tr>
+										@endforeach
 									</tbody>
 								</table>										
 							</div>

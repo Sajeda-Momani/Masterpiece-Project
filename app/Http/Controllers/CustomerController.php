@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -13,8 +15,8 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::all();
-        return view('admin.customers', ['customers'=>$customers]);  
-        }
+        return view('admin.customers', ['customers' => $customers]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -30,8 +32,8 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         Customer::create($request->all());
-        return redirect ('customers')->withSuccess('Added Successfully');
-             }
+        return redirect('customers')->withSuccess('Added Successfully');
+    }
 
     /**
      * Display the specified resource.
@@ -60,11 +62,21 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
         $customer = Customer::find($id);
         $customer->delete();
         return redirect()->route('customers.index')->withSuccess('customer deleted successfully');
-              
+    }
+
+    public function Recent()
+    {
+        $recentCustomers = Customer::latest()->take(5)->get(); // Retrieve the most recent 5 customers (adjust as needed)
+        $recentOrders = Order::orderBy('order_date', 'desc')->take(5)->get();
+
+        return view('Admin.dashboard', [
+            'recentCustomers' => $recentCustomers,
+            'recentOrders' => $recentOrders
+        ]);
     }
 }

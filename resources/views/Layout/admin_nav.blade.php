@@ -81,8 +81,8 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
 
-                        <li class="nav-item {{ request()->is('Admin.dashboard') ? 'active' : '' }}">
-                            <a href="{{ route('Admin.dashboard') }}" class="nav-link">
+                        <li class="nav-item {{ request()->is('dashboard*') ? 'active' : '' }}">
+                            <a href="{{ url('/dashboard') }}" class="nav-link">
                                 <ion-icon name="home-outline" class="custom-icon-size"></ion-icon>
                                 <p>Dashboard</p>
                             </a>
@@ -120,14 +120,14 @@
                                 <p>Admins</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->is('Admin.pages') ? 'active' : '' }}">
+                        <li class="nav-item {{ request()->is('contacts*') ? 'active' : '' }}">
                             <a href="{{ url('/contacts') }}" class="nav-link">
                                 <ion-icon name="chatbubble-outline"class="custom-icon-size"></ion-icon>
                                 <p>Messages</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->is('Admin.pages') ? 'active' : '' }}">
-                            <a href="{{ route('Admin.pages') }}" class="nav-link">
+                        <li class="nav-item {{ request()->is('reviews*') ? 'active' : '' }}">
+                            <a href="{{ url('/reviews') }}" class="nav-link">
                                 <ion-icon name="star-outline"class="custom-icon-size"></ion-icon>
                                 <p>Reviwes</p>
                             </a>
@@ -138,14 +138,14 @@
                                 <p>Discount</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{ request()->is('address*') ? 'active' : '' }}">
+                            <a href="{{ url('/address') }}" class="nav-link">
                                 <ion-icon name="location-outline"class="custom-icon-size"></ion-icon>
                                 <p>Address</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->is('Admin.subcategory') ? 'active' : '' }}">
-                            <a href="{{ route('Admin.subcategory') }}" class="nav-link">
+                        <li class="nav-item {{ request()->is('paymant*') ? 'active' : '' }}">
+                            <a href="{{ url('/paymant') }}" class="nav-link">
                                 <ion-icon name="card-outline"class="custom-icon-size"></ion-icon>
                                 <p>Paymant</p>
                             </a>

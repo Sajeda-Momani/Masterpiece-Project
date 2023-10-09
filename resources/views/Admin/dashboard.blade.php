@@ -28,23 +28,27 @@
                     <div class="cardBox">
                         <div class="card">
                             <div class="d-flex align-items-center">
+                                @php
+                                    $CustomerCount = \App\Models\Customer::count();
+                                @endphp
                                 <div>
-                                    <div class="numbers">1,504</div>
-                                    <div class="cardName">Daily Views</div>
+                                    <div class="numbers">{{ $CustomerCount }}</div>
+                                    <div class="cardName">Customers</div>
                                 </div>
                                 <div class="iconBx ml-2"> <!-- You can adjust the margin as needed -->
-                                    <ion-icon name="eye-outline"></ion-icon>
+                                    <ion-icon name="person-outline"></ion-icon>
                                 </div>
                             </div>
                         </div>
 
-
                         <div class="card">
                             <div class="d-flex align-items-center">
-
+                                @php
+                                    $OrderCount = \App\Models\Order::count();
+                                @endphp
                                 <div>
-                                    <div class="numbers">8000</div>
-                                    <div class="cardName">Sales</div>
+                                    <div class="numbers">{{ $OrderCount }}</div>
+                                    <div class="cardName">Orders</div>
                                 </div>
 
                                 <div class="iconBx ml-2">
@@ -55,10 +59,12 @@
 
                         <div class="card">
                             <div class="d-flex align-items-center">
-
+                                @php
+                                    $MessagesCount = \App\Models\Contact::count();
+                                @endphp
                                 <div>
-                                    <div class="numbers">2840</div>
-                                    <div class="cardName">Comments</div>
+                                    <div class="numbers">{{ $MessagesCount }}</div>
+                                    <div class="cardName">Messages</div>
                                 </div>
 
                                 <div class="iconBx ml-2">
@@ -69,12 +75,15 @@
 
                         <div class="card">
                             <div class="d-flex align-items-center">
+                                @php
+                                    $PaymentsTotal = \App\Models\Payment::sum('amount');
+                                @endphp
                                 <div>
-                                    <div class="numbers">$7,842</div>
+                                    <div class="numbers">{{ $PaymentsTotal }}</div>
                                     <div class="cardName">Earning</div>
                                 </div>
 
-                                <div class="iconBx ml-2"> 
+                                <div class="iconBx ml-2">
                                     <ion-icon name="cash-outline"></ion-icon>
                                 </div>
                             </div>
@@ -86,20 +95,45 @@
                         <div class="recentOrders">
                             <div class="cardHeader">
                                 <h2>Recent Orders</h2>
-                                <a href="#" class="btn">View All</a>
+                                <a href="/orders" class="btn">View All</a>
                             </div>
 
                             <table>
                                 <thead>
                                     <tr>
                                         <td>Name</td>
-                                        <td>Price</td>
                                         <td>Payment</td>
                                         <td>Status</td>
+                                        <td>Date Purchased</td>
                                     </tr>
                                 </thead>
 
                                 <tbody>
+                                    @foreach ($recentOrders as $order)
+                                        <tr>
+                                            <td>{{ $order->customer->name }}</td>
+                                            <td>${{ number_format($order->total_price, 2) }}</td>
+                                            <td>
+                                                <span class="status {{ $order->statusClass }}">{{ $order->status }}</span>
+                                            </td>
+                                            <td>{{ $order->order_date }}</td>
+                                        </tr>
+                                    @endforeach
+                                    {{-- <tr>
+                                        <td>Dell Laptop</td>
+                                        <td>$110</td>
+                                        <td>Due</td>
+                                        <td><span class="status pending">Pending</span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Apple Watch</td>
+                                        <td>$1200</td>
+                                        <td>Paid</td>
+                                        <td><span class="status return">Return</span></td>
+                                    </tr>
+
+
                                     <tr>
                                         <td>Star Refrigerator</td>
                                         <td>$1200</td>
@@ -123,38 +157,10 @@
 
                                     <tr>
                                         <td>Addidas Shoes</td>
-                                        <td>$620</td>
+                                        <td>$620</td>غ
                                         <td>Due</td>
                                         <td><span class="status inProgress">In Progress</span></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Star Refrigerator</td>
-                                        <td>$1200</td>
-                                        <td>Paid</td>
-                                        <td><span class="status delivered">Delivered</span></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Dell Laptop</td>
-                                        <td>$110</td>
-                                        <td>Due</td>
-                                        <td><span class="status pending">Pending</span></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Apple Watch</td>
-                                        <td>$1200</td>
-                                        <td>Paid</td>
-                                        <td><span class="status return">Return</span></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Addidas Shoes</td>
-                                        <td>$620</td>
-                                        <td>Due</td>
-                                        <td><span class="status inProgress">In Progress</span></td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>
@@ -166,79 +172,22 @@
                             </div>
 
                             <table>
-                                <tr>
-                                    <td width="60px">
-                                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                                    </td>
-                                    <td>
-                                        <h4>David <br> <span>Italy</span></h4>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td width="60px">
-                                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                                    </td>
-                                    <td>
-                                        <h4>Amit <br> <span>India</span></h4>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td width="60px">
-                                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                                    </td>
-                                    <td>
-                                        <h4>David <br> <span>Italy</span></h4>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td width="60px">
-                                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                                    </td>
-                                    <td>
-                                        <h4>Amit <br> <span>India</span></h4>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td width="60px">
-                                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                                    </td>
-                                    <td>
-                                        <h4>David <br> <span>Italy</span></h4>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td width="60px">
-                                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                                    </td>
-                                    <td>
-                                        <h4>Amit <br> <span>India</span></h4>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td width="60px">
-                                        <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                                    </td>
-                                    <td>
-                                        <h4>David <br> <span>Italy</span></h4>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td width="60px">
-                                        <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                                    </td>
-                                    <td>
-                                        <h4>Amit <br> <span>India</span></h4>
-                                    </td>
-                                </tr>
+                                @foreach ($recentCustomers as $customer)
+                                    <tr>
+                                        <td width="60px">
+                                            <div class="imgBx">
+                                                <img src="{{ asset($customer->profile_image) }}"
+                                                    alt="{{ $customer->name }} Image">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4>{{ $customer->name }} <br> <span>{{ $customer->email }}</span></h4>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -250,8 +199,8 @@
     </div>
 
     <!-- ====== ionicons ======= -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="{{ asset('js/ionicons/ionicons.esm.js') }}"></script>
+    <script nomodule src="{{ asset('js/ionicons/ionicons.js') }}"></script>
 
     <!-- /.content-wrapper -->
 @endsection

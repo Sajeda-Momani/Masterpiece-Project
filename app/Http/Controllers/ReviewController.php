@@ -12,8 +12,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $reviews = Review::all();
+        return view('admin.reviews', ['reviews' => $reviews]);    }
 
     /**
      * Show the form for creating a new resource.

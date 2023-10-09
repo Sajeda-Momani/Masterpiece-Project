@@ -5,13 +5,12 @@
 			<div class="content-wrapper">
 				<!-- Content Header (Page header) -->
 				<section class="content-header">					
-					<div class="container-fluid my-2">
+					<div class="container-fluid">
 						<div class="row mb-2">
 							<div class="col-sm-6">
-								<h1>Orders</h1>
+								<h1>Payments</h1>
 							</div>
-							<div class="col-sm-6 text-right">
-							</div>
+							
 						</div>
 					</div>
 					<!-- /.container-fluid -->
@@ -20,7 +19,7 @@
 				<section class="content">
 					<!-- Default box -->
 					<div class="container-fluid">
-						<div class="card">
+						 <div class="card">
 							<div class="card-header">
 								<div class="card-tools">
 									<div class="input-group input-group" style="width: 250px;">
@@ -38,30 +37,29 @@
 								<table class="table table-hover text-nowrap">
 									<thead>
 										<tr>
-											<th>Orders #</th>											
-                                            <th>Image</th>
-                                            <th>Customer</th>
-                                            <th>Email</th>
-											<th>Status</th>
-                                            <th>Total</th>
-                                            <th>Date Purchased</th>
+											<th width="60">Orders #	</th>
+											<th>Customer Name</th>
+											<th>Payment Method</th>
+											<th>Amount</th>
+											<th>Payment Status</th>
+											<th>Payment Date</th>
+											<th>Payment Details</th>
 										</tr>
 									</thead>
 									<tbody>
-										@foreach ($orders as $order)
-                                        <tr>
-											<td><a href="/ordersitem/{{ $order->id }}">{{ $order->id }}</a></td>
-                                            <td>{{ $order->customer->image  }}</td>
-											<td>{{ $order->customer->name  }}</td>
-                                            <td>{{ $order->customer->email  }}</td>
-                                            <td>
-                                                <span class="status {{ $order->statusClass }}">{{ $order->status }}</span>
-                                            </td>
-											<td>${{ number_format($order->total_price, 2) }}</td>
-                                            <td>{{ $order->order_date }}</td>
+										@foreach ( $paymants as $paymant)
+											
+										<tr>
 
-                                        </tr>
-                                    @endforeach
+											<td>{{ $paymant->order->id }}</td>
+											<td>{{ $paymant->customer->name }}</td>
+											<td>{{ $paymant->payment_method }}</td>
+											<td>{{ $paymant->payment_status }}</td>
+											<td>{{ $paymant->payment_date }}</td>
+											<td>{{ $paymant->payment_details }}</td>
+											
+										</tr>
+										@endforeach
 										
 									</tbody>
 								</table>										
@@ -75,7 +73,7 @@
 								  <li class="page-item"><a class="page-link" href="#">»</a></li>
 								</ul>
 							</div>
-						</div>
+						</div> 
 					</div>
 					<!-- /.card -->
 				</section>

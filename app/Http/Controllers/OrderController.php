@@ -13,7 +13,8 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return view('admin.orders', ['orders'=>$orders]);    }
+        return view('admin.orders', ['orders' => $orders]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -29,8 +30,8 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         Order::create($request->all());
-        return redirect ('orders')->withSuccess('Added Successfully');
-             }
+        return redirect('orders')->withSuccess('Added Successfully');
+    }
 
     /**
      * Display the specified resource.
@@ -45,21 +46,22 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-    //
- }
+        //
+    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Order $order)
     {
-       
-       }
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
-       }
+    }
+
+   
 }
