@@ -16,7 +16,7 @@ class AddressesTableSeeder extends Seeder
         // Define your seed data here
         $addresses = [
             [
-                'customer_id' => 3, 
+                'customer_id' => 1, 
                 'city' => 'New York',
                 'town' => 'Manhattan',
                 'street' => '123 Main Street',

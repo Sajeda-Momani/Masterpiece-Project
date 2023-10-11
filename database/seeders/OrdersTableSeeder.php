@@ -12,7 +12,7 @@ class OrdersTableSeeder extends Seeder
      
         $orders = [
             [
-                'customer_id' => 3, 
+                'customer_id' => 2, 
                 'address_id' => 1,
                 'coupon_id' => null,
                 'order_date' => now(),
@@ -22,7 +22,7 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'customer_id' => 2, 
+                'customer_id' => 1, 
                 'address_id' => 2,
                 'coupon_id' => 1, 
                 'order_date' => now()->subDays(2), 

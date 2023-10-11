@@ -21,6 +21,7 @@ class CustomersTableSeeder extends Seeder
                 'email' => 'john@example.com',
                 'password' => Hash::make('password123'),
                 'image' => 'admin_images/john_doe.jpg',
+                'role' => 'Admin',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -28,18 +29,12 @@ class CustomersTableSeeder extends Seeder
                 'name' => 'Jane Smith',
                 'email' => 'jane@example.com',
                 'password' => Hash::make('secret456'),
+                'role' => 'Customer',
                 'image' => 'admin_images/jane_smith.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'name' => 'Emily Johnson',
-                'email' => 'emily@example.com',
-                'password' => Hash::make('emilypass789'),
-                'image' => 'admin_images/emily_johnson.jpg',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+           
         ];
     
         DB::table('customers')->insert($customers);
