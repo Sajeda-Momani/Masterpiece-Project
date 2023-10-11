@@ -8,7 +8,7 @@
             <div class="container-fluid my-2">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Create customer</h1>
+                        <h1>Create New User</h1>
                     </div>
                     <div class="col-sm-6 text-right">
                         <a href="{{ route('customers.index') }}" class="btn btn-primary">Back</a>
@@ -47,6 +47,15 @@
                                         <input type="password" name="password" id="phone" class="form-control"
                                             placeholder="password">
                                     </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="category">Role</label>
+                                    <select name="category_id" id="category" class="form-control">
+                                        <option value="">Select a Role</option>
+                                        @foreach ($customers as $customer)
+                                            <option value="{{ $customer->id }}">{{ $customer->role }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-md-12">
                                     <label for="image">Image</label>

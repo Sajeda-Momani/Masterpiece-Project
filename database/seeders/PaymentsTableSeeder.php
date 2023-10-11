@@ -16,7 +16,7 @@ class PaymentsTableSeeder extends Seeder
         // Define your seed data here
         $payments = [
             [
-                'customer_id' => 3, 
+                'customer_id' => 1, 
                 'order_id' => 1,    
                 'payment_method' => 'Credit Card',
                 'transaction_id' => '12345abc',

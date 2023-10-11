@@ -23,7 +23,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('Admin.create-customer');
+        $customers = Customer::all();
+        return view('Admin.create-customer', ['customers' => $customers]);
     }
 
     /**

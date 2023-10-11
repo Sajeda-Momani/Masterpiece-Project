@@ -111,15 +111,15 @@
                         <li class="nav-item {{ request()->is('customers*') ? 'active' : '' }}">
                             <a href="{{ url('customers') }}" class="nav-link">
                                 <ion-icon name="people-outline"class="custom-icon-size"></ion-icon>
-                                <p>Customers</p>
+                                <p>Users</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->is('admins*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->is('admins*') ? 'active' : '' }}">
                             <a href="{{ url('/admins') }}" class="nav-link">
                                 <ion-icon name="shield-checkmark-outline"class="custom-icon-size"></ion-icon>
                                 <p>Admins</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item {{ request()->is('contacts*') ? 'active' : '' }}">
                             <a href="{{ url('/contacts') }}" class="nav-link">
                                 <ion-icon name="chatbubble-outline"class="custom-icon-size"></ion-icon>

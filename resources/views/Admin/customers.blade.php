@@ -15,10 +15,10 @@
                         @endif
                     </div>
                     <div class="col-sm-6">
-                        <h1>Customers</h1>
+                        <h1>Users</h1>
                     </div>
                     <div class="col-sm-6 text-right">
-                        <a href="{{ route('customers.create') }}" class="btn btn-primary">New Customer</a>
+                        <a href="{{ route('customers.create') }}" class="btn btn-primary">New User</a>
                     </div>
                 </div>
             </div>
@@ -50,6 +50,7 @@
                                     <th width="60">ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Role</th>
                                     <th>Image</th>
                                     <th width="100">Actions</th>
                                 </tr>
@@ -60,6 +61,8 @@
                                         <td>{{ $customer->id }} </td>
                                         <td>{{ $customer->name }}</td>
                                         <td>{{ $customer->email }}</td>
+                                        <td>{{ $customer->role }}</td>
+
                                         <td>
                                             <img src="{{ asset($customer->image) }}" width='60' height='60'
                                                 class="img img-responsive" />

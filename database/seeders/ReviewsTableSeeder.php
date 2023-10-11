@@ -15,7 +15,7 @@ class ReviewsTableSeeder extends Seeder
         $reviews = [
             [
                 'product_id' => 1, 
-                'customer_id' => 2, 
+                'customer_id' => 1, 
                 'content' => 'This is a great product.',
                 'rating' => 5,
                 'created_at' => now(),
@@ -23,7 +23,7 @@ class ReviewsTableSeeder extends Seeder
             ],
             [
                 'product_id' => 2, 
-                'customer_id' => 3, 
+                'customer_id' => 2, 
                 'content' => 'Not satisfied with this product.',
                 'rating' => 2,
                 'created_at' => now(),

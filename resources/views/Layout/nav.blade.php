@@ -23,7 +23,7 @@
     <!-- Minify Version -->
     <!-- <link rel="stylesheet" href="{{ asset('css/plugins.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.min.css') }}"> -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 
 </head>
