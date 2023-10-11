@@ -29,6 +29,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', function () {
+    return view('Pages.login');
+})->name('login');
+
 Route::get('/ad', function () {
     return view('Admin.login');
 });
@@ -69,9 +73,6 @@ Route::get('/faq', function () {
     return view('Pages.faq');
 })->name('faq');
 
-Route::get('/login', function () {
-    return view('Pages.login');
-})->name('login');
 
 Route::get('/shop', function () {
     return view('Pages.shop');

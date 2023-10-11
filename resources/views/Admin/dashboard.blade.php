@@ -33,7 +33,7 @@
                                 @endphp
                                 <div>
                                     <div class="numbers">{{ $CustomerCount }}</div>
-                                    <div class="cardName">Customers</div>
+                                    <div class="cardName">Users</div>
                                 </div>
                                 <div class="iconBx ml-2"> <!-- You can adjust the margin as needed -->
                                     <ion-icon name="person-outline"></ion-icon>
