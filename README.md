@@ -21,11 +21,8 @@ https://drawsql.app/teams/g6-6/diagrams/smartify
 # Commands
 
 composer install
--------------------------
 cp .env.example .env
--------------------------
 php artisan migrate
--------------------------
 php artisan db:seed --class=CategoriesTableSeeder
 php artisan db:seed --class=ProductsTableSeeder
 php artisan db:seed --class=CouponsTableSeeder
@@ -36,4 +33,3 @@ php artisan db:seed --class=AddressesTableSeeder
 php artisan db:seed --class=ReviewsTableSeeder
 php artisan db:seed --class=OrdersTableSeeder
 php artisan db:seed --class=PaymentsTableSeeder
-------------------------
