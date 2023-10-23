@@ -14,19 +14,19 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->decimal('price', 10, 2); 
-            $table->unsignedBigInteger('category_id');
             $table->string('brand'); 
             $table->string('brief'); 
             $table->integer('quantity_in_stock'); 
-            $table->mediumText('image1')->nullable(); 
-            $table->mediumText('image2')->nullable();
-            $table->mediumText('image3')->nullable();
-            $table->mediumText('image4')->nullable();
-            
+            $table->string('image1')->nullable(); 
+            $table->string('image2')->nullable();
+            $table->string('image3')->nullable();
+            $table->string('image4')->nullable();
             $table->timestamps();
-
+            
+            // Define foreign key constraints
+            $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('CASCADE')->onDelete('CASCADE');
 
         });

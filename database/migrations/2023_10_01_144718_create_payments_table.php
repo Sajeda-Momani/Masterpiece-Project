@@ -12,8 +12,6 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('order_id');
             $table->string('payment_method');
             $table->string('transaction_id');
             $table->decimal('amount', 10, 2);
@@ -22,8 +20,10 @@ return new class extends Migration
             $table->timestamp('payment_date');
             $table->text('payment_details')->nullable();
             $table->timestamps();
-
-            // Add foreign key constraints
+            
+            // Foreign key constraints
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('order_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign('order_id')->references('id')->on('orders')->onUpdate('CASCADE')->onDelete('CASCADE');
         });

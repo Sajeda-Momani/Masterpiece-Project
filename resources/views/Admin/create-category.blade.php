@@ -42,14 +42,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-								<input class="form-control" name="image" type="file" id="photo"> </br>
-
-                                    {{-- <div class="mb-3">
+                                    <div class="mb-3">
                                         <label for="image">{{ __('Upload new image') }}</label>
                                         <input id="image" name="image" type="file" accept="image/*"
-                                            class="form-control-file" autocomplete="image" />
-                                        {{-- <x-input-error class="mt-2" :messages="$errors->get('image')" /> --}}
-                                    {{-- </div>  --}}
+                                          class="form-control-file" autocomplete="image"
+                                          store_as="public/images/categories/" />
+                                        <x-input-error class="mt-2" :messages="$errors->get('image.*')" />
+                                      </div>
+                                       
                                 </div>
 
                             </div>

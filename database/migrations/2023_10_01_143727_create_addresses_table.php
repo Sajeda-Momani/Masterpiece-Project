@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id(); 
-            $table->unsignedBigInteger('customer_id');
             $table->string('city');
             $table->string('town');
             $table->string('street');
@@ -21,7 +20,9 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->text('additional_information')->nullable();
             $table->timestamps();
-
+            
+             // Define foreign key constraints
+            $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('CASCADE')->onDelete('CASCADE');
         
         });

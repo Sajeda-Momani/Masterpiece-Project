@@ -70,14 +70,5 @@ class CustomerController extends Controller
         return redirect()->route('customers.index')->withSuccess('customer deleted successfully');
     }
 
-    public function Recent()
-    {
-        $recentCustomers = Customer::latest()->take(5)->get(); // Retrieve the most recent 5 customers (adjust as needed)
-        $recentOrders = Order::orderBy('order_date', 'desc')->take(5)->get();
-
-        return view('Admin.dashboard', [
-            'recentCustomers' => $recentCustomers,
-            'recentOrders' => $recentOrders
-        ]);
-    }
+    
 }

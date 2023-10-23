@@ -57,7 +57,7 @@
                             <i class="fas fa-lock mr-2"></i> Change Password
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item text-danger">
+                        <a href="{{ route('logout') }}" class="dropdown-item text-danger">
                             <i class="fas fa-sign-out-alt mr-2"></i> Logout
                         </a>
                     </div>
@@ -151,7 +151,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('logout') }}" class="nav-link">
                                 <ion-icon name="log-out-outline"class="custom-icon-size"></ion-icon>
                                 <p>Sign Out</p>
                             </a>

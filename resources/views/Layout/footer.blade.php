@@ -8,7 +8,7 @@
                     <div class="col-md-6 col-lg-3 mb-md-30px mb-lm-30px">
                         <div class="single-wedge">
                             <div class="footer-logo">
-                                <a href="{{ route('home') }}"><img src="{{ asset('images/logo/footer-logo.png') }}"
+                                <a href="{{ url('home') }}"><img src="{{ asset('images/logo/footer-logo.png') }}"
                                         style="height: 50px;width: auto;" alt=""></a>
                             </div>
                             <p class="about-text"> Embark on Your Smart Home Journey with Smartify: Pioneering Your
@@ -45,12 +45,12 @@
                             <div class="footer-links">
                                 <div class="footer-row">
                                     <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="{{ route('home') }}">Home
+                                        <li class="li"><a class="single-link" href="{{ url('home') }}">Home
                                             </a></li>
                                         <li class="li"><a class="single-link" href="{{ route('shop') }}">Shop</a>
                                         </li>
                                         <li class="li"><a class="single-link"
-                                                href="{{ route('contact') }}">Contact</a>
+                                                href="{{ url('contact') }}">Contact</a>
                                         </li>
                                         <li class="li"><a class="single-link" href="{{ route('about') }}">About</a>
                                         </li>
@@ -71,13 +71,13 @@
                                                 Account</a></li>
                                         <li class="li"><a class="single-link" href="{{ route('login') }}"> Login</a>
                                         </li>
-                                        <li class="li"><a class="single-link" href="{{ route('cart') }}">Shopping
+                                        <li class="li"><a class="single-link" href="{{ url('singleproduct') }}">Shopping
                                                 cart</a>
                                         </li>
                                         <li class="li"><a class="single-link"
                                                 href="{{ route('wishlist') }}">Wishlist</a>
                                         </li>
-                                       
+
                                     </ul>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                     <div class="row flex-md-row-reverse align-items-center">
                         <div class="col-md-6 text-center text-md-end">
                             <div class="payment-mth"><a href="#"><img class="img img-fluid"
-                                        src="{{ asset('images/icons/payment.png')}}" alt="payment-image"></a></div>
+                                        src="{{ asset('images/icons/payment.png') }}" alt="payment-image"></a></div>
                         </div>
                         <div class="col-md-6 text-center text-md-start">
                             <p class="copy-text"> © 2023 <strong>Smartify</strong>
@@ -137,23 +137,23 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                        src="{{ asset('images/product-image/zoom-image/1.webp')}}" alt="">
+                                        src="{{ asset('images/product-image/zoom-image/1.webp') }}" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                        src="{{ asset('images/product-image/zoom-image/2.webp')}}" alt="">
+                                        src="{{ asset('images/product-image/zoom-image/2.webp') }}" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                        src="{{ asset('images/product-image/zoom-image/3.webp')}}" alt="">
+                                        src="{{ asset('images/product-image/zoom-image/3.webp') }}" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                        src="{{ asset('images/product-image/zoom-image/4.webp')}}" alt="">
+                                        src="{{ asset('images/product-image/zoom-image/4.webp') }}" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                        src="{{ asset('images/product-image/zoom-image/5.webp')}}" alt="">
+                                        src="{{ asset('images/product-image/zoom-image/5.webp') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -161,23 +161,23 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                        src="{{ asset('images/product-image/small-image/1.webp')}}" alt="">
+                                        src="{{ asset('images/product-image/small-image/1.webp') }}" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                        src="{{ asset('images/product-image/small-image/2.webp')}}" alt="">
+                                        src="{{ asset('images/product-image/small-image/2.webp') }}" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                        src="{{ asset('images/product-image/small-image/3.webp')}}" alt="">
+                                        src="{{ asset('images/product-image/small-image/3.webp') }}" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                        src="{{ asset('images/product-image/small-image/4.webp')}}" alt="">
+                                        src="{{ asset('images/product-image/small-image/4.webp') }}" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                        src="{{ asset('images/product-image/small-image/5.webp')}}" alt="">
+                                        src="{{ asset('images/product-image/small-image/5.webp') }}" alt="">
                                 </div>
                             </div>
                             <!-- Add Arrows -->
@@ -254,7 +254,8 @@
                                 </div>
                             </div>
                             <div class="payment-img">
-                                <a href="#"><img src="{{ asset('images/icons/payment.png')}}" alt=""></a>
+                                <a href="#"><img src="{{ asset('images/icons/payment.png') }}"
+                                        alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -276,7 +277,7 @@
                 </div>
                 <div class="tt-modal-product">
                     <div class="tt-img">
-                        <img src="{{ asset('images/product-image/1.webp')}}" alt="Modern Smart House">
+                        <img src="{{ asset('images/product-image/1.webp') }}" alt="Modern Smart House">
                     </div>
                     <h2 class="tt-title"><a href="#">Modern Smart House</a></h2>
                 </div>
@@ -296,7 +297,7 @@
                 </div>
                 <div class="tt-modal-product">
                     <div class="tt-img">
-                        <img src="{{ asset('images/product-image/1.webp')}}" alt="Modern Smart House">
+                        <img src="{{ asset('images/product-image/1.webp') }}" alt="Modern Smart House">
                     </div>
                     <h2 class="tt-title"><a href="#">Modern Smart House</a></h2>
                 </div>
@@ -316,7 +317,7 @@
                 </div>
                 <div class="tt-modal-product">
                     <div class="tt-img">
-                        <img src="{{ asset('images/product-image/1.webp')}}" alt="Modern Smart House">
+                        <img src="{{ asset('images/product-image/1.webp') }}" alt="Modern Smart House">
                     </div>
                     <h2 class="tt-title"><a href="#">Modern Smart House</a></h2>
                 </div>
@@ -327,6 +328,8 @@
 <!-- Global Vendor, plugins JS -->
 <!-- JS Files
     ============================================ -->
+    
+<script src="{{ asset('https://unpkg.com/swiper/swiper-bundle.min.js') }}"></script>
 <script src="{{ asset('js/vendor/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/vendor/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
@@ -344,9 +347,9 @@
     <script src="{{ asset('js/main.min.js') }}"></script> -->
 
 <!--Main JS (Common Activation Codes)-->
-<script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 

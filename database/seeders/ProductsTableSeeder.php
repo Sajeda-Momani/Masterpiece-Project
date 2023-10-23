@@ -18,7 +18,7 @@ class ProductsTableSeeder extends Seeder
         $categorySmartAssistants = Category::where('name', 'Smart Assistants')->first();
         $categoryStreamingDevices = Category::where('name', 'Streaming Devices')->first();
         $categorySmartLighting = Category::where('name', 'Smart Lighting')->first();
-        $categorySmartPlugs = Category::where('name', 'Smart Plugs & Outlets')->first();
+        $categorySmartPlugs = Category::where('name', 'Smart Plugs')->first();
         $categorySmartSensors = Category::where('name', 'Smart Sensors')->first();
         $categorySecurityCameras = Category::where('name', 'Security Cameras')->first();
         $categorySmartDoorbells = Category::where('name', 'Smart Doorbells')->first();
@@ -89,6 +89,20 @@ class ProductsTableSeeder extends Seeder
                 'image2' => 'images\product-image\small-image\Ring Video Doorbell\52.jpg',
                 'image3' => 'images\product-image\small-image\Ring Video Doorbell\31.jpg',
                 'image4' => 'images\product-image\small-image\Ring Video Doorbell\51.jpg',
+            ],
+
+            [
+                'name' => 'Security Camera Model 1',
+                'description' => 'High-quality security camera with advanced features.',
+                'price' => 79.99,
+                'category_id' => $categorySecurityCameras->id,
+                'brand' => 'SecurityCam Inc.',
+                'brief' => 'Ensure your property is safe with our top-notch security camera.',
+                'quantity_in_stock' => 50,
+                'image1' => 'images\product-image\small-image\Security Camera eufy\6.png',
+                'image2' => 'images\product-image\small-image\Security Camera eufy\6.png',
+                'image3' => 'images\product-image\small-image\Security Camera eufy\6.png',
+                'image4' => 'images\product-image\small-image\Security Camera eufy\6.png',
             ],
         ];
 

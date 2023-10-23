@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -8,12 +10,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\OrderItemController;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,18 +31,66 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('Pages.login');
-})->name('login');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+
+
+
+Route::get('/home', [HomeController::class, 'showhome']);
+
+Route::get('/shop', [ProductController::class, 'showshop'])->name('shop');
+
+Route::get('/singleproduct/{id}', [ProductController::class, 'showsingle'])->name('singleproduct');
+
+// Route::get('/cart', [CartController::class, 'index'])->name('cart');
+// Route::get('/addItemToCart/{id}', [CartController::class, 'addItemToCart'])->name('addItemToCart');
+// Route::get('/addProductToCart/{id}', [CartController::class, 'addProductToCart'])->name('addProductToCart');
+
+// Route::get('/cart/{id}', [CartController::class, 'add'])->name('cart.add');
+// Route::get('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+// Route::get('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+// Route::get('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+// Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+// Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+/*--------------------------------------------- CART --------------------------------------------- */
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+//Add Menu Item To Cart
+Route::get('/addItemToCart/{id}', [CartController::class, 'addItemToCart'])->name('addItemToCart');
+
+//Add Menu Item To Cart
+Route::get('/addProductToCart/{id}', [CartController::class, 'addProductToCart'])->name('addProductToCart');
+
+Route::get('/qtyInc/{id}', [CartController::class, 'qtyInc'])->name('qtyInc');
+Route::get('/qtyDec/{id}', [CartController::class, 'qtyDec'])->name('qtyDec');
+Route::get('/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+
+Route::post('handleCoupon', [CartController::class, 'handleCoupon'])->name('handleCoupon');
+/*------------------------------------------- END CART -------------------------------------------- */
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route::get('/login', function () {
+//     return view('Pages.login');
+// })->name('login');
 
 Route::get('/ad', function () {
     return view('Admin.login');
 });
-
-Route::get('/home', function () {
-    return view('Pages.index');
-})->name('home');
-
 Route::get('/account', function () {
     return view('Pages.account');
 })->name('account');
@@ -52,10 +102,6 @@ Route::get('/404', function () {
 Route::get('/about', function () {
     return view('Pages.about');
 })->name('about');
-
-Route::get('/cart', function () {
-    return view('Pages.cart');
-})->name('cart');
 
 Route::get('/checkout', function () {
     return view('Pages.checkout');
@@ -74,13 +120,8 @@ Route::get('/faq', function () {
 })->name('faq');
 
 
-Route::get('/shop', function () {
-    return view('Pages.shop');
-})->name('shop');
 
-Route::get('/singleproduct', function () {
-    return view('Pages.singleproduct');
-})->name('singleproduct');
+
 
 Route::get('/thankyou', function () {
     return view('Pages.thankyou');
@@ -92,7 +133,7 @@ Route::get('/wishlist', function () {
 
 // ///////////////// Dashboard ///////////////////
 
-Route::get('/dashboard', [CustomerController::class, 'Recent']);
+Route::get('/dashboard', [HomeController::class, 'Recent']);
 
 Route::resource('/categories', CategoryController::class);
 Route::resource('/products', ProductController::class);
@@ -105,5 +146,3 @@ Route::resource('/ordersitem', OrderItemController::class);
 Route::resource('/reviews', ReviewController::class);
 Route::resource('/address', AddressController::class);
 Route::resource('/paymant', PaymentController::class);
-
-

@@ -23,25 +23,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="product-thumbnail">
-                                            <a href="#"><img class="img-responsive ml-15px"
-                                                    src="assets/images/product-image/3.png" alt="" /></a>
-                                        </td>
-                                        <td class="product-name"><a href="#">Arlo Wired Wi-Fi Video Doorbell</a></td>
-                                        <td class="product-price-cart"><span class="amount">$114.50</span></td>
-                                        <td class="product-quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qtybutton"
-                                                    value="1" />
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal">$114.50</td>
-                                        <td class="product-remove">
-                                            <a href="#"><i class="fa fa-times"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
+                                    @foreach ($cartItems as $key => $cartItem)
+                                        <tr>
+                                            <td class="product-thumbnail">
+                                                {{-- <a href="#"><img class="img-responsive ml-15px" src="{{ $cartItem['image1'] }}" alt="" /></a> --}}
+
+                                            </td>
+                                            <td class="product-name"><a href="#">{{ $cartItem['name'] }}</a></td>
+                                            <td class="product-price-cart"><span
+                                                    class="amount">${{ $cartItem['price'] }}</span></td>
+                                            <td class="product-quantity">
+                                                <div class="cart-plus-minus">
+                                                    <input class="cart-plus-minus-box" type="number"
+                                                        name="qtybutton{{ $key }}" value="{{ $cartItem['qty'] }}"
+                                                        data-key="{{ $key }}" min="1" />
+                                                </div>
+                                            </td>
+                                            <td class="product-subtotal" id="subtotal{{ $key }}">
+                                                ${{ $cartItem['price'] * $cartItem['qty'] }}</td>
+                                            <td class="product-remove">
+                                                <a href="{{ route('removeFromCart', $cartItem['id']) }}"><i class="fa fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    {{-- <tr>
                                         <td class="product-thumbnail">
                                             <a href="#"><img class="img-responsive ml-15px"
                                                     src="assets/images/product-image/5.jpg" alt="" /></a>
@@ -77,7 +83,7 @@
                                         <td class="product-remove">
                                             <a href="#"><i class="fa fa-times"></i></a>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>
@@ -97,48 +103,48 @@
                     </form>
                     <div class="row">
                         <!-- <div class="col-lg-4 col-md-6 mb-lm-30px">
-                                    <div class="cart-tax">
-                                        <div class="title-wrap">
-                                            <h4 class="cart-bottom-title section-bg-gray">Estimate Shipping And Tax</h4>
-                                        </div>
-                                        <div class="tax-wrapper">
-                                            <p>Enter your destination to get a shipping estimate.</p>
-                                            <div class="tax-select-wrapper">
-                                                <div class="tax-select">
-                                                    <label>
-                                                        * Country
-                                                    </label>
-                                                    <select class="email s-email s-wid">
-                                                        <option>Bangladesh</option>
-                                                        <option>Albania</option>
-                                                        <option>Åland Islands</option>
-                                                        <option>Afghanistan</option>
-                                                        <option>Belgium</option>
-                                                    </select>
+                                        <div class="cart-tax">
+                                            <div class="title-wrap">
+                                                <h4 class="cart-bottom-title section-bg-gray">Estimate Shipping And Tax</h4>
+                                            </div>
+                                            <div class="tax-wrapper">
+                                                <p>Enter your destination to get a shipping estimate.</p>
+                                                <div class="tax-select-wrapper">
+                                                    <div class="tax-select">
+                                                        <label>
+                                                            * Country
+                                                        </label>
+                                                        <select class="email s-email s-wid">
+                                                            <option>Bangladesh</option>
+                                                            <option>Albania</option>
+                                                            <option>Åland Islands</option>
+                                                            <option>Afghanistan</option>
+                                                            <option>Belgium</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="tax-select">
+                                                        <label>
+                                                            * Region / State
+                                                        </label>
+                                                        <select class="email s-email s-wid">
+                                                            <option>Bangladesh</option>
+                                                            <option>Albania</option>
+                                                            <option>Åland Islands</option>
+                                                            <option>Afghanistan</option>
+                                                            <option>Belgium</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="tax-select mb-25px">
+                                                        <label>
+                                                            * Zip/Postal Code
+                                                        </label>
+                                                        <input type="text" />
+                                                    </div>
+                                                    <button class="cart-btn-2" type="submit">Get A Quote</button>
                                                 </div>
-                                                <div class="tax-select">
-                                                    <label>
-                                                        * Region / State
-                                                    </label>
-                                                    <select class="email s-email s-wid">
-                                                        <option>Bangladesh</option>
-                                                        <option>Albania</option>
-                                                        <option>Åland Islands</option>
-                                                        <option>Afghanistan</option>
-                                                        <option>Belgium</option>
-                                                    </select>
-                                                </div>
-                                                <div class="tax-select mb-25px">
-                                                    <label>
-                                                        * Zip/Postal Code
-                                                    </label>
-                                                    <input type="text" />
-                                                </div>
-                                                <button class="cart-btn-2" type="submit">Get A Quote</button>
                                             </div>
                                         </div>
-                                    </div>
-                                </div> -->
+                                    </div> -->
                         <div class="col-lg-4 col-md-6 mb-lm-30px">
                             <div class="discount-code-wrapper">
                                 <div class="title-wrap">
@@ -177,5 +183,6 @@
             </div>
         </div>
     </div>
+    
     <!-- Cart Area End -->
 @endsection

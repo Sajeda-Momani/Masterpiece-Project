@@ -7,7 +7,7 @@
         <section class="content-header">
             <div class="container-fluid my-2">
                 <div class="row mb-2">
-					<div class="col-12">
+                    <div class="col-12">
                         @if (session()->has('success'))
                             <div class="alert alert-info ">
                                 {{ session()->get('success') }}
@@ -47,7 +47,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-									<th >ID</th>
+                                    <th>ID</th>
                                     <th>Name</th>
                                     <th>Brief</th>
                                     <th>Image</th>
@@ -57,7 +57,7 @@
                             <tbody>
                                 @foreach ($categories as $category)
                                     <tr>
-										<td>{{ $category->id }}</td>
+                                        <td>{{ $category->id }}</td>
                                         {{-- <td>
 											@if ($category->image)
 											<img src="{{ asset('images/banner/' . $category->image) }}"
@@ -68,13 +68,18 @@
                                         </td> --}}
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->description }}</td>
-										
-										<td>
-											<img src="{{ asset($category->image) }}" width= '60' height='60' class="img img-responsive" />
-										</td>
-										
+
                                         <td>
-											<svg class="text-success-500 h-6 w-6 text-success"
+                                            @if ($category->image)
+                                                <img src="{{ asset('storage/images/categories/' . $category->image) }}"
+                                                    alt="" style="height: 60px; width: 60px;">
+                                            @else
+                                                No Image Available
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            <svg class="text-success-500 h-6 w-6 text-success"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="2" stroke="currentColor" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -82,7 +87,7 @@
                                             </svg>
                                         </td>
                                         <td>
-											{{-- <a href="{{ url('categories', ['id' => $category->id]) }}">
+                                            {{-- <a href="{{ url('categories', ['id' => $category->id]) }}">
 												<svg class="filament-link-icon w-6 h-6 mr-1"
 													xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
 													fill="currentColor" aria-hidden="true">
@@ -91,38 +96,41 @@
 													</path>
 												</svg>
 											</a> --}}
-											
-                                            <form action="{{ route('categories.edit', ['category' => $category->id]) }}" method="">
-												@csrf
-												@method('')
-											
-												<button type="submit" class="text-primary w-6 h-6 mr-1 bac" >
-													<svg class="filament-link-icon w-6 h-6 mr-1"
-													xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-													fill="currentColor" aria-hidden="true">
-													<path
-														d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
-													</path>
-												</svg>
-												</button>
-											</form>
 
-                                            <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="POST">
-												@csrf
-												@method('DELETE')
-											
-												<button type="submit" class="text-danger w-6 h-6 mr-1 bac" onclick="return confirm('Are you sure you want to delete this category?')">
-													<svg wire:loading.remove.delay="" wire:target=""
-														class="filament-link-icon w-6 h-6 mr-1"
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-														fill="currentColor" aria-hidden="true">
-														<path fill-rule="evenodd"
-															d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-															clip-rule="evenodd"></path>
-													</svg>
-												</button>
-											</form>
-											
+                                            <form action="{{ route('categories.edit', ['category' => $category->id]) }}"
+                                                method="">
+                                                @csrf
+                                                @method('')
+
+                                                <button type="submit" class="text-primary w-6 h-6 mr-1 bac">
+                                                    <svg class="filament-link-icon w-6 h-6 mr-1"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                        fill="currentColor" aria-hidden="true">
+                                                        <path
+                                                            d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </form>
+
+                                            <form action="{{ route('categories.destroy', ['category' => $category->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit" class="text-danger w-6 h-6 mr-1 bac"
+                                                    onclick="return confirm('Are you sure you want to delete this category?')">
+                                                    <svg wire:loading.remove.delay="" wire:target=""
+                                                        class="filament-link-icon w-6 h-6 mr-1"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                        fill="currentColor" aria-hidden="true">
+                                                        <path fill-rule="evenodd"
+                                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                            clip-rule="evenodd"></path>
+                                                    </svg>
+                                                </button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 @endforeach

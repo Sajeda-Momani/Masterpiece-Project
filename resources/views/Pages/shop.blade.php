@@ -10,7 +10,7 @@
                 <div class="col-lg-9 order-lg-last col-md-12 order-md-first">
                     <!-- Shop Top Area Start -->
                     <div class="shop-top-bar d-flex">
-                        <p class="compare-product"> <span>12</span> Product Found of <span>30</span></p>
+                        <p class="compare-product"> <span>({{ $products->count() }})</span> Product Found  <span>({{ $products->count() }})</span></p>
                         <!-- Left Side End -->
                         <div class="shop-tab nav">
                             <button class="active" data-bs-target="#shop-grid" data-bs-toggle="tab">
@@ -51,48 +51,62 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="shop-grid">
                                         <div class="row mb-n-30px">
-                                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-40px mt-20px ">
-                                                <!-- Single Prodect -->
-                                                <div class="product">
-                                                    <span class="badges">
-                                                        <span class="new">New</span>
-                                                    </span>
-                                                    <div class="thumb">
-                                                        <a href="single-product.html" class="image">
-                                                            <img src="assets/images/product-image/1.png" alt="Product" />
-                                                            <img class="hover-image" src="assets/images/product-image/1.png"
-                                                                alt="Product" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="content">
-                                                        <span class="category"><a href="#">Streaming
-                                                                Devices</a></span>
-                                                        <h5 class="title"><a href="single-product.html">Apple TV 4K 128GB
+                                            @foreach ($products as $product)
+                                                @php
+                                                    $isProductNew = now()
+                                                        ->subDays()
+                                                        ->lte($product->created_at);
+                                                @endphp
+                                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-40px mt-20px ">
+                                                    <!-- Single Prodect -->
+                                                    <div class="product" style="  height: 400px;">
+                                                        @if ($isProductNew)
+                                                            <span class="badges">
+                                                                <span class="new">New</span>
+                                                            </span>
+                                                        @endif
+                                                        <div class="thumb">
+                                                            <a href="{{ url('singleproduct', $product->id) }}"
+                                                                class="image">
+                                                                <img src="{{ asset($product->image1) }}"
+                                                                    alt="{{ $product->name }}" />
+                                                                <img class="hover-image" src="{{ asset($product->image2) }}"
+                                                                    alt="{{ $product->name }}" />
                                                             </a>
-                                                        </h5>
-                                                        <span class="price">
-                                                            <span class="new">$199.50</span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="actions">
-                                                        <button title="Add To Cart" class="action add-to-cart"
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                                                class="pe-7s-shopbag"></i></button>
-                                                        <button class="action wishlist" title="Wishlist"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal-Wishlist"><i
-                                                                class="pe-7s-like"></i></button>
-                                                        <button class="action quickview" data-link-action="quickview"
-                                                            title="Quick view" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal"><i
-                                                                class="pe-7s-look"></i></button>
-                                                        <button class="action compare" title="Compare"
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                                class="pe-7s-refresh-2"></i></button>
+                                                        </div>
+                                                        <div class="content mt-30px">
+                                                            <span class="category"><a
+                                                                    href="{{ url('category.show', $product->category->id) }}">{{ $product->category->name }}</a></span>
+                                                            <h5 class="title"><a
+                                                                    href="{{ url('product.show', $product->id) }}">{{ $product->name }}</a>
+                                                            </h5>
+
+                                                            <span class="price">
+                                                                <span class="new">${{ $product->price }}</span>
+                                                            </span>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <button title="Add To Cart" class="action add-to-cart"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal-Cart"><i
+                                                                    class="pe-7s-shopbag"></i></button>
+                                                            <button class="action wishlist" title="Wishlist"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal-Wishlist"><i
+                                                                    class="pe-7s-like"></i></button>
+                                                            <button class="action quickview" data-link-action="quickview"
+                                                                title="Quick view" data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal"><i
+                                                                    class="pe-7s-look"></i></button>
+                                                            <button class="action compare" title="Compare"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal-Compare"><i
+                                                                    class="pe-7s-refresh-2"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-40px mt-20px">
+                                            @endforeach
+                                            {{-- <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-40px mt-20px">
                                                 <!-- Single Prodect -->
                                                 <div class="product">
                                                     <span class="badges">
@@ -101,8 +115,8 @@
                                                     </span>
                                                     <div class="thumb">
                                                         <a href="single-product.html" class="image">
-                                                            <img src="assets/images/product-image/2.png" alt="Product" />
-                                                            <img class="hover-image" src="assets/images/product-image/2.png"
+                                                            <img src="images/product-image/2.png" alt="Product" />
+                                                            <img class="hover-image" src="images/product-image/2.png"
                                                                 alt="Product" />
                                                         </a>
                                                     </div>
@@ -143,9 +157,9 @@
                                                     </span>
                                                     <div class="thumb">
                                                         <a href="single-product.html" class="image">
-                                                            <img src="assets/images/product-image/3.png" alt="Product" />
+                                                            <img src="images/product-image/3.png" alt="Product" />
                                                             <img class="hover-image"
-                                                                src="assets/images/product-image/3.png" alt="Product" />
+                                                                src="images/product-image/3.png" alt="Product" />
                                                         </a>
                                                     </div>
                                                     <div class="content">
@@ -186,9 +200,9 @@
                                                     </span>
                                                     <div class="thumb">
                                                         <a href="single-product.html" class="image">
-                                                            <img src="assets/images/product-image/4.png" alt="Product" />
+                                                            <img src="images/product-image/4.png" alt="Product" />
                                                             <img class="hover-image"
-                                                                src="assets/images/product-image/4.png" alt="Product" />
+                                                                src="images/product-image/4.png" alt="Product" />
                                                         </a>
                                                     </div>
                                                     <div class="content">
@@ -219,17 +233,17 @@
                                                                 class="pe-7s-refresh-2"></i></button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-40px mt-20px">
+                                            </div> --}}
+                                            {{-- <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-40px mt-20px">
                                                 <!-- Single Prodect -->
                                                 <div class="product">
                                                     <span class="badges">
                                                     </span>
                                                     <div class="thumb">
                                                         <a href="single-product.html" class="image">
-                                                            <img src="assets/images/product-image/5.jpg" alt="Product" />
+                                                            <img src="images/product-image/5.jpg" alt="Product" />
                                                             <img class="hover-image"
-                                                                src="assets/images/product-image/5.jpg" alt="Product" />
+                                                                src="images/product-image/5.jpg" alt="Product" />
                                                         </a>
                                                     </div>
                                                     <div class="content">
@@ -271,9 +285,9 @@
                                                     </span>
                                                     <div class="thumb">
                                                         <a href="single-product.html" class="image">
-                                                            <img src="assets/images/product-image/6.png" alt="Product" />
+                                                            <img src="images/product-image/6.png" alt="Product" />
                                                             <img class="hover-image"
-                                                                src="assets/images/product-image/6.png" alt="Product" />
+                                                                src="images/product-image/6.png" alt="Product" />
                                                         </a>
                                                     </div>
                                                     <div class="content">
@@ -315,9 +329,9 @@
                                                     </span>
                                                     <div class="thumb">
                                                         <a href="single-product.html" class="image">
-                                                            <img src="assets/images/product-image/7.png" alt="Product" />
+                                                            <img src="images/product-image/7.png" alt="Product" />
                                                             <img class="hover-image"
-                                                                src="assets/images/product-image/7.png" alt="Product" />
+                                                                src="images/product-image/7.png" alt="Product" />
                                                         </a>
                                                     </div>
                                                     <div class="content">
@@ -356,9 +370,9 @@
                                                     </span>
                                                     <div class="thumb">
                                                         <a href="single-product.html" class="image">
-                                                            <img src="assets/images/product-image/8.png" alt="Product" />
+                                                            <img src="images/product-image/8.png" alt="Product" />
                                                             <img class="hover-image"
-                                                                src="assets/images/product-image/8.png" alt="Product" />
+                                                                src="images/product-image/8.png" alt="Product" />
                                                         </a>
                                                     </div>
                                                     <div class="content">
@@ -398,9 +412,9 @@
                                                     </span>
                                                     <div class="thumb">
                                                         <a href="single-product.html" class="image">
-                                                            <img src="assets/images/product-image/9.png" alt="Product" />
+                                                            <img src="images/product-image/9.png" alt="Product" />
                                                             <img class="hover-image"
-                                                                src="assets/images/product-image/9.png" alt="Product" />
+                                                                src="images/product-image/9.png" alt="Product" />
                                                         </a>
                                                     </div>
                                                     <div class="content">
@@ -431,173 +445,179 @@
                                                                 class="pe-7s-refresh-2"></i></button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <!-- <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                                        <div class="product">
-                                                            <span class="badges">
-                                                            <span class="new">New</span>
-                                                            </span>
-                                                            <div class="thumb">
-                                                                <a href="single-product.html" class="image">
-                                                                    <img src="assets/images/product-image/2.png" alt="Product" />
-                                                                    <img class="hover-image" src="assets/images/product-image/2.png" alt="Product" />
-                                                                </a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <span class="category"><a href="#">Accessories</a></span>
-                                                                <h5 class="title"><a href="single-product.html">Modern Smart Phone
-                                                                    </a>
-                                                                </h5>
-                                                                <span class="price">
-                                                                <span class="new">$38.50</span>
-                                                                </span>
-                                                            </div>
-                                                            <div class="actions">
-                                                                <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                                                    class="pe-7s-shopbag"></i></button>
-                                                                <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                                        class="pe-7s-like"></i></button>
-                                                                <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                                                <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                                        class="pe-7s-refresh-2"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
+                                                                                        <div class="product">
+                                                                                            <span class="badges">
+                                                                                            <span class="new">New</span>
+                                                                                            </span>
+                                                                                            <div class="thumb">
+                                                                                                <a href="single-product.html" class="image">
+                                                                                                    <img src="images/product-image/2.png" alt="Product" />
+                                                                                                    <img class="hover-image" src="images/product-image/2.png" alt="Product" />
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <div class="content">
+                                                                                                <span class="category"><a href="#">Accessories</a></span>
+                                                                                                <h5 class="title"><a href="single-product.html">Modern Smart Phone
+                                                                                                    </a>
+                                                                                                </h5>
+                                                                                                <span class="price">
+                                                                                                <span class="new">$38.50</span>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                            <div class="actions">
+                                                                                                <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                                                                                    class="pe-7s-shopbag"></i></button>
+                                                                                                <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
+                                                                                                        class="pe-7s-like"></i></button>
+                                                                                                <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                                                                                <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
+                                                                                                        class="pe-7s-refresh-2"></i></button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
                                             <!-- <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                                        <div class="product">
-                                                            <span class="badges">
-                                                            <span class="sale">-8%</span>
-                                                            </span>
-                                                            <div class="thumb">
-                                                                <a href="single-product.html" class="image">
-                                                                    <img src="assets/images/product-image/4.png" alt="Product" />
-                                                                    <img class="hover-image" src="assets/images/product-image/4.png" alt="Product" />
-                                                                </a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <span class="category"><a href="#">Accessories</a></span>
-                                                                <h5 class="title"><a href="single-product.html">Modern Smart Phone
-                                                                    </a>
-                                                                </h5>
-                                                                <span class="price">
-                                                                <span class="old">$38.50</span>
-                                                                <span class="new">$30.50</span>
-                                                                </span>
-                                                            </div>
-                                                            <div class="actions">
-                                                                <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                                                    class="pe-7s-shopbag"></i></button>
-                                                                <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                                        class="pe-7s-like"></i></button>
-                                                                <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                                                <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                                        class="pe-7s-refresh-2"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
+                                                                                        <div class="product">
+                                                                                            <span class="badges">
+                                                                                            <span class="sale">-8%</span>
+                                                                                            </span>
+                                                                                            <div class="thumb">
+                                                                                                <a href="single-product.html" class="image">
+                                                                                                    <img src="images/product-image/4.png" alt="Product" />
+                                                                                                    <img class="hover-image" src="images/product-image/4.png" alt="Product" />
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <div class="content">
+                                                                                                <span class="category"><a href="#">Accessories</a></span>
+                                                                                                <h5 class="title"><a href="single-product.html">Modern Smart Phone
+                                                                                                    </a>
+                                                                                                </h5>
+                                                                                                <span class="price">
+                                                                                                <span class="old">$38.50</span>
+                                                                                                <span class="new">$30.50</span>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                            <div class="actions">
+                                                                                                <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                                                                                    class="pe-7s-shopbag"></i></button>
+                                                                                                <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
+                                                                                                        class="pe-7s-like"></i></button>
+                                                                                                <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                                                                                <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
+                                                                                                        class="pe-7s-refresh-2"></i></button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
                                             <!-- <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                                        <div class="product">
-                                                            <span class="badges">
-                                                            <span class="new">Sale</span>
-                                                            </span>
-                                                            <div class="thumb">
-                                                                <a href="single-product.html" class="image">
-                                                                    <img src="assets/images/product-image/3.png" alt="Product" />
-                                                                    <img class="hover-image" src="assets/images/product-image/3.png" alt="Product" />
-                                                                </a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <span class="category"><a href="#">Accessories</a></span>
-                                                                <h5 class="title"><a href="single-product.html">Modern Smart Phone
-                                                                    </a>
-                                                                </h5>
-                                                                <span class="price">
-                                                                <span class="new">$38.50</span>
-                                                                </span>
-                                                            </div>
-                                                            <div class="actions">
-                                                                <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                                                    class="pe-7s-shopbag"></i></button>
-                                                                <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                                        class="pe-7s-like"></i></button>
-                                                                <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                                                <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                                        class="pe-7s-refresh-2"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
+                                                                                        <div class="product">
+                                                                                            <span class="badges">
+                                                                                            <span class="new">Sale</span>
+                                                                                            </span>
+                                                                                            <div class="thumb">
+                                                                                                <a href="single-product.html" class="image">
+                                                                                                    <img src="images/product-image/3.png" alt="Product" />
+                                                                                                    <img class="hover-image" src="images/product-image/3.png" alt="Product" />
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <div class="content">
+                                                                                                <span class="category"><a href="#">Accessories</a></span>
+                                                                                                <h5 class="title"><a href="single-product.html">Modern Smart Phone
+                                                                                                    </a>
+                                                                                                </h5>
+                                                                                                <span class="price">
+                                                                                                <span class="new">$38.50</span>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                            <div class="actions">
+                                                                                                <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                                                                                    class="pe-7s-shopbag"></i></button>
+                                                                                                <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
+                                                                                                        class="pe-7s-like"></i></button>
+                                                                                                <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                                                                                <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
+                                                                                                        class="pe-7s-refresh-2"></i></button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
                                         </div>
                                     </div>
                                     <div class="tab-pane fade mb-n-30px" id="shop-list">
-                                        <div class="shop-list-wrapper mb-30px">
-                                            <div class="row">
-                                                <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
-                                                    <div class="product">
-                                                        <div class="thumb">
-                                                            <a href="single-product.html" class="image">
-                                                                <img src="assets/images/product-image/1.png"
-                                                                    alt="Product" />
-                                                                <img class="hover-image"
-                                                                    src="assets/images/product-image/1.png"
-                                                                    alt="Product" />
-                                                            </a>
-                                                            <span class="badges">
-                                                                <span class="new">New</span>
-                                                            </span>
+                                        @foreach ($products as $product)
+                                            <div class="shop-list-wrapper mb-30px">
+                                                <div class="row">
+                                                    <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
+                                                        <div class="product">
+                                                            <div class="thumb">
+                                                                <a href="single-product.html" class="image">
+                                                                    <img src="{{ asset($product->image1) }}"
+                                                                        alt="{{ $product->name }}" />
+                                                                    <img class="hover-image"
+                                                                        src="{{ asset($product->image2) }}"
+                                                                        alt="{{ $product->name }}" />
+                                                                </a>
+                                                                <span class="badges">
+                                                                    @if ($isProductNew)
+                                                                        <span class="badges">
+                                                                            <span class="new">New</span>
+                                                                        </span>
+                                                                    @endif
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-7 col-lg-7 col-xl-8">
-                                                    <div class="content-desc-wrap">
-                                                        <div class="content">
-                                                            <span class="category"><a href="#">Streaming
-                                                                    Devices</a></span>
-                                                            <h5 class="title"><a href="single-product.html">Apple TV 4K
-                                                                    128GB</a></h5>
-                                                            <p>Enjoy watching shows and movies in stunning 4K Dolby Vision
-                                                                and HDR10+ with Apple TV (3rd Generation). Get theatre-like
-                                                                Spatial Audio with Dolby Atmos that immerses you in sound.
-                                                                Use it as a home hub to connect and control smart home
-                                                                accessories. </p>
-                                                        </div>
-                                                        <div class="box-inner">
-                                                            <span class="price">
-                                                                <span class="new">$199.50</span>
-                                                            </span>
-                                                            <div class="actions">
-                                                                <button title="Add To Cart" class="action add-to-cart"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal-Cart"><i
-                                                                        class="pe-7s-shopbag"></i></button>
-                                                                <button class="action wishlist" title="Wishlist"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal-Wishlist"><i
-                                                                        class="pe-7s-like"></i></button>
-                                                                <button class="action quickview"
-                                                                    data-link-action="quickview" title="Quick view"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal"><i
-                                                                        class="pe-7s-look"></i></button>
-                                                                <button class="action compare" title="Compare"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal-Compare"><i
-                                                                        class="pe-7s-refresh-2"></i></button>
+                                                    <div class="col-md-7 col-lg-7 col-xl-8">
+                                                        <div class="content-desc-wrap">
+                                                            <div class="content">
+                                                                <span class="category">
+                                                                    <a
+                                                                        href="{{ url('category.show', $product->category->id) }}">{{ $product->category->name }}</a>
+                                                                </span>
+                                                                <h5 class="title">
+                                                                    <a
+                                                                        href="{{ url('product.show', $product->id) }}">{{ $product->name }}</a>
+                                                                </h5>
+                                                                <p>{{ $product->description }}</p>
+                                                            </div>
+                                                            <div class="box-inner">
+                                                                <span class="price">
+                                                                    <span class="new">${{ $product->price }}</span>
+                                                                </span>
+                                                                <div class="actions">
+                                                                    <button title="Add To Cart" class="action add-to-cart"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModal-Cart"><i
+                                                                            class="pe-7s-shopbag"></i></button>
+                                                                    <button class="action wishlist" title="Wishlist"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModal-Wishlist"><i
+                                                                            class="pe-7s-like"></i></button>
+                                                                    <button class="action quickview"
+                                                                        data-link-action="quickview" title="Quick view"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModal"><i
+                                                                            class="pe-7s-look"></i></button>
+                                                                    <button class="action compare" title="Compare"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModal-Compare"><i
+                                                                            class="pe-7s-refresh-2"></i></button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="shop-list-wrapper mb-30px">
+                                        @endforeach
+                                        {{-- <div class="shop-list-wrapper mb-30px">
                                             <div class="row">
                                                 <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
                                                     <div class="product">
                                                         <div class="thumb">
                                                             <a href="single-product.html" class="image">
-                                                                <img src="assets/images/product-image/2.png"
+                                                                <img src="images/product-image/2.png"
                                                                     alt="Product" />
                                                                 <img class="hover-image"
-                                                                    src="assets/images/product-image/2.png"
+                                                                    src="images/product-image/2.png"
                                                                     alt="Product" />
                                                             </a>
                                                             <span class="badges">
@@ -658,10 +678,10 @@
                                                     <div class="product">
                                                         <div class="thumb">
                                                             <a href="single-product.html" class="image">
-                                                                <img src="assets/images/product-image/3.png"
+                                                                <img src="images/product-image/3.png"
                                                                     alt="Product" />
                                                                 <img class="hover-image"
-                                                                    src="assets/images/product-image/3.png"
+                                                                    src="images/product-image/3.png"
                                                                     alt="Product" />
                                                             </a>
                                                             <span class="badges">
@@ -719,10 +739,10 @@
                                                     <div class="product">
                                                         <div class="thumb">
                                                             <a href="single-product.html" class="image">
-                                                                <img src="assets/images/product-image/4.png"
+                                                                <img src="images/product-image/4.png"
                                                                     alt="Product" />
                                                                 <img class="hover-image"
-                                                                    src="assets/images/product-image/4.png"
+                                                                    src="images/product-image/4.png"
                                                                     alt="Product" />
                                                             </a>
                                                             <span class="badges">
@@ -780,10 +800,10 @@
                                                     <div class="product">
                                                         <div class="thumb">
                                                             <a href="single-product.html" class="image">
-                                                                <img src="assets/images/product-image/5.jpg"
+                                                                <img src="images/product-image/5.jpg"
                                                                     alt="Product" />
                                                                 <img class="hover-image"
-                                                                    src="assets/images/product-image/5.jpg"
+                                                                    src="images/product-image/5.jpg"
                                                                     alt="Product" />
                                                             </a>
                                                             <span class="badges">
@@ -843,10 +863,10 @@
                                                     <div class="product">
                                                         <div class="thumb">
                                                             <a href="single-product.html" class="image ">
-                                                                <img src="assets/images/product-image/7.png"
+                                                                <img src="images/product-image/7.png"
                                                                     alt="Product" />
                                                                 <img class="hover-image"
-                                                                    src="assets/images/product-image/7.png"
+                                                                    src="images/product-image/7.png"
                                                                     alt="Product" />
                                                             </a>
                                                             <span class="badges">
@@ -906,10 +926,10 @@
                                                     <div class="product">
                                                         <div class="thumb">
                                                             <a href="single-product.html" class="image">
-                                                                <img src="assets/images/product-image/8.png"
+                                                                <img src="images/product-image/8.png"
                                                                     alt="Product" />
                                                                 <img class="hover-image"
-                                                                    src="assets/images/product-image/8.png"
+                                                                    src="images/product-image/8.png"
                                                                     alt="Product" />
                                                             </a>
                                                             <span class="badges">
@@ -964,10 +984,10 @@
                                                     <div class="product">
                                                         <div class="thumb">
                                                             <a href="single-product.html" class="image">
-                                                                <img src="assets/images/product-image/9.png"
+                                                                <img src="images/product-image/9.png"
                                                                     alt="Product" />
                                                                 <img class="hover-image"
-                                                                    src="assets/images/product-image/9.png"
+                                                                    src="images/product-image/9.png"
                                                                     alt="Product" />
                                                             </a>
                                                             <span class="badges">
@@ -1019,181 +1039,181 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div> --}}
+                                        {{-- <div class="shop-list-wrapper mb-30px">
+                                            <div class="row"> --}}
+                                        <!-- <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
+                                                                                        <div class="product">
+                                                                                            <div class="thumb">
+                                                                                                <a href="single-product.html" class="image">
+                                                                                                    <img src="images/product-image/2.png" alt="Product" />
+                                                                                                    <img class="hover-image" src="images/product-image/1.png" alt="Product" />
+                                                                                                </a>
+                                                                                                <span class="badges">
+                                                                                            </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
+                                        <!-- <div class="col-md-7 col-lg-7 col-xl-8">
+                                                                                        <div class="content-desc-wrap">
+                                                                                            <div class="content">
+                                                                                                <span class="category"><a href="#">Accessories</a></span>
+                                                                                                <h5 class="title"><a href="single-product.html">Power Bank 10000Mhp</a></h5>
+                                                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                                                                    sed do eiusmodol tempor incididunt ut labore et dolore
+                                                                                                    magna aliqua. Ut enim ad minim veni quis nostrud
+                                                                                                    exercitation ullamco laboris </p>
+                                                                                            </div>
+                                                                                            <div class="box-inner">
+                                                                                                <span class="price">
+                                                                                                <span class="old">$58.50</span>
+                                                                                                <span class="new">$38.50</span>
+                                                                                                </span>
+                                                                                                <div class="actions">
+                                                                                                    <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                                                                                        class="pe-7s-shopbag"></i></button>
+                                                                                                    <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
+                                                                                                            class="pe-7s-like"></i></button>
+                                                                                                    <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                                                                                    <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
+                                                                                                            class="pe-7s-refresh-2"></i></button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
+                                        {{-- </div>
                                         </div>
                                         <div class="shop-list-wrapper mb-30px">
-                                            <div class="row">
-                                                <!-- <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
-                                                            <div class="product">
-                                                                <div class="thumb">
-                                                                    <a href="single-product.html" class="image">
-                                                                        <img src="assets/images/product-image/2.png" alt="Product" />
-                                                                        <img class="hover-image" src="assets/images/product-image/1.png" alt="Product" />
-                                                                    </a>
-                                                                    <span class="badges">
-                                                                </span>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                                <!-- <div class="col-md-7 col-lg-7 col-xl-8">
-                                                            <div class="content-desc-wrap">
-                                                                <div class="content">
-                                                                    <span class="category"><a href="#">Accessories</a></span>
-                                                                    <h5 class="title"><a href="single-product.html">Power Bank 10000Mhp</a></h5>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                                        sed do eiusmodol tempor incididunt ut labore et dolore
-                                                                        magna aliqua. Ut enim ad minim veni quis nostrud
-                                                                        exercitation ullamco laboris </p>
-                                                                </div>
-                                                                <div class="box-inner">
-                                                                    <span class="price">
-                                                                    <span class="old">$58.50</span>
-                                                                    <span class="new">$38.50</span>
-                                                                    </span>
-                                                                    <div class="actions">
-                                                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                                                            class="pe-7s-shopbag"></i></button>
-                                                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                                                class="pe-7s-like"></i></button>
-                                                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                                                class="pe-7s-refresh-2"></i></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                            </div>
+                                            <div class="row"> --}}
+                                        <!-- <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
+                                                                                        <div class="product">
+                                                                                            <div class="thumb">
+                                                                                                <a href="single-product.html" class="image">
+                                                                                                    <img src="images/product-image/3.png" alt="Product" />
+                                                                                                    <img class="hover-image" src="images/product-image/3.png" alt="Product" />
+                                                                                                </a>
+                                                                                                <span class="badges">
+                                                                                                <span class="new">New</span>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
+                                        <!-- <div class="col-md-7 col-lg-7 col-xl-8">
+                                                                                        <div class="content-desc-wrap">
+                                                                                            <div class="content">
+                                                                                                <span class="category"><a href="#">Accessories</a></span>
+                                                                                                <h5 class="title"><a href="single-product.html">Modern Smart Phone</a></h5>
+                                                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                                                                    sed do eiusmodol tempor incididunt ut labore et dolore
+                                                                                                    magna aliqua. Ut enim ad minim veni quis nostrud
+                                                                                                    exercitation ullamco laboris </p>
+                                                                                            </div>
+                                                                                            <div class="box-inner">
+                                                                                                <span class="price">
+                                                                                                <span class="new">$38.50</span>
+                                                                                                </span>
+                                                                                                <div class="actions">
+                                                                                                    <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                                                                                        class="pe-7s-shopbag"></i></button>
+                                                                                                    <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
+                                                                                                            class="pe-7s-like"></i></button>
+                                                                                                    <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                                                                                    <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
+                                                                                                            class="pe-7s-refresh-2"></i></button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
+                                        {{-- </div>
                                         </div>
                                         <div class="shop-list-wrapper mb-30px">
-                                            <div class="row">
-                                                <!-- <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
-                                                            <div class="product">
-                                                                <div class="thumb">
-                                                                    <a href="single-product.html" class="image">
-                                                                        <img src="assets/images/product-image/3.png" alt="Product" />
-                                                                        <img class="hover-image" src="assets/images/product-image/3.png" alt="Product" />
-                                                                    </a>
-                                                                    <span class="badges">
-                                                                    <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                                <!-- <div class="col-md-7 col-lg-7 col-xl-8">
-                                                            <div class="content-desc-wrap">
-                                                                <div class="content">
-                                                                    <span class="category"><a href="#">Accessories</a></span>
-                                                                    <h5 class="title"><a href="single-product.html">Modern Smart Phone</a></h5>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                                        sed do eiusmodol tempor incididunt ut labore et dolore
-                                                                        magna aliqua. Ut enim ad minim veni quis nostrud
-                                                                        exercitation ullamco laboris </p>
-                                                                </div>
-                                                                <div class="box-inner">
-                                                                    <span class="price">
-                                                                    <span class="new">$38.50</span>
-                                                                    </span>
-                                                                    <div class="actions">
-                                                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                                                            class="pe-7s-shopbag"></i></button>
-                                                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                                                class="pe-7s-like"></i></button>
-                                                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                                                class="pe-7s-refresh-2"></i></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                            </div>
+                                            <div class="row"> --}}
+                                        <!-- <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
+                                                                                        <div class="product">
+                                                                                            <div class="thumb">
+                                                                                                <a href="single-product.html" class="image">
+                                                                                                    <img src="images/product-image/4.png" alt="Product" />
+                                                                                                    <img class="hover-image" src="images/product-image/5.jpg" alt="Product" />
+                                                                                                </a>
+                                                                                                <span class="badges">
+                                                                                                <span class="new">Sale</span>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
+                                        <!-- <div class="col-md-7 col-lg-7 col-xl-8">
+                                                                                        <div class="content-desc-wrap">
+                                                                                            <div class="content">
+                                                                                                <span class="category"><a href="#">Accessories</a></span>
+                                                                                                <h5 class="title"><a href="single-product.html">Bluetooth Headphone </a></h5>
+                                                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                                                                    sed do eiusmodol tempor incididunt ut labore et dolore
+                                                                                                    magna aliqua. Ut enim ad minim veni quis nostrud
+                                                                                                    exercitation ullamco laboris </p>
+                                                                                            </div>
+                                                                                            <div class="box-inner">
+                                                                                                <span class="price">
+                                                                                                <span class="new">$38.50</span>
+                                                                                                </span>
+                                                                                                <div class="actions">
+                                                                                                    <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                                                                                        class="pe-7s-shopbag"></i></button>
+                                                                                                    <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
+                                                                                                            class="pe-7s-like"></i></button>
+                                                                                                    <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                                                                                    <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
+                                                                                                            class="pe-7s-refresh-2"></i></button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
+                                        {{-- </div>
                                         </div>
                                         <div class="shop-list-wrapper mb-30px">
-                                            <div class="row">
-                                                <!-- <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
-                                                            <div class="product">
-                                                                <div class="thumb">
-                                                                    <a href="single-product.html" class="image">
-                                                                        <img src="assets/images/product-image/4.png" alt="Product" />
-                                                                        <img class="hover-image" src="assets/images/product-image/5.jpg" alt="Product" />
-                                                                    </a>
-                                                                    <span class="badges">
-                                                                    <span class="new">Sale</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                                <!-- <div class="col-md-7 col-lg-7 col-xl-8">
-                                                            <div class="content-desc-wrap">
-                                                                <div class="content">
-                                                                    <span class="category"><a href="#">Accessories</a></span>
-                                                                    <h5 class="title"><a href="single-product.html">Bluetooth Headphone </a></h5>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                                        sed do eiusmodol tempor incididunt ut labore et dolore
-                                                                        magna aliqua. Ut enim ad minim veni quis nostrud
-                                                                        exercitation ullamco laboris </p>
-                                                                </div>
-                                                                <div class="box-inner">
-                                                                    <span class="price">
-                                                                    <span class="new">$38.50</span>
-                                                                    </span>
-                                                                    <div class="actions">
-                                                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                                                            class="pe-7s-shopbag"></i></button>
-                                                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                                                class="pe-7s-like"></i></button>
-                                                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                                                class="pe-7s-refresh-2"></i></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="shop-list-wrapper mb-30px">
-                                            <div class="row">
-                                                <!-- <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
-                                                            <div class="product">
-                                                                <div class="thumb">
-                                                                    <a href="single-product.html" class="image">
-                                                                        <img src="assets/images/product-image/6.png" alt="Product" />
-                                                                        <img class="hover-image" src="assets/images/product-image/7.png" alt="Product" />
-                                                                    </a>
-                                                                    <span class="badges">
-                                                                    <span class="sale">-10%</span>
-                                                                    <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                                <!-- <div class="col-md-7 col-lg-7 col-xl-8">
-                                                            <div class="content-desc-wrap">
-                                                                <div class="content">
-                                                                    <span class="category"><a href="#">Accessories</a></span>
-                                                                    <h5 class="title"><a href="single-product.html">Smart Music Box</a></h5>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                                        sed do eiusmodol tempor incididunt ut labore et dolore
-                                                                        magna aliqua. Ut enim ad minim veni quis nostrud
-                                                                        exercitation ullamco laboris </p>
-                                                                </div>
-                                                                <div class="box-inner">
-                                                                    <span class="price">
-                                                                    <span class="old">$48.50</span>
-                                                                    <span class="new">$38.50</span>
-                                                                    </span>
-                                                                    <div class="actions">
-                                                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                                                            class="pe-7s-shopbag"></i></button>
-                                                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                                                class="pe-7s-like"></i></button>
-                                                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                                                class="pe-7s-refresh-2"></i></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                            </div>
-                                        </div>
+                                            <div class="row"> --}}
+                                        <!-- <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
+                                                                                        <div class="product">
+                                                                                            <div class="thumb">
+                                                                                                <a href="single-product.html" class="image">
+                                                                                                    <img src="images/product-image/6.png" alt="Product" />
+                                                                                                    <img class="hover-image" src="images/product-image/7.png" alt="Product" />
+                                                                                                </a>
+                                                                                                <span class="badges">
+                                                                                                <span class="sale">-10%</span>
+                                                                                                <span class="new">New</span>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
+                                        <!-- <div class="col-md-7 col-lg-7 col-xl-8">
+                                                                                        <div class="content-desc-wrap">
+                                                                                            <div class="content">
+                                                                                                <span class="category"><a href="#">Accessories</a></span>
+                                                                                                <h5 class="title"><a href="single-product.html">Smart Music Box</a></h5>
+                                                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                                                                    sed do eiusmodol tempor incididunt ut labore et dolore
+                                                                                                    magna aliqua. Ut enim ad minim veni quis nostrud
+                                                                                                    exercitation ullamco laboris </p>
+                                                                                            </div>
+                                                                                            <div class="box-inner">
+                                                                                                <span class="price">
+                                                                                                <span class="old">$48.50</span>
+                                                                                                <span class="new">$38.50</span>
+                                                                                                </span>
+                                                                                                <div class="actions">
+                                                                                                    <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                                                                                        class="pe-7s-shopbag"></i></button>
+                                                                                                    <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
+                                                                                                            class="pe-7s-like"></i></button>
+                                                                                                    <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                                                                                    <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
+                                                                                                            class="pe-7s-refresh-2"></i></button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> -->
+                                        {{-- </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -1229,20 +1249,18 @@
                             <h4 class="sidebar-title">Top Categories</h4>
                             <div class="sidebar-widget-category">
                                 <ul>
-                                    <li><a href="#" class="selected m-0"> All
-                                            <span>(65)</span> </a></li>
-                                    <li><a href="#" class=""> Smart Assistants
-                                            <span>(12)</span> </a></li>
-                                    <li><a href="#" class=""> Security Cameras
-                                            <span>(22)</span> </a></li>
-                                    <li><a href="#" class=""> Smart Lights
-                                            <span>(19)</span> </a></li>
-                                    <li><a href="#" class=""> Smart Switches
-                                            <span>(17)</span> </a></li>
-                                    <li><a href="#" class=""> Smart Entry
-                                            <span>(7)</span> </a></li>
-                                    <li><a href="#" class=""> Streaming Devices
-                                            <span>(9)</span> </a></li>
+                                    <li>
+                                        <a href="#" class="selected m-0"> All
+                                            <span>({{ $products->count() }})</span> </a>
+
+                                    </li>
+                                    @foreach ($categories as $category)
+                                        <li>
+                                            <a href="#" class="">{{ $category->name }}
+                                                <span>({{ $category->products->count() }})</span> </a>
+                                        </li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                         </div>
@@ -1251,75 +1269,36 @@
                             <h4 class="sidebar-title">Brands</h4>
                             <div class="sidebar-widget-brand">
                                 <ul>
-                                    <li><a href="#" class="selected m-0"> Eufy<span>(5)</span> </a></li>
-                                    <li><a href="#" class=""> Ooma <span>(4)</span></a></li>
-                                    <li><a href="#" class=""> Amazon <span>(2)</span></a></li>
-                                    <li><a href="#" class=""> Philips <span>(6)</span></a></li>
-                                    <li><a href="#" class=""> Apple<span>(2)</span></a></li>
-                                    <li><a href="#" class=""> Google<span>(2)</span></a></li>
-                                    <li><a href="#" class=""> Blink<span>(6)</span></a></li>
-
+                                    @foreach ($products->groupBy('brand') as $brand => $productsByBrand)
+                                        <li>
+                                            <a href="#" class="">{{ $brand }}
+                                                <span>({{ $productsByBrand->count() }})</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
                         <!-- Sidebar single item -->
-                        <div class="sidebar-widget mt-8">
+                        {{-- <div class="sidebar-widget mt-8">
                             <h4 class="sidebar-title">Price Filter</h4>
                             <div class="price-filter">
                                 <div class="price-slider-amount">
                                     <input type="text" id="amount" class="p-0 h-auto lh-1" name="price"
-                                        placeholder="Add Your Price" />
+                                        placeholder="Add Your Price" onclick=""/>
                                 </div>
                                 <div id="slider-range"></div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <!-- <div class="sidebar-widget">
-                                    <h4 class="sidebar-title">Color</h4>
-                                    <div class="sidebar-widget-color">
-                                        <ul class="d-flex flex-wrap">
-                                            <li><a href="#" class="color-1"></a></li>
-                                            <li><a href="#" class="color-2"></a></li>
-                                            <li><a href="#" class="color-3"></a></li>
-                                            <li><a href="#" class="color-4"></a></li>
-                                            <li><a href="#" class="color-5"></a></li>
-                                            <li><a href="#" class="color-6"></a></li>
-                                            <li><a href="#" class="color-7"></a></li>
-                                            <li><a href="#" class="color-8"></a></li>
-                                            <li><a href="#" class="color-9"></a></li>
-                                            <li><a href="#" class="color-10"></a></li>
-                                            <li><a href="#" class="color-11"></a></li>
-                                            <li><a href="#" class="color-12"></a></li>
-                                            <li><a href="#" class="color-13"></a></li>
-                                            <li><a href="#" class="color-14"></a></li>
-                                        </ul>
-                                    </div>
-                                </div> -->
-                        <!-- Sidebar single item -->
-                        <!-- <div class="sidebar-widget">
-                                    <h4 class="sidebar-title">Size</h4>
-                                    <div class="sidebar-widget-size">
-                                        <ul>
-                                            <li><a href="#" class="selected m-0"> All
-                                                    <span>(6)</span> </a></li>
-                                            <li><a href="#" class=""> S <span>(12)</span> </a>
-                                            </li>
-                                            <li><a href="#" class=""> M <span>(21)</span> </a>
-                                            </li>
-                                            <li><a href="#" class=""> L <span>(16)</span> </a>
-                                            </li>
-                                            <li><a href="#" class=""> XL <span>(22)</span> </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> -->
-                        <!-- Sidebar single item -->
-
-                        <!-- Sidebar single item -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+   
+    
+
+
     <!-- Shop Page End  -->
 @endsection

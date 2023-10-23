@@ -12,14 +12,18 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('address_id');
-            $table->unsignedBigInteger('coupon_id')->nullable();
-            $table->timestamp('order_date');
+            $table->date('order_date');
             $table->decimal('total_price', 10, 2);
+            $table->decimal('shipping_fee', 10, 2)->default(5);
+            $table->decimal('maintenance_fee', 10, 2)->default(10);
+            $table->decimal('installation_fee', 10, 2)->default(15);
             $table->string('status');
             $table->timestamps();
 
+            // Foreign key constraints
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('address_id');
+            $table->unsignedBigInteger('coupon_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign('address_id')->references('id')->on('addresses')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign('coupon_id')->references('id')->on('coupons')->onUpdate('CASCADE')->onDelete('CASCADE');

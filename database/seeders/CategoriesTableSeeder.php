@@ -27,7 +27,7 @@ class CategoriesTableSeeder extends Seeder
                 'image' => 'images/banner/Smart Lights.png',
             ],
             [
-                'name' => 'Smart Plugs & Outlets',
+                'name' => 'Smart Plugs',
                 'description' => 'Smart plugs and outlets for remote control of appliances.',
                 'image' => 'images/banner/Smart Switches.png',
             ],
@@ -45,6 +45,11 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'Smart Doorbells',
                 'description' => 'Video doorbells with smart features.',
                 'image' => 'images/banner/Smart Entry.png',
+            ],
+            [
+                'name' => 'Smart Kits',
+                'description' => 'Smart kit with multiple devices for home automation.',
+                'image' => 'images\feature-image\1.png',
             ],
           
         ];

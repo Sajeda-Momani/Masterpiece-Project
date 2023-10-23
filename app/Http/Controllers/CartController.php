@@ -2,64 +2,122 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Cart;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session; // Import the Session class
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // Fetch cart items and calculate total price and discount as needed
+        $cartItems = Session::get('cart', []); // Assuming you're using the session for the cart
+        $totalPrice = $this->calculateTotalPrice($cartItems);
+        $discount = null; // You may calculate this as per your requirements
+
+        return view('Pages.cart', compact('cartItems', 'totalPrice', 'discount'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function addItemToCart($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        // Get the current cart items from the session
+        $cartItems = Session::get('cart', []);
+
+        // Check if the item is already in the cart
+        if (array_key_exists($id, $cartItems)) {
+            // Increment the quantity if the item is already in the cart
+            $cartItems[$id]['qty']++;
+        } else {
+            // Add the item to the cart
+            $cartItems[$id] = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'image1' => $product->image1,
+                'qty' => 1,
+            ];
+        }
+
+        // Store the updated cart items back in the session
+        Session::put('cart', $cartItems);
+
+        return redirect()->route('cart');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function qtyInc($id)
     {
-        //
+        $cartItems = Session::get('cart', []);
+
+        if (array_key_exists($id, $cartItems)) {
+            $cartItems[$id]['qty']++;
+        }
+
+        Session::put('cart', $cartItems);
+
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Cart $cart)
+    public function qtyDec($id)
     {
-        //
+        $cartItems = Session::get('cart', []);
+
+        if (array_key_exists($id, $cartItems) && ($cartItems[$id]['qty'] - 1) > 0) {
+            $cartItems[$id]['qty']--;
+        }
+
+        Session::put('cart', $cartItems);
+
+        return redirect()->back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cart $cart)
-    {
-        //
+    public function removeFromCart($id)
+{
+    $cartItems = Session::get('cart', []);
+
+    foreach ($cartItems as $key => $cartItem) {
+        if ($cartItem['id'] == $id) {
+            unset($cartItems[$key]);
+        }
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cart $cart)
+    Session::put('cart', $cartItems);
+
+    return redirect()->back();
+}
+
+
+    public function handleCoupon(Request $request)
     {
-        //
+        $discountCode = Coupon::where('discount_code', $request->coupon)->first();
+
+        if ($discountCode) {
+            $per = $discountCode->discount_per;
+            $cartItems = Session::get('cart', []);
+            $totalPrice = $this->calculateTotalPrice($cartItems);
+            $discount = $totalPrice * $per;
+            $totalPrice -= $discount;
+
+            return view('Pages.cart', compact('cartItems', 'totalPrice', 'discount'));
+        } else {
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cart $cart)
+    private function calculateTotalPrice($cartItems)
     {
-        //
+        $totalPrice = 0;
+
+        foreach ($cartItems as $item) {
+            $totalPrice += $item['price'] * $item['qty'];
+        }
+
+        return $totalPrice;
     }
 }

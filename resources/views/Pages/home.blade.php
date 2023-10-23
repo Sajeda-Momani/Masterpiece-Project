@@ -10,18 +10,22 @@
             <div class="swiper-wrapper">
                 <!-- Single slider item -->
                 <div class="hero-slide-item slider-height-2 swiper-slide bg-color1"
-                    data-bg-image="assets/images/hero/bg/hero-bg-2-1.webp">
+                    data-bg-image="{{ asset('images/hero/bg/hero-bg-2-1.webp') }}">
                     <div class="container h-100">
                         <div class="row h-100 flex-row-reverse">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 align-self-center sm-center-view">
                                 <div class="hero-slide-content hero-slide-content-2 slider-animated-1">
-                                    <h2 class="title-1">Easy Your Life <br>
-                                        with Smart Device </h2>
+                                    <h2 class="title-1">Easy Your Life
+                                        with <br>Smart Cameras</h2>
                                     <span class="price">
                                         <span class="mini-title"> from</span>
-                                        <span class="amount">$140.99</span>
+                                        <span class="amount">
+                                            @if ($lowestPrices->where('category_id', 6)->isNotEmpty())
+                                                ${{ $lowestPrices->where('category_id', 6)->first()->lowest_price }}
+                                            @endif
+                                        </span>
                                     </span>
-                                    <a href="shop-left-sidebar.html" class="btn btn-primary text-capitalize">Shop
+                                    <a href="{{ url('shop') }}" class="btn btn-primary text-capitalize">Shop
                                         All Devices</a>
                                 </div>
                             </div>
@@ -29,7 +33,7 @@
                                 class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-center position-relative align-items-center">
                                 <div class="show-case">
                                     <div class="hero-slide-image slider-2">
-                                        <img src="assets/images/hero/inner-img/image (2).png" alt="" />
+                                        <img src="{{ asset('images/hero/inner-img/image (2).png') }}" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -37,19 +41,24 @@
                     </div>
                 </div>
                 <!-- Single slider item -->
+
                 <div class="hero-slide-item slider-height-2 swiper-slide bg-color1"
-                    data-bg-image="assets/images/hero/bg/hero-bg-2-1.webp">
+                    data-bg-image="{{ asset('images/hero/bg/hero-bg-2-1.webp') }}">
                     <div class="container h-100">
                         <div class="row h-100 flex-row-reverse">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 align-self-center sm-center-view">
                                 <div class="hero-slide-content hero-slide-content-2 slider-animated-1">
-                                    <h2 class="title-1">Easy Your Life <br>
-                                        with Smart Device </h2>
+                                    <h3 class="title-1">Easy Your Life
+                                        with <br> Smart Assistants </h3>
                                     <span class="price">
                                         <span class="mini-title"> from</span>
-                                        <span class="amount">$180.50</span>
+                                        <span class="amount">
+                                            @if ($lowestPrices->where('category_id', 1)->isNotEmpty())
+                                                ${{ $lowestPrices->where('category_id', 1)->first()->lowest_price }}
+                                            @endif
+                                        </span>
                                     </span>
-                                    <a href="shop-left-sidebar.html" class="btn btn-primary text-capitalize">Shop
+                                    <a href="{{ url('shop') }}" class="btn btn-primary text-capitalize">Shop
                                         All Devices</a>
                                 </div>
                             </div>
@@ -57,7 +66,7 @@
                                 class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-center position-relative align-items-center">
                                 <div class="show-case">
                                     <div class="hero-slide-image slider-2">
-                                        <img src="assets/images/hero/inner-img/image (1).png" alt="" />
+                                        <img src="{{ asset('images/hero/inner-img/image (1).png') }}" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -73,89 +82,48 @@
                 <div class="swiper-button-prev"></div>
             </div>
         </div>
+
     </div>
     <!-- Hero/Intro Slider End -->
+
+
+
     <!-- Banner Area Start -->
     <div class="banner-area style-two pt-100px pb-100px">
         <div class="container">
             <div class="row">
 
-                <div class="col-md-6 mb-3">
-                    <div class="single-banner nth-child-2 fixalign ">
-                        <div class="banner-content nth-child-2">
-                            <h3 class="title">Smart Assistants</h3>
-                            <span class="category">From $95.00</span>
-                            <a href="shop-left-sidebar.html" class="shop-link">Shop Now <i class="fa fa-arrow-right"
-                                    aria-hidden="true"></i></a>
+                @foreach ($categories as $category)
+                    @php
+                        $categoryIds = $category->id;
+                    @endphp
+                    <div class="col-md-6 mb-3">
+                        <div class="single-banner nth-child-2 fixalign ">
+                            <div class="banner-content nth-child-2">
+                                <h3 class="title">{{ $category->name }}</h3>
+                                <span class="category">From @if ($lowestPrices->where('category_id', $categoryIds)->isNotEmpty())
+                                        ${{ $lowestPrices->where('category_id', $categoryIds)->first()->lowest_price }}
+                                    @endif
+                                </span>
+                                <a href="{{ route('shop', ['category_id' => $categoryIds]) }}" class="shop-link">Shop Now
+                                    <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+
+                            </div>
+                            @if ($category->image)
+                                <img src="{{ asset($category->image) }}" alt=""
+                                    style="height: 250px; width: 200px;padding: 15px;">
+                            @else
+                                No Image Available
+                            @endif
                         </div>
-                        <img src="assets/images/banner/Smart Assistants.png" alt=""
-                            style="height: 250px; width: 200px;padding: 15px;">
                     </div>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="single-banner nth-child-2 fixalign">
-                        <div class="banner-content nth-child-2">
-                            <h3 class="title">Security Cameras</h3>
-                            <span class="category">From $95.00</span>
-                            <a href="shop-left-sidebar.html" class="shop-link">Shop Now <i class="fa fa-arrow-right"
-                                    aria-hidden="true"></i></a>
-                        </div>
-                        <img src="assets/images/banner/Security Cameras.png" alt=""
-                            style="height: 250px; width: 200px;padding: 15px;">
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="single-banner nth-child-2 fixalign">
-                        <div class="banner-content nth-child-2">
-                            <h3 class="title">Smart Entry</h3>
-                            <span class="category">From $95.00</span>
-                            <a href="shop-left-sidebar.html" class="shop-link">Shop Now <i class="fa fa-arrow-right"
-                                    aria-hidden="true"></i></a>
-                        </div>
-                        <img src="assets/images/banner/Smart Entry.png" alt=""
-                            style="height: 250px; width: 250px;padding: 15px;">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="single-banner nth-child-2 fixalign">
-                        <div class="banner-content nth-child-2">
-                            <h3 class="title">Smart Lights</h3>
-                            <span class="category">From $95.00</span>
-                            <a href="shop-left-sidebar.html" class="shop-link">Shop Now <i class="fa fa-arrow-right"
-                                    aria-hidden="true"></i></a>
-                        </div>
-                        <img src="assets/images/banner/Smart Lights.png" alt=""
-                            style="height: 250px; width: 250px;padding: 10px;">
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="single-banner nth-child-2 fixalign ">
-                        <div class="banner-content nth-child-2">
-                            <h3 class="title">Smart Switches</h3>
-                            <span class="category">From $95.00</span>
-                            <a href="shop-left-sidebar.html" class="shop-link">Shop Now <i class="fa fa-arrow-right"
-                                    aria-hidden="true"></i></a>
-                        </div>
-                        <img src="assets/images/banner/Smart Switches.png" alt=""
-                            style="height: 250px; width: 250px;padding: 10px;">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="single-banner nth-child-2 fixalign">
-                        <div class="banner-content nth-child-2">
-                            <h3 class="title">Streaming Devices</h3>
-                            <span class="category">From $95.00</span>
-                            <a href="shop-left-sidebar.html" class="shop-link">Shop Now <i class="fa fa-arrow-right"
-                                    aria-hidden="true"></i></a>
-                        </div>
-                        <img src="assets/images/banner/Streaming Devices.png" alt=""
-                            style="height: 250px; width: 80px; margin-right: 20px;padding: 15px;">
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
     </div>
-    </div>
+
+
     <!-- Banner Area End -->
     <!-- Product Area Start -->
     <div class="product-area pb-100px">
@@ -173,41 +141,44 @@
             <div class="row">
                 <div class="col">
                     <div class="row mb-n-30px">
-                        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-50px mt-20px">
-                            <!-- Single Prodect -->
-                            <div class="product">
-                                <span class="badges">
-                                    <span class="new">New</span>
-                                </span>
-                                <div class="thumb">
-                                    <a href="single-product.html" class="image">
-                                        <img src="assets/images/product-image/1.png" alt="Product" />
-                                        <img class="hover-image" src="assets/images/product-image/1.png"
-                                            alt="Product" />
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <span class="category"><a href="#">Streaming Devices</a></span>
-                                    <h5 class="title"><a href="single-product.html">Apple TV 4K 128GB</a>
-                                    </h5>
-                                    <span class="price">
-                                        <span class="new">$199.50</span>
+                        @foreach ($products as $product)
+                            <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-50px mt-20px">
+                                <!-- Single Prodect -->
+                                <div class="product">
+                                    <span class="badges">
+                                        <span class="new">New</span>
                                     </span>
-                                </div>
-                                <div class="actions">
-                                    <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal-Cart"><i class="pe-7s-shopbag"></i></button>
-                                    <button class="action wishlist" title="Wishlist" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal-Wishlist"><i class="pe-7s-like"></i></button>
-                                    <button class="action quickview" data-link-action="quickview" title="Quick view"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                                            class="pe-7s-look"></i></button>
-                                    <button class="action compare" title="Compare" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal-Compare"><i class="pe-7s-refresh-2"></i></button>
+                                    <div class="thumb">
+                                        <a href="{{ url('product.show', $product->id) }}" class="image">
+                                            <img src="{{ asset('images/products/' . $product->image) }}" alt="Product" />
+                                            <img class="hover-image"
+                                                src="{{ asset('images/products/' . $product->image) }}" alt="Product" />
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <span class="category"><a href="#">{{ $product->category->name }}</a></span>
+                                        <h5 class="title"><a
+                                                href="{{ url('product.show', $product->id) }}">{{ $product->name }}</a>
+                                        </h5>
+                                        <span class="price">
+                                            <span class="new">${{ $product->price }}</span>
+                                        </span>
+                                    </div>
+                                    <div class="actions">
+                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal-Cart"><i class="pe-7s-shopbag"></i></button>
+                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal-Wishlist"><i class="pe-7s-like"></i></button>
+                                        <button class="action quickview" data-link-action="quickview" title="Quick view"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                                                class="pe-7s-look"></i></button>
+                                        <button class="action compare" title="Compare" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal-Compare"><i
+                                                class="pe-7s-refresh-2"></i></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-50px mt-20px">
+                            {{-- <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-50px mt-20px">
                             <!-- Single Prodect -->
                             <div class="product">
                                 <span class="badges">
@@ -216,9 +187,8 @@
                                 </span>
                                 <div class="thumb">
                                     <a href="single-product.html" class="image">
-                                        <img src="assets/images/product-image/2.png" alt="Product" />
-                                        <img class="hover-image" src="assets/images/product-image/2.png"
-                                            alt="Product" />
+                                        <img src="images/product-image/2.png" alt="Product" />
+                                        <img class="hover-image" src="images/product-image/2.png" alt="Product" />
                                     </a>
                                 </div>
                                 <div class="content">
@@ -253,9 +223,8 @@
                                 </span>
                                 <div class="thumb">
                                     <a href="single-product.html" class="image">
-                                        <img src="assets/images/product-image/3.png" alt="Product" />
-                                        <img class="hover-image" src="assets/images/product-image/3.png"
-                                            alt="Product" />
+                                        <img src="images/product-image/3.png" alt="Product" />
+                                        <img class="hover-image" src="images/product-image/3.png" alt="Product" />
                                     </a>
                                 </div>
                                 <div class="content">
@@ -290,9 +259,8 @@
                                 </span>
                                 <div class="thumb">
                                     <a href="single-product.html" class="image">
-                                        <img src="assets/images/product-image/4.png" alt="Product" />
-                                        <img class="hover-image" src="assets/images/product-image/4.png"
-                                            alt="Product" />
+                                        <img src="images/product-image/4.png" alt="Product" />
+                                        <img class="hover-image" src="images/product-image/4.png" alt="Product" />
                                     </a>
                                 </div>
                                 <div class="content">
@@ -325,9 +293,8 @@
                                 </span>
                                 <div class="thumb">
                                     <a href="single-product.html" class="image">
-                                        <img src="assets/images/product-image/5.jpg" alt="Product" />
-                                        <img class="hover-image" src="assets/images/product-image/5.jpg"
-                                            alt="Product" />
+                                        <img src="images/product-image/5.jpg" alt="Product" />
+                                        <img class="hover-image" src="images/product-image/5.jpg" alt="Product" />
                                     </a>
                                 </div>
                                 <div class="content">
@@ -361,9 +328,8 @@
                                 </span>
                                 <div class="thumb">
                                     <a href="single-product.html" class="image">
-                                        <img src="assets/images/product-image/6.png" alt="Product" />
-                                        <img class="hover-image" src="assets/images/product-image/6.png"
-                                            alt="Product" />
+                                        <img src="images/product-image/6.png" alt="Product" />
+                                        <img class="hover-image" src="images/product-image/6.png" alt="Product" />
                                     </a>
                                 </div>
                                 <div class="content">
@@ -400,9 +366,8 @@
                                 </span>
                                 <div class="thumb">
                                     <a href="single-product.html" class="image">
-                                        <img src="assets/images/product-image/7.png" alt="Product" />
-                                        <img class="hover-image" src="assets/images/product-image/7.png"
-                                            alt="Product" />
+                                        <img src="images/product-image/7.png" alt="Product" />
+                                        <img class="hover-image" src="images/product-image/7.png" alt="Product" />
                                     </a>
                                 </div>
                                 <div class="content">
@@ -437,9 +402,8 @@
                                 </span>
                                 <div class="thumb">
                                     <a href="single-product.html" class="image">
-                                        <img src="assets/images/product-image/8.png" alt="Product" />
-                                        <img class="hover-image" src="assets/images/product-image/8.png"
-                                            alt="Product" />
+                                        <img src="images/product-image/8.png" alt="Product" />
+                                        <img class="hover-image" src="images/product-image/8.png" alt="Product" />
                                     </a>
                                 </div>
                                 <div class="content">
@@ -464,43 +428,44 @@
                                         data-bs-target="#exampleModal-Compare"><i class="pe-7s-refresh-2"></i></button>
                                 </div>
                             </div>
-                        </div>
-                        <!-- <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px"> -->
-                        <!-- Single Prodect -->
-                        <!-- <div class="product">
-                                            <span class="badges">
-                                            </span>
-                                            <div class="thumb">
-                                                <a href="single-product.html" class="image">
-                                                    <img src="assets/images/product-image/9.png" alt="Product" />
-                                                    <img class="hover-image" src="assets/images/product-image/9.png"
-                                                        alt="Product" />
-                                                </a>
-                                            </div>
-                                            <div class="content">
-                                                <span class="category"><a href="#"> Smart Assistants</a></span>
-                                                <h5 class="title"><a href="single-product.html">Amazon Echo Dot
-         
-                                                    </a>
-                                                </h5>
-                                                <span class="price">
-                                                    <span class="new">$79.99</span>
-                                                </span>
-                                            </div>
-                                            <div class="actions">
-                                                <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal-Cart"><i class="pe-7s-shopbag"></i></button>
-                                                <button class="action wishlist" title="Wishlist" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal-Wishlist"><i class="pe-7s-like"></i></button>
-                                                <button class="action quickview" data-link-action="quickview" title="Quick view"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                                                        class="pe-7s-look"></i></button>
-                                                <button class="action compare" title="Compare" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal-Compare"><i
-                                                        class="pe-7s-refresh-2"></i></button>
-                                            </div>
-                                        </div> -->
-                        <!-- </div> -->
+                        </div> --}}
+                            <!-- <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px"> -->
+                            <!-- Single Prodect -->
+                            <!-- <div class="product">
+                                                                    <span class="badges">
+                                                                    </span>
+                                                                    <div class="thumb">
+                                                                        <a href="single-product.html" class="image">
+                                                                            <img src="images/product-image/9.png" alt="Product" />
+                                                                            <img class="hover-image" src="images/product-image/9.png"
+                                                                                alt="Product" />
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="content">
+                                                                        <span class="category"><a href="#"> Smart Assistants</a></span>
+                                                                        <h5 class="title"><a href="single-product.html">Amazon Echo Dot
+                                 
+                                                                            </a>
+                                                                        </h5>
+                                                                        <span class="price">
+                                                                            <span class="new">$79.99</span>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="actions">
+                                                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal"
+                                                                            data-bs-target="#exampleModal-Cart"><i class="pe-7s-shopbag"></i></button>
+                                                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal"
+                                                                            data-bs-target="#exampleModal-Wishlist"><i class="pe-7s-like"></i></button>
+                                                                        <button class="action quickview" data-link-action="quickview" title="Quick view"
+                                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                                                                                class="pe-7s-look"></i></button>
+                                                                        <button class="action compare" title="Compare" data-bs-toggle="modal"
+                                                                            data-bs-target="#exampleModal-Compare"><i
+                                                                                class="pe-7s-refresh-2"></i></button>
+                                                                    </div>
+                                                                </div> -->
+                            <!-- </div> -->
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -509,35 +474,35 @@
     <!-- Product Area End -->
     <!-- Banner Area Start -->
     <!-- <div class="banner-area style-three pb-100px">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="single-banner mb-lm-30px">
-                                    <img src="assets/images/banner/8.webp" alt="">
-                                    <div class="banner-content nth-child-3">
-                                        <h3 class="title">Smart Watch For <br>
-                                            Your Hand</h3>
-                                        <span class="category">From $69.00</span>
-                                        <a href="shop-left-sidebar.html" class="shop-link">Shop Now <i class="fa fa-arrow-right"
-                                                aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="single-banner">
-                                    <img src="assets/images/banner/9.webp" alt="">
-                                    <div class="banner-content nth-child-2">
-                                        <h3 class="title">Smart Watch For <br>
-                                            Your Hand</h3>
-                                        <span class="category">From $95.00</span>
-                                        <a href="shop-left-sidebar.html" class="shop-link">Shop Now <i class="fa fa-arrow-right"
-                                                aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="single-banner mb-lm-30px">
+                                                            <img src="images/banner/8.webp" alt="">
+                                                            <div class="banner-content nth-child-3">
+                                                                <h3 class="title">Smart Watch For <br>
+                                                                    Your Hand</h3>
+                                                                <span class="category">From $69.00</span>
+                                                                <a href="shop-left-sidebar.html" class="shop-link">Shop Now <i class="fa fa-arrow-right"
+                                                                        aria-hidden="true"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="single-banner">
+                                                            <img src="images/banner/9.webp" alt="">
+                                                            <div class="banner-content nth-child-2">
+                                                                <h3 class="title">Smart Watch For <br>
+                                                                    Your Hand</h3>
+                                                                <span class="category">From $95.00</span>
+                                                                <a href="shop-left-sidebar.html" class="shop-link">Shop Now <i class="fa fa-arrow-right"
+                                                                        aria-hidden="true"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
     <!-- Banner Area End -->
     <!-- Feature product area start -->
     <div class="feature-product-area pb-100px">
@@ -555,7 +520,7 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide feature-right-content">
                         <div class="image-side">
-                            <img src="assets/images/feature-image/3.png" alt="">
+                            <img src="images/feature-image/3.png" alt="">
                             <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal-Cart"><i class="pe-7s-shopbag"></i></button>
                         </div>
@@ -580,7 +545,7 @@
                     </div>
                     <div class="swiper-slide feature-right-content">
                         <div class="image-side">
-                            <img src="assets/images/feature-image/4.png" alt="">
+                            <img src="images/feature-image/4.png" alt="">
                             <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal-Cart"><i class="pe-7s-shopbag"></i></button>
                         </div>
@@ -605,7 +570,7 @@
                     </div>
                     <div class="swiper-slide feature-right-content">
                         <div class="image-side">
-                            <img src="assets/images/feature-image/1.png" alt="">
+                            <img src="images/feature-image/1.png" alt="">
                             <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal-Cart"><i class="pe-7s-shopbag"></i></button>
                         </div>
@@ -630,7 +595,7 @@
                     </div>
                     <div class="swiper-slide feature-right-content">
                         <div class="image-side">
-                            <img src="assets/images/feature-image/2.png" alt="">
+                            <img src="images/feature-image/2.png" alt="">
                             <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal-Cart"><i class="pe-7s-shopbag"></i></button>
                         </div>
@@ -666,27 +631,27 @@
     </div>
     <!-- Feature product area End -->
     <!-- Fashion Area Start -->
-    <!-- <div class="fashion-area" data-bg-image="assets/images/fashion/fashion-bg.webp">
-                    <div class="container h-100">
-                        <div class="row justify-content-center align-items-center h-100">
-                            <div class="col-12 text-center">
-                                <h2 class="title"> <span>Smart Fashion</span> With Smart Devices </h2>
-                                <a href="shop-left-sidebar.html" class="btn btn-primary text-capitalize m-auto">Shop All
-                                    Devices</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+    <!-- <div class="fashion-area" data-bg-image="images/fashion/fashion-bg.webp">
+                                            <div class="container h-100">
+                                                <div class="row justify-content-center align-items-center h-100">
+                                                    <div class="col-12 text-center">
+                                                        <h2 class="title"> <span>Smart Fashion</span> With Smart Devices </h2>
+                                                        <a href="shop-left-sidebar.html" class="btn btn-primary text-capitalize m-auto">Shop All
+                                                            Devices</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
     <!-- Fashion Area End -->
     <!-- Feature Area Srart -->
-    <div class="feature-area  pb-100px">
+    <div class="feature-area pb-100px">
         <div class="container">
             <div class="feature-wrapper">
                 <div class="single-feture-col mb-md-30px mb-lm-30px">
                     <!-- single item -->
                     <div class="single-feature">
                         <div class="feature-icon">
-                            <img src="assets/images/icons/1.png" alt="">
+                            <img src="{{ asset('images/icons/1.png') }}" alt="">
                         </div>
                         <div class="feature-content">
                             <h4 class="title">Free Shipping</h4>
@@ -698,7 +663,7 @@
                 <div class="single-feture-col mb-md-30px mb-lm-30px">
                     <div class="single-feature">
                         <div class="feature-icon">
-                            <img src="assets/images/icons/2.png" alt="">
+                            <img src="{{ asset('images/icons/2.png') }}" alt="">
                         </div>
                         <div class="feature-content">
                             <h4 class="title">Card Payments</h4>
@@ -710,7 +675,7 @@
                 <div class="single-feture-col">
                     <div class="single-feature">
                         <div class="feature-icon">
-                            <img src="assets/images/icons/3.png" alt="">
+                            <img src="{{ asset('images/icons/3.png') }}" alt="">
                         </div>
                         <div class="feature-content">
                             <h4 class="title">Easy Returns</h4>
@@ -722,109 +687,142 @@
             </div>
         </div>
     </div>
+
     <!-- Feature Area End -->
     <!-- Blog area start from here -->
     <!-- <div class="main-blog-area pb-100px">
-                    <div class="container"> -->
+                                            <div class="container"> -->
     <!-- section title start -->
     <!-- <div class="row">
-                            <div class="col-md-12">
-                                <div class="section-title text-center mb-30px0px">
-                                    <h2 class="title">Latest Blog</h2>
-                                    <p> There are many variations of passages of Lorem Ipsum available</p>
-                                </div>
-                            </div>
-                        </div> -->
+                                                    <div class="col-md-12">
+                                                        <div class="section-title text-center mb-30px0px">
+                                                            <h2 class="title">Latest Blog</h2>
+                                                            <p> There are many variations of passages of Lorem Ipsum available</p>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
     <!-- section title start -->
     <!-- <div class="row">
-                            <div class="col-lg-6 col-sm-6 mb-xs-30px">
-                                <div class="single-blog">
-                                    <div class="blog-image">
-                                        <a href="blog-single-left-sidebar.html"><img src="assets/images/blog-image/1.webp"
-                                                class="img-responsive w-100" alt=""></a>
-                                    </div>
-                                    <div class="blog-text">
-                                        <div class="blog-athor-date line-height-1">
-                                            <span class="blog-date"><i class="fa fa-calendar" aria-hidden="true"></i> 27,Jun
-                                                2030</span>
-                                            <span><a class="blog-author" href="blog-grid.html"><i class="fa fa-user"
-                                                        aria-hidden="true"></i> Wild Nick</a></span>
-                                        </div>
-                                        <h5 class="blog-heading"><a class="blog-heading-link"
-                                                href="blog-single-left-sidebar.html">10 Quick Tips About Smart Product</a></h5>
-                                        <p>Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod templ incididunt ut
-                                            labore</p>
-                                        <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
-                                    </div>
-                                </div>
-                            </div> -->
+                                                    <div class="col-lg-6 col-sm-6 mb-xs-30px">
+                                                        <div class="single-blog">
+                                                            <div class="blog-image">
+                                                                <a href="blog-single-left-sidebar.html"><img src="images/blog-image/1.webp"
+                                                                        class="img-responsive w-100" alt=""></a>
+                                                            </div>
+                                                            <div class="blog-text">
+                                                                <div class="blog-athor-date line-height-1">
+                                                                    <span class="blog-date"><i class="fa fa-calendar" aria-hidden="true"></i> 27,Jun
+                                                                        2030</span>
+                                                                    <span><a class="blog-author" href="blog-grid.html"><i class="fa fa-user"
+                                                                                aria-hidden="true"></i> Wild Nick</a></span>
+                                                                </div>
+                                                                <h5 class="blog-heading"><a class="blog-heading-link"
+                                                                        href="blog-single-left-sidebar.html">10 Quick Tips About Smart Product</a></h5>
+                                                                <p>Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod templ incididunt ut
+                                                                    labore</p>
+                                                                <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
     <!-- End single blog -->
     <!-- <div class="col-lg-6 col-sm-6">
-                                <div class="single-blog">
-                                    <div class="blog-image">
-                                        <a href="blog-single-left-sidebar.html"><img src="assets/images/blog-image/2.webp"
-                                                class="img-responsive w-100" alt=""></a>
-                                    </div>
-                                    <div class="blog-text">
-                                        <div class="blog-athor-date line-height-1">
-                                            <span class="blog-date"><i class="fa fa-calendar" aria-hidden="true"></i> 27,Jun
-                                                2030</span>
-                                            <span><a class="blog-author" href="blog-grid.html"><i class="fa fa-user"
-                                                        aria-hidden="true"></i> Oaklee Odom</a></span>
-                                        </div>
-                                        <h5 class="blog-heading"><a class="blog-heading-link"
-                                                href="blog-single-left-sidebar.html">5 Real-Life Lessons About Smart Product</a>
-                                        </h5>
-                                        <p>Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod templ incididunt ut
-                                            labore</p>
-                                        <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
-                                    </div>
-                                </div>
-                            </div> -->
+                                                        <div class="single-blog">
+                                                            <div class="blog-image">
+                                                                <a href="blog-single-left-sidebar.html"><img src="images/blog-image/2.webp"
+                                                                        class="img-responsive w-100" alt=""></a>
+                                                            </div>
+                                                            <div class="blog-text">
+                                                                <div class="blog-athor-date line-height-1">
+                                                                    <span class="blog-date"><i class="fa fa-calendar" aria-hidden="true"></i> 27,Jun
+                                                                        2030</span>
+                                                                    <span><a class="blog-author" href="blog-grid.html"><i class="fa fa-user"
+                                                                                aria-hidden="true"></i> Oaklee Odom</a></span>
+                                                                </div>
+                                                                <h5 class="blog-heading"><a class="blog-heading-link"
+                                                                        href="blog-single-left-sidebar.html">5 Real-Life Lessons About Smart Product</a>
+                                                                </h5>
+                                                                <p>Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod templ incididunt ut
+                                                                    labore</p>
+                                                                <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
     <!-- End single blog -->
     <!-- </div>
-                    </div> -->
+                                            </div> -->
     <!-- </div> -->
     <!-- Blog area end here -->
 
-    <!-- <img src="assets/images/banner/Villa-removebg.png" style="display: block;height: auto;width: 100%;padding:5% ;"> -->
-    <div class="brand-area  pb-100px">
+    <!-- <img src="images/banner/Villa-removebg.png" style="display: block;height: auto;width: 100%;padding:5% ;"> -->
+    <div class="brand-area pb-100px">
         <div class="container">
             <div class="row">
                 <div class="section-title text-center">
-                    <h2 class="title"> Brands</h2>
+                    <h2 class="title">Brands</h2>
                 </div>
             </div>
             <div class="brand-slider swiper-container">
                 <div class="swiper-wrapper align-items-center">
                     <div class="swiper-slide brand-slider-item text-center">
-                        <a href="#"><img class=" img-fluid" src="assets/images/partner/1.png"
-                                alt="" /></a>
+                        <a href="#">
+                            <img class="img-fluid" src="{{ asset('images/partner/1.png') }}" alt="" />
+                        </a>
                     </div>
                     <div class="swiper-slide brand-slider-item text-center">
-                        <a href="#"><img class=" img-fluid" src="assets/images/partner/2.png"
-                                alt="" /></a>
+                        <a href="#">
+                            <img class="img-fluid" src="{{ asset('images/partner/2.png') }}" alt="" />
+                        </a>
+                    </div>
+                    <div class ="swiper-slide brand-slider-item text-center">
+                        <a href="#">
+                            <img class="img-fluid" src="{{ asset('images/partner/3.png') }}" alt="" />
+                        </a>
                     </div>
                     <div class="swiper-slide brand-slider-item text-center">
-                        <a href="#"><img class=" img-fluid" src="assets/images/partner/3.png"
-                                alt="" /></a>
+                        <a href="#">
+                            <img class="img-fluid" src="{{ asset('images/partner/4.png') }}" alt="" />
+                        </a>
                     </div>
                     <div class="swiper-slide brand-slider-item text-center">
-                        <a href="#"><img class=" img-fluid" src="assets/images/partner/4.png"
-                                alt="" /></a>
+                        <a href="#">
+                            <img class="img-fluid" src="{{ asset('images/partner/5.png') }}" alt="" />
+                        </a>
                     </div>
                     <div class="swiper-slide brand-slider-item text-center">
-                        <a href="#"><img class=" img-fluid" src="assets/images/partner/5.png"
-                                alt="" /></a>
-                    </div>
-                    <div class="swiper-slide brand-slider-item text-center">
-                        <a href="#"><img class=" img-fluid" src="assets/images/partner/6.png"
-                                alt="" /></a>
+                        <a href="#">
+                            <img class="img-fluid" src="{{ asset('images/partner/6.png') }}" alt="" />
+                        </a>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const brandSlider = new Swiper('.brand-slider', {
+                slidesPerView: 4,
+                spaceBetween: 30,
+                loop: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                speed: 1500,
+            });
+        });
+    </script>
+
+
+
+
+
 
     <!-- Footer Area Start -->
 
@@ -841,48 +839,48 @@
                             <div class="swiper-container gallery-top">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto"
-                                            src="assets/images/product-image/zoom-image/1.webp" alt="">
+                                        <img class="img-responsive m-auto" src="images/product-image/zoom-image/1.webp"
+                                            alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto"
-                                            src="assets/images/product-image/zoom-image/2.webp" alt="">
+                                        <img class="img-responsive m-auto" src="images/product-image/zoom-image/2.webp"
+                                            alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto"
-                                            src="assets/images/product-image/zoom-image/3.webp" alt="">
+                                        <img class="img-responsive m-auto" src="images/product-image/zoom-image/3.webp"
+                                            alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto"
-                                            src="assets/images/product-image/zoom-image/4.webp" alt="">
+                                        <img class="img-responsive m-auto" src="images/product-image/zoom-image/4.webp"
+                                            alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto"
-                                            src="assets/images/product-image/zoom-image/5.webp" alt="">
+                                        <img class="img-responsive m-auto" src="images/product-image/zoom-image/5.webp"
+                                            alt="">
                                     </div>
                                 </div>
                             </div>
                             <div class="swiper-container gallery-thumbs mt-20px slider-nav-style-1 small-nav">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto"
-                                            src="assets/images/product-image/small-image/1.webp" alt="">
+                                        <img class="img-responsive m-auto" src="images/product-image/small-image/1.webp"
+                                            alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto"
-                                            src="assets/images/product-image/small-image/2.webp" alt="">
+                                        <img class="img-responsive m-auto" src="images/product-image/small-image/2.webp"
+                                            alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto"
-                                            src="assets/images/product-image/small-image/3.webp" alt="">
+                                        <img class="img-responsive m-auto" src="images/product-image/small-image/3.webp"
+                                            alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto"
-                                            src="assets/images/product-image/small-image/4.webp" alt="">
+                                        <img class="img-responsive m-auto" src="images/product-image/small-image/4.webp"
+                                            alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto"
-                                            src="assets/images/product-image/small-image/5.webp" alt="">
+                                        <img class="img-responsive m-auto" src="images/product-image/small-image/5.webp"
+                                            alt="">
                                     </div>
                                 </div>
                                 <!-- Add Arrows -->
@@ -958,7 +956,7 @@
                                     </div>
                                 </div>
                                 <div class="payment-img">
-                                    <a href="#"><img src="assets/images/icons/payment.png" alt=""></a>
+                                    <a href="#"><img src="images/icons/payment.png" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -980,7 +978,7 @@
                     </div>
                     <div class="tt-modal-product">
                         <div class="tt-img">
-                            <img src="assets/images/product-image/1.webp" alt="Modern Smart Phone">
+                            <img src="images/product-image/1.webp" alt="Modern Smart Phone">
                         </div>
                         <h2 class="tt-title"><a href="#">Modern Smart Phone</a></h2>
                     </div>
@@ -1000,7 +998,7 @@
                     </div>
                     <div class="tt-modal-product">
                         <div class="tt-img">
-                            <img src="assets/images/product-image/1.webp" alt="Modern Smart Phone">
+                            <img src="images/product-image/1.webp" alt="Modern Smart Phone">
                         </div>
                         <h2 class="tt-title"><a href="#">Modern Smart Phone</a></h2>
                     </div>
@@ -1020,7 +1018,7 @@
                     </div>
                     <div class="tt-modal-product">
                         <div class="tt-img">
-                            <img src="assets/images/product-image/1.webp" alt="Modern Smart Phone">
+                            <img src="images/product-image/1.webp" alt="Modern Smart Phone">
                         </div>
                         <h2 class="tt-title"><a href="#">Modern Smart Phone</a></h2>
                     </div>
