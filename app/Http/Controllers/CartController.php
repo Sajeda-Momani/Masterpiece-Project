@@ -2,260 +2,126 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Coupon;
-use App\Models\Cart;
-use App\Models\Product;
-use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session; // Import the Session class
+use App\Models\Product;
+use App\Models\Cart;
+use App\Models\Order;
+use App\Models\Payment;
 
 class CartController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Fetch cart items and calculate total price and discount as needed
-        $cartItems = Session::get('cart', []); // Assuming you're using the session for the cart
-        $totalPrice = $this->calculateTotalPrice($cartItems);
-        $discount = null; // You may calculate this as per your requirements
+        $carts = Cart::where('customer_id', $request->user()->id)->get();
 
-        return view('Pages.cart', compact('cartItems', 'totalPrice', 'discount'));
+        return view('Pages.cart', compact('carts'));
     }
-
-    public function addItemToCart($id)
+    public function addToCart(Request $request, $productId)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::findOrFail($productId);
 
-        // Get the current cart items from the session
-        $cartItems = Session::get('cart', []);
+        $cart = Cart::where('customer_id', $request->user()->id)
+            ->where('product_id', $productId)
+            ->first();
 
-        // Check if the item is already in the cart
-        if (array_key_exists($id, $cartItems)) {
-            // Increment the quantity if the item is already in the cart
-            $cartItems[$id]['qty']++;
+        if ($cart) {
+            $cart->quantity = $request->input('quantity') ?: $cart->quantity + 1;
         } else {
-            // Add the item to the cart
-            $cartItems[$id] = [
-                'id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'image1' => $product->image1,
-                'qty' => 1,
-            ];
+            $cart = new Cart();
+            $cart->customer_id = $request->user()->id;
+            $cart->product_id = $productId;
+            $cart->quantity = $request->input('quantity') ?: 1;
         }
 
-        // Store the updated cart items back in the session
-        Session::put('cart', $cartItems);
+        $cart->price = $product->price * $cart->quantity;
+        $cart->total = $cart->price + $cart->shipping_fee + $cart->maintenance_fee + $cart->installation_fee;
+        $cart->save();
 
-        return redirect()->route('cart');
+        return redirect()->route('cart.index');
     }
 
-    public function qtyInc($id)
+    public function increaseQuantity($id)
     {
-        $cartItems = Session::get('cart', []);
+        $cartItem = Cart::find($id);
 
-        if (array_key_exists($id, $cartItems)) {
-            $cartItems[$id]['qty']++;
+        if ($cartItem) {
+            // Increment the quantity
+            $cartItem->quantity += 1;
+            $cartItem->save();
         }
-
-        Session::put('cart', $cartItems);
 
         return redirect()->back();
     }
 
-    public function qtyDec($id)
+    public function decreaseQuantity($id)
     {
-        $cartItems = Session::get('cart', []);
+        $cartItem = Cart::find($id);
 
-        if (array_key_exists($id, $cartItems) && ($cartItems[$id]['qty'] - 1) > 0) {
-            $cartItems[$id]['qty']--;
+        if ($cartItem && $cartItem->quantity > 1) {
+            // Decrement the quantity (if it's greater than 1)
+            $cartItem->quantity -= 1;
+            $cartItem->save();
         }
-
-        Session::put('cart', $cartItems);
 
         return redirect()->back();
     }
+    public function removeItem(Request $request, $itemId)
+    {
+        $cart = Cart::findOrFail($itemId);
+        $cart->delete();
 
-    public function removeFromCart($id)
-{
-    $cartItems = Session::get('cart', []);
-
-    foreach ($cartItems as $key => $cartItem) {
-        if ($cartItem['id'] == $id) {
-            unset($cartItems[$key]);
-        }
-        
+        return redirect()->route('cart.index');
     }
 
-    Session::put('cart', $cartItems);
 
-    return redirect()->back();
-}
-
-
-    public function handleCoupon(Request $request)
+    public function removeAllItems(Request $request)
     {
-        $discountCode = Coupon::where('discount_code', $request->coupon)->first();
+        Cart::where('customer_id', $request->user()->id)->delete();
 
-        if ($discountCode) {
-            $per = $discountCode->discount_per;
-            $cartItems = Session::get('cart', []);
-            $totalPrice = $this->calculateTotalPrice($cartItems);
-            $discount = $totalPrice * $per;
-            $totalPrice -= $discount;
-
-            return view('Pages.cart', compact('cartItems', 'totalPrice', 'discount'));
-        } else {
-            return redirect()->back();
-        }
+        return redirect()->route('cart.index');
     }
 
-    private function calculateTotalPrice($cartItems)
+
+    public function checkout(Request $request)
     {
+        // Validate the request
+        $request->validate([
+            'address_id' => 'required',
+            'payment_method' => 'required',
+        ]);
+
+        // Create an order
+        $order = new Order();
+        $order->customer_id = $request->user()->id;
+        $order->address_id = $request->address_id;
+        $order->payment_method = $request->payment_method;
+
+        // Calculate the total price
         $totalPrice = 0;
-
-        foreach ($cartItems as $item) {
-            $totalPrice += $item['price'] * $item['qty'];
+        foreach ($request->user()->carts as $cart) {
+            $totalPrice += $cart->total;
         }
+        $order->total_price = $totalPrice;
 
-        return $totalPrice;
+        // Save the order
+        $order->save();
+
+        // Create a payment
+        $payment = new Payment();
+        $payment->customer_id = $request->user()->id;
+        $payment->order_id = $order->id;
+        $payment->payment_method = $request->payment_method;
+        $payment->amount = $order->total_price;
+        $payment->currency = 'USD';
+        $payment->payment_status = 'pending';
+
+        // Save the payment
+        $payment->save();
+
+        // Clear the cart
+        Cart::where('customer_id', $request->user()->id)->delete();
+
+        // Redirect to the order confirmation page
+        return redirect()->route('order.confirmation', $order->id);
     }
 }
-// <?php
-
-// namespace App\Http\Controllers;
-
-// use App\Http\Controllers\Controller;
-// use App\Models\Coupon;
-// use App\Models\Cart;
-// use App\Models\Product;
-// use App\Models\Customer;
-// use App\Http\Controllers\Auth;
-// use App\Models\Category;
-// use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Session;
-// use Illuminate\Support\Facades\DB;
-
-// class CartController extends Controller
-// {
-//     public function __construct()
-//     {
-//         $this->middleware('auth');
-
-//         $this->migrateToDatabase();
-//     }
-
-//     private function migrateToDatabase()
-//     {
-//         $cartItems = Session::get('cart', []);
-
-//         foreach ($cartItems as $item) {
-//             Cart::create([
-//                 'customer_id' => $this->customer()->id,
-//                 'product_id' => $item['id'],
-//                 'quantity' => $item['qty'],
-//             ]);
-//         }
-
-//         Session::forget('cart');
-//     }
-
-//     public function index()
-//     {
-//         // Fetch cart items from the database
-//         $cartItems = Cart::where('customer_id', auth()->user()->id)->get();
-
-//         // Calculate total price and discount as needed
-//         $totalPrice = $this->calculateTotalPrice($cartItems);
-//         $discount = null; // You may calculate this as per your requirements
-
-//         return view('Pages.cart', compact('cartItems', 'totalPrice', 'discount'));
-//     }
-
-
-//     public function addItemToCart($id)
-//     {
-//         $product = Product::findOrFail($id);
-
-//         // Check if the item is already in the cart
-//         $cartItem = Cart::where('customer_id', $this->customer()->id)->where('product_id', $id)->first();
-
-//         if ($cartItem) {
-//             // Increment the quantity if the item is already in the cart
-//             $cartItem->quantity++;
-//             $cartItem->save();
-//         } else {
-//             // Add the item to the cart
-//             Cart::create([
-//                 'customer_id' => $this->customer()->id,
-//                 'product_id' => $id,
-//                 'quantity' => 1,
-//             ]);
-//         }
-
-//         return redirect()->route('cart');
-//     }
-
-//     public function qtyInc($id)
-//     {
-//         $cartItem = Cart::where('customer_id', $this->customer()->id)->where('product_id', $id)->first();
-
-//         if ($cartItem) {
-//             $cartItem->quantity++;
-//             $cartItem->save();
-//         }
-
-//         return redirect()->back();
-//     }
-
-//     public function qtyDec($id)
-//     {
-//         $cartItem = Cart::where('customer_id', $this->customer()->id)->where('product_id', $id)->first();
-
-//         if ($cartItem && ($cartItem->quantity - 1) > 0) {
-//             $cartItem->quantity--;
-//             $cartItem->save();
-//         }
-
-//         return redirect()->back();
-//     }
-
-//     public function removeFromCart($id)
-//     {
-//         $cartItem = Cart::where('customer_id', $this->customer()->id)->where('product_id', $id)->first();
-
-//         if ($cartItem) {
-//             $cartItem->delete();
-//         }
-
-//         return redirect()->back();
-//     }
-
-//     public function handleCoupon(Request $request)
-//     {
-//         $discountCode = Coupon::where('discount_code', $request->coupon)->first();
-
-//         if ($discountCode) {
-//             $per = $discountCode->discount_per;
-//             $cartItems = Cart::where('customer_id', $this->customer()->id)->get();
-//             $totalPrice = $this->calculateTotalPrice($cartItems);
-//             $discount = $totalPrice * $per;
-//             $totalPrice -= $discount;
-
-//             return view('Pages.cart', compact('cartItems', 'totalPrice', 'discount'));
-//         } else {
-//             return redirect()->back();
-//         }
-//     }
-
-//     private function calculateTotalPrice($cartItems)
-//     {
-//         $totalPrice = 0;
-
-//         foreach ($cartItems as $item) {
-//             $totalPrice += $item->price * $item->quantity;
-//         }
-
-//         return $totalPrice;
-//     }
-// }

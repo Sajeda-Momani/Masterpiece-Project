@@ -44,36 +44,47 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+
+// ************************* Main routes ********************************
+
 Route::get('/home', [HomeController::class, 'showhome']);
 
 Route::get('/shop', [ProductController::class, 'showshop'])->name('shop');
 
 Route::get('/singleproduct/{id}', [ProductController::class, 'showsingle'])->name('singleproduct');
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
+// ************************* Dashboard routes *************************
+
+Route::get('/dashboard', [HomeController::class, 'Recent']);
+
+Route::resource('/categories', CategoryController::class);
+Route::resource('/products', ProductController::class);
+Route::resource('/admins', AdminController::class);
+Route::resource('/contacts', ContactController::class);
+Route::resource('/coupons', CouponController::class);
+Route::resource('/customers', CustomerController::class);
+Route::resource('/orders', OrderController::class);
+Route::resource('/ordersitem', OrderItemController::class);
+Route::resource('/reviews', ReviewController::class);
+Route::resource('/address', AddressController::class);
+Route::resource('/paymant', PaymentController::class);
+
+
+// ************************* cart routes *************************
+
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::delete('/cart/remove/{itemId}', [CartController::class, 'removeItem'])->name('cart.remove');
+Route::post('/cart/remove-all-items', [CartController::class, 'removeAllItems'])->name('cart.removeAllItems');
+Route::get('/increaseQuantity/{id}', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
+Route::get('/decreaseQuantity/{id}', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
 
 
-
-// Route::get('/addToCart/{id}', [CartController::class, 'addItemToCart'])->name('addItemToCart');
-// Route::get('/addProductToCart/{id}', [CartController::class, 'addProductToCart'])->name('addProductToCart');
-
-// Route::get('/cart', [CartController::class, 'index'])->name('cart');
-// Route::get('/addItemToCart/{id}', [CartController::class, 'addItemToCart'])->name('addItemToCart');
-// Route::get('/addProductToCart/{id}', [CartController::class, 'addProductToCart'])->name('addProductToCart');
-// Route::get('/qtyInc/{id}', [CartController::class, 'qtyInc'])->name('qtyInc');
-// Route::get('/qtyDec/{id}', [CartController::class, 'qtyDec'])->name('qtyDec');
-// Route::get('/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
-// Route::post('handleCoupon', [CartController::class, 'handleCoupon'])->name('handleCoupon');
-
-
-// Route::get('/cart/{id}', [CartController::class, 'add'])->name('cart.add');
-// Route::get('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
-// Route::get('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
-// Route::get('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
-// Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
-// Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
-
+// ************************* Addtional routes *************************
 
 
 Route::get('/', function () {
@@ -111,10 +122,6 @@ Route::get('/faq', function () {
     return view('Pages.faq');
 })->name('faq');
 
-
-
-
-
 Route::get('/thankyou', function () {
     return view('Pages.thankyou');
 })->name('thankyou');
@@ -122,19 +129,3 @@ Route::get('/thankyou', function () {
 Route::get('/wishlist', function () {
     return view('Pages.wishlist');
 })->name('wishlist');
-
-// ///////////////// Dashboard ///////////////////
-
-Route::get('/dashboard', [HomeController::class, 'Recent']);
-
-Route::resource('/categories', CategoryController::class);
-Route::resource('/products', ProductController::class);
-Route::resource('/admins', AdminController::class);
-Route::resource('/contacts', ContactController::class);
-Route::resource('/coupons', CouponController::class);
-Route::resource('/customers', CustomerController::class);
-Route::resource('/orders', OrderController::class);
-Route::resource('/ordersitem', OrderItemController::class);
-Route::resource('/reviews', ReviewController::class);
-Route::resource('/address', AddressController::class);
-Route::resource('/paymant', PaymentController::class);

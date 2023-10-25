@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign('order_id')->references('id')->on('orders')->onUpdate('CASCADE')->onDelete('CASCADE');
+
         });
     }
 

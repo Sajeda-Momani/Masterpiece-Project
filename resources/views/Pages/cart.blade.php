@@ -1,7 +1,5 @@
 @extends('Layout.master')
 
-
-{{-- @section('title', '404') --}}
 @section('content')
     <!-- Cart Area Start -->
     <div class="cart-main-area pt-100px pb-100px">
@@ -16,136 +14,76 @@
                                     <tr>
                                         <th>Image</th>
                                         <th>Product Name</th>
-                                        <th>Until Price</th>
+                                        <th>Unit Price</th>
                                         <th>Qty</th>
                                         <th>Subtotal</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($cartItems as $key => $cartItem)
+                                    @foreach ($carts as $key => $cartItem)
                                         <tr>
-                                            <td class="product-thumbnail">
-                                                {{-- <a href="#"><img class="img-responsive ml-15px" src="{{ $cartItem['image1'] }}" alt="" /></a> --}}
-
+                                            <td>
+                                                <img class="img-responsive ml-15px" src="{{ $cartItem['product']['image1'] }}"
+                                                    alt="" style="width: 100px; height: 100px; margin-left: 40px;" />
                                             </td>
-                                            <td class="product-name"><a href="#">{{ $cartItem['name'] }}</a></td>
-                                            <td class="product-price-cart"><span
-                                                    class="amount">${{ $cartItem['price'] }}</span></td>
-                                            <td class="product-quantity">
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" type="number" href="{{ route('qtyDec', $cartItem['id']) }}"
-                                                    name="qtybutton{{ $key }}" value="{{ $cartItem['qty'] }}" data-key="{{ $key }}" min="1" />
-                                             
+                                            <td>{{ $cartItem['product']['name'] }}</td>
+                                            <td>${{ $cartItem['product']['price'] }}</td>
+                                            
+                                            <td>
+                                                <div class="border">
+                                                    <button type="button" style="display: inline-block;">
+                                                        <a href="{{ route('decreaseQuantity', $cartItem->id) }}">-</a>
+                                                    </button>
+                                                    <p style="display: inline-block; margin: 0 30px;">{{ $cartItem['quantity'] }}</p>
+                                                    <button type="button" style="display: inline-block;">
+                                                        <a href="{{ route('increaseQuantity', $cartItem->id) }}">+</a>
+                                                    </button>
                                                 </div>
+                                                
+                                                
+                                              </td>
+
+                                            <td>
+                                                {{ $cartItem['product']['price'] * $cartItem['quantity'] }}
                                             </td>
-                                            <td class="product-subtotal" id="subtotal{{ $key }}">
-                                                ${{ $cartItem['price'] * $cartItem['qty'] }}</td>
-                                            <td class="product-remove">
-                                                <a href="{{ route('removeFromCart', $cartItem['id']) }}"><i
-                                                        class="fa fa-times"></i></a>
+                                            <td>
+                                                <form action="{{ route('cart.remove', ['itemId' => $cartItem['id']]) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="delete-button"><i
+                                                            class="fa fa-times" style="color: #dc3545" ></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
 
-                                    {{-- <tr>
-                                        <td class="product-thumbnail">
-                                            <a href="#"><img class="img-responsive ml-15px"
-                                                    src="assets/images/product-image/5.jpg" alt="" /></a>
-                                        </td>
-                                        <td class="product-name"><a href="#">Smart speaker with Alexa</a></td>
-                                        <td class="product-price-cart"><span class="amount">$80.00</span></td>
-                                        <td class="product-quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qtybutton"
-                                                    value="1" />
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal">$80.00</td>
-                                        <td class="product-remove">
-                                            <a href="#"><i class="fa fa-times"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-thumbnail">
-                                            <a href="#"><img class="img-responsive ml-15px"
-                                                    src="assets/images/product-image/6.png" alt="" /></a>
-                                        </td>
-                                        <td class="product-name"><a href="#">Smart Table Camera
-                                            </a></td>
-                                        <td class="product-price-cart"><span class="amount">$279.99</span></td>
-                                        <td class="product-quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qtybutton"
-                                                    value="1" />
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal">$279.99</td>
-                                        <td class="product-remove">
-                                            <a href="#"><i class="fa fa-times"></i></a>
-                                        </td>
-                                    </tr> --}}
+
                                 </tbody>
                             </table>
+
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="cart-shiping-update-wrapper">
                                     <div class="cart-shiping-update">
-                                        <a href="#">Continue Shopping</a>
+                                        <a href="/shop">Continue Shopping</a>
                                     </div>
-                                    <div class="cart-clear">
-                                        <button>Update Shopping Cart</button>
-                                        <a href="#">Clear Shopping Cart</a>
+                                    <div class="">
+                                        <form action="{{ route('cart.removeAllItems') }}" method="post">
+                                            @csrf
+                                            <button style="background-color: #dc3545; border-radius: 0px; color: white; display: inline-block; font-size: 14px; font-weight: 600; line-height: 1; padding: 18px 63px 17px; text-transform: uppercase;">
+                                                Clear Cart
+                                            </button>
+                                             </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
                     <div class="row">
-                        <!-- <div class="col-lg-4 col-md-6 mb-lm-30px">
-                                            <div class="cart-tax">
-                                                <div class="title-wrap">
-                                                    <h4 class="cart-bottom-title section-bg-gray">Estimate Shipping And Tax</h4>
-                                                </div>
-                                                <div class="tax-wrapper">
-                                                    <p>Enter your destination to get a shipping estimate.</p>
-                                                    <div class="tax-select-wrapper">
-                                                        <div class="tax-select">
-                                                            <label>
-                                                                * Country
-                                                            </label>
-                                                            <select class="email s-email s-wid">
-                                                                <option>Bangladesh</option>
-                                                                <option>Albania</option>
-                                                                <option>Åland Islands</option>
-                                                                <option>Afghanistan</option>
-                                                                <option>Belgium</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="tax-select">
-                                                            <label>
-                                                                * Region / State
-                                                            </label>
-                                                            <select class="email s-email s-wid">
-                                                                <option>Bangladesh</option>
-                                                                <option>Albania</option>
-                                                                <option>Åland Islands</option>
-                                                                <option>Afghanistan</option>
-                                                                <option>Belgium</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="tax-select mb-25px">
-                                                            <label>
-                                                                * Zip/Postal Code
-                                                            </label>
-                                                            <input type="text" />
-                                                        </div>
-                                                        <button class="cart-btn-2" type="submit">Get A Quote</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
+
                         <div class="col-lg-4 col-md-6 mb-lm-30px">
                             <div class="discount-code-wrapper">
                                 <div class="title-wrap">
@@ -161,23 +99,34 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 mb-lm-30px">
+
                         </div>
                         <br>
+                        <?php
+                        
+                        $totalPrice = array_sum(array_column($carts->toArray(), 'total'));
+                        
+                        ?>
                         <div class="col-lg-4 col-md-12 mt-md-30px">
                             <div class="grand-totall">
                                 <div class="title-wrap">
                                     <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
                                 </div>
-                                <h5>Total products <span>$260.00</span></h5>
+                                <h5>Total products <span>${{ $totalPrice }}</span></h5>
                                 <div class="total-shipping">
                                     <h5>Total shipping</h5>
                                     <ul>
                                         <li><input type="checkbox" /> Standard <span>$20.00</span></li>
                                         <li><input type="checkbox" /> Express <span>$30.00</span></li>
                                     </ul>
+
                                 </div>
-                                <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4>
-                                <a href="/checkout">Proceed to Checkout</a>
+
+                                <h4>Grand Total:   
+                                    <span style="color: green; margin-left: 15%">${{ $totalPrice }}</span>
+                                </h4>
+                                <br>
+                                <a  style="background-color: green; border-radius: 0px; color: white; display: inline-block; font-size: 14px; font-weight: 600; line-height: 1; padding: 18px 63px 17px; text-transform: uppercase;"href="{{ route('checkout') }}">Proceed to Checkout</a>
                             </div>
                         </div>
                     </div>

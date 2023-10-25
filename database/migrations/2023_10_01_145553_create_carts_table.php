@@ -13,6 +13,7 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
+            $table->decimal('price', 10, 2)->nullable();
             $table->decimal('total', 10, 2)->nullable();
             $table->timestamps();
             

@@ -115,12 +115,11 @@
                                 <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
                             </div>
                             <div class="pro-details-cart">
-
-
-                                <a href="{{ route('cart') }}" class="add-cart">Add To Cart</a>
-                                {{-- <a href="{{ route('addToCart', $product->id) }}" class="add-cart">Add To Cart</a> --}}
-                                <!-- <button class="add-cart"> Add To Cart</button> -->
-
+                                <form action="/cart/add/{{ $product->id }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="productId" value="{{ $product->id }}">
+                                    <button type="submit" class="add-cart">Add To Cart</button>
+                                </form>
                             </div>
                             <div class="pro-details-compare-wishlist pro-details-wishlist ">
                                 <a href="wishlist.html"><i class="pe-7s-like"></i></a>
