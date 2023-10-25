@@ -44,18 +44,28 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
-
-
 Route::get('/home', [HomeController::class, 'showhome']);
 
 Route::get('/shop', [ProductController::class, 'showshop'])->name('shop');
 
 Route::get('/singleproduct/{id}', [ProductController::class, 'showsingle'])->name('singleproduct');
 
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
+
+
+
+// Route::get('/addToCart/{id}', [CartController::class, 'addItemToCart'])->name('addItemToCart');
+// Route::get('/addProductToCart/{id}', [CartController::class, 'addProductToCart'])->name('addProductToCart');
+
 // Route::get('/cart', [CartController::class, 'index'])->name('cart');
 // Route::get('/addItemToCart/{id}', [CartController::class, 'addItemToCart'])->name('addItemToCart');
 // Route::get('/addProductToCart/{id}', [CartController::class, 'addProductToCart'])->name('addProductToCart');
+// Route::get('/qtyInc/{id}', [CartController::class, 'qtyInc'])->name('qtyInc');
+// Route::get('/qtyDec/{id}', [CartController::class, 'qtyDec'])->name('qtyDec');
+// Route::get('/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+// Route::post('handleCoupon', [CartController::class, 'handleCoupon'])->name('handleCoupon');
+
 
 // Route::get('/cart/{id}', [CartController::class, 'add'])->name('cart.add');
 // Route::get('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
@@ -64,29 +74,11 @@ Route::get('/singleproduct/{id}', [ProductController::class, 'showsingle'])->nam
 // Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
 // Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
-/*--------------------------------------------- CART --------------------------------------------- */
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
-//Add Menu Item To Cart
-Route::get('/addItemToCart/{id}', [CartController::class, 'addItemToCart'])->name('addItemToCart');
-
-//Add Menu Item To Cart
-Route::get('/addProductToCart/{id}', [CartController::class, 'addProductToCart'])->name('addProductToCart');
-
-Route::get('/qtyInc/{id}', [CartController::class, 'qtyInc'])->name('qtyInc');
-Route::get('/qtyDec/{id}', [CartController::class, 'qtyDec'])->name('qtyDec');
-Route::get('/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
-
-Route::post('handleCoupon', [CartController::class, 'handleCoupon'])->name('handleCoupon');
-/*------------------------------------------- END CART -------------------------------------------- */
 
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-// Route::get('/login', function () {
-//     return view('Pages.login');
-// })->name('login');
 
 Route::get('/ad', function () {
     return view('Admin.login');

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,7 +29,7 @@
                     <a href="" class="social-text">Forget your password?</a>
                 </div>
             </form>
-            <form action="" method="post" class="sign-up-form">
+            <form action="{{ route('register') }}" method="post" class="sign-up-form">
                 @csrf <!-- Add CSRF protection for Laravel forms -->
                 <h2 class="title">Sign up</h2>
                 <div class="input-field">
@@ -44,6 +44,12 @@
                     <i class="fas fa-lock"></i>
                     <input type="password" name="password" placeholder="Password" />
                 </div>
+
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password_confirmation" placeholder="confirmation Password" />
+                </div>
+                
                 <input type="submit" class="btn" value="Sign up" />
                 <p class="social-text">Or Sign up with social platforms</p>
                 <div class="social-media">
@@ -107,4 +113,4 @@
     });
 </script>
 </body>
-</html>
+</html> --}}

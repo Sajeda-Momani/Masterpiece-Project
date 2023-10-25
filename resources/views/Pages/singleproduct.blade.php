@@ -1,7 +1,5 @@
 @extends('Layout.master')
 
-
-{{-- @section('title', '404') --}}
 @section('content')
     <!-- Product Details Area Start -->
     <div class="product-details-area pt-100px pb-100px">
@@ -117,8 +115,12 @@
                                 <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
                             </div>
                             <div class="pro-details-cart">
-                                <a href="{{ route('addItemToCart', $product->id) }}" class="add-cart">Add To Cart</a>
+
+
+                                <a href="{{ route('cart') }}" class="add-cart">Add To Cart</a>
+                                {{-- <a href="{{ route('addToCart', $product->id) }}" class="add-cart">Add To Cart</a> --}}
                                 <!-- <button class="add-cart"> Add To Cart</button> -->
+
                             </div>
                             <div class="pro-details-compare-wishlist pro-details-wishlist ">
                                 <a href="wishlist.html"><i class="pe-7s-like"></i></a>
@@ -138,16 +140,7 @@
                                 ({{ $reviews->count() }})</button>
                         </div>
                         <div class="tab-content description-review-bottom">
-                            <!-- <div id="des-details2" class="tab-pane">
-                                                                                        <div class="product-anotherinfo-wrapper text-start">
-                                                                                            <ul>
-                                                                                                <li><span>Compatibility</span> Google Assistant, Amazon Alexa, Apple HomeKit</li>
-                                                                                                <li><span>Dimensions</span>4.7 x 14.3 x 3.7 cm</li>
-                                                                                                <li><span>Connectivity</span> Wifi - No Hub Required</li>
-                                                                                                <li><span>Other Info</span> American heirloom jean shorts pug seitan letterpress</li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div> -->
+
                             <div id="des-details1" class="tab-pane active">
                                 <div class="product-description-wrapper">
                                     <p>

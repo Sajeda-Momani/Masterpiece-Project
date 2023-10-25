@@ -3,20 +3,7 @@
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        {{-- <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Dashboard</h1>
-                    </div>
-                    <div class="col-sm-6">
 
-                    </div>
-                </div>
-            </div>
-            <!-- /.container-fluid -->
-        </section> --}}
         <!-- Main content -->
         <section class="content">
             <!-- Default box -->
@@ -119,48 +106,7 @@
                                             <td>{{ $order->order_date }}</td>
                                         </tr>
                                     @endforeach
-                                    {{-- <tr>
-                                        <td>Dell Laptop</td>
-                                        <td>$110</td>
-                                        <td>Due</td>
-                                        <td><span class="status pending">Pending</span></td>
-                                    </tr>
 
-                                    <tr>
-                                        <td>Apple Watch</td>
-                                        <td>$1200</td>
-                                        <td>Paid</td>
-                                        <td><span class="status return">Return</span></td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <td>Star Refrigerator</td>
-                                        <td>$1200</td>
-                                        <td>Paid</td>
-                                        <td><span class="status delivered">Delivered</span></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Dell Laptop</td>
-                                        <td>$110</td>
-                                        <td>Due</td>
-                                        <td><span class="status pending">Pending</span></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Apple Watch</td>
-                                        <td>$1200</td>
-                                        <td>Paid</td>
-                                        <td><span class="status return">Return</span></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Addidas Shoes</td>
-                                        <td>$620</td>غ
-                                        <td>Due</td>
-                                        <td><span class="status inProgress">In Progress</span></td>
-                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>
