@@ -12,12 +12,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->date('order_date');
+            $table->timestamp('order_date')->default(now()); // Set a default value to the current timestamp
+            $table->string('payment_method')->nullable();
             $table->decimal('total_price', 10, 2);
             $table->decimal('shipping_fee', 10, 2)->default(5);
             $table->decimal('maintenance_fee', 10, 2)->default(10);
             $table->decimal('installation_fee', 10, 2)->default(15);
-            $table->string('status');
+            $table->string('status')->default('pending'); // Set a default value for 'status'
             $table->timestamps();
 
             // Foreign key constraints

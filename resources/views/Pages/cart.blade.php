@@ -71,7 +71,7 @@
                                         <a href="/shop">Continue Shopping</a>
                                     </div>
                                     <div class="">
-                                        <form action="{{ route('cart.removeAllItems') }}" method="post">
+                                        <form action="{{ route('cart.removeAllItems') }}" method="POST">
                                             @csrf
                                             <button style="background-color: #dc3545; border-radius: 0px; color: white; display: inline-block; font-size: 14px; font-weight: 600; line-height: 1; padding: 18px 63px 17px; text-transform: uppercase;">
                                                 Clear Cart

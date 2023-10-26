@@ -8,16 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'customer_id',
         'city',
-        'town',
         'street',
         'department_number',
         'phone',
         'additional_information',
+        'customer_id',
     ];
+   
+
 
     public function orders()
     {
@@ -28,5 +29,4 @@ class Address extends Model
     {
         return $this->belongsTo(Customer::class);
     }
-
 }
