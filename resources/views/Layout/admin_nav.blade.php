@@ -34,33 +34,31 @@
      </ol> -->
             </div>
 
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto" margin-top="20px">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link p-0 pr-3" data-toggle="dropdown" href="#">
-                        <img src="{{ asset('admin/img/avatar5.png') }}" class='img-circle elevation-2' width="40"
-                            height="40" alt="">
+                    <a class="nav-link p-0 pr-3" data-toggle="dropdown" href="#" >
+                        <i class="fa fa-user fa-lg" style="color: #2a2185; width: 20px; height: 20px; margin-top: 10px;" class='img-circle elevation-2'></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-3">
-                        <h4 class="h4 mb-0"><strong>Sajeda Momani</strong></h4>
-                        <div class="mb-3">example@example.com</div>
+
+                    @if(Auth::check())
+                    {{-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-3">
+                        <h4 class="h4 mb-0"><strong> {{ $name }}</strong></h4>
+                        <div class="mb-3">{{ $email }}</div>
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('profile.edit') }}" class="dropdown-item">
                             <i class="fas fa-user-cog mr-2"></i> Profile
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-lock mr-2"></i> Change Password
-                        </a>
-                        <div class="dropdown-divider"></div>
                         <a href="{{ route('logout') }}" class="dropdown-item text-danger">
                             <i class="fas fa-sign-out-alt mr-2"></i> Logout
                         </a>
-                    </div>
+                    </div> --}}
+                    @endif
                 </li>
             </ul>
         </nav>
@@ -77,6 +75,7 @@
             <div class="sidebar">
                 <!-- Sidebar user (optional) -->
                 <nav class="mt-2">
+                    
 
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
@@ -121,7 +120,7 @@
                             </a>
                         </li> --}}
                         <li class="nav-item {{ request()->is('contacts*') ? 'active' : '' }}">
-                            <a href="{{ url('/contacts') }}" class="nav-link">
+                            <a href="{{ url('/admin_contacts') }}" class="nav-link">
                                 <ion-icon name="chatbubble-outline"class="custom-icon-size"></ion-icon>
                                 <p>Messages</p>
                             </a>

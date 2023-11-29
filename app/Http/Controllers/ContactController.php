@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactReceived;
+use Illuminate\Http\RedirectResponse;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class ContactController extends Controller
 {
@@ -13,15 +18,15 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::all();
-        return view('admin.contacts', ['contacts'=>$contacts]);
-       }
+        return view('admin.contacts', compact('contacts'));
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        // You might want to return a view for creating a new contact if needed.
     }
 
     /**
@@ -29,7 +34,20 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'subject' => 'required|string',
+            'message' => 'required|string',
+        ]);
+
+        $contact = Contact::create($data);
+
+        Mail::to('sajeda.momani20@gmail.com')->send(new ContactReceived($contact));
+
+        // Alert::success('Success', 'Form submitted successfully');
+        
+        return redirect()->route('contact')->with('success', 'Form submitted successfully!');
     }
 
     /**
@@ -37,7 +55,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        // You might want to return a view to show the details of a specific contact if needed.
     }
 
     /**
@@ -45,7 +63,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        // You might want to return a view for editing a contact if needed.
     }
 
     /**
@@ -53,14 +71,17 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        // You might want to implement the logic for updating a contact if needed.
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact): RedirectResponse
     {
-        //
+        $contact->delete();
+
+        // Alert::success('Success', 'Contact deleted successfully');
+        return redirect()->route('admin.contacts')->with('success', 'Contact deleted successfully!');
     }
 }

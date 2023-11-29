@@ -40,9 +40,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/dashboard', [HomeController::class, 'Recent', 'showUserInfo'])->middleware('admin');
+
+    Route::resource('/categories', CategoryController::class)->middleware('admin');
+    Route::resource('/products', ProductController::class)->middleware('admin');
+    Route::resource('/admins', AdminController::class)->middleware('admin');
+    Route::resource('/admin_contacts', ContactController::class)->middleware('admin');
+    Route::resource('/coupons', CouponController::class)->middleware('admin');
+    Route::resource('/customers', CustomerController::class)->middleware('admin');
+    Route::resource('/orders', OrderController::class)->middleware('admin');
+    Route::resource('/ordersitem', OrderItemController::class)->middleware('admin');
+    Route::resource('/reviews', ReviewController::class)->middleware('admin');
+    Route::resource('/address', AddressController::class)->middleware('admin');
+    Route::resource('/paymant', PaymentController::class)->middleware('admin');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 // ************************* Main routes ********************************
@@ -56,19 +70,19 @@ Route::get('/singleproduct/{id}', [ProductController::class, 'showsingle'])->nam
 
 // ************************* Dashboard routes *************************
 
-Route::get('/dashboard', [HomeController::class, 'Recent']);
+// Route::get('/dashboard', [HomeController::class, 'Recent', 'showUserInfo']);
 
-Route::resource('/categories', CategoryController::class);
-Route::resource('/products', ProductController::class);
-Route::resource('/admins', AdminController::class);
-Route::resource('/contacts', ContactController::class);
-Route::resource('/coupons', CouponController::class);
-Route::resource('/customers', CustomerController::class);
-Route::resource('/orders', OrderController::class);
-Route::resource('/ordersitem', OrderItemController::class);
-Route::resource('/reviews', ReviewController::class);
-Route::resource('/address', AddressController::class);
-Route::resource('/paymant', PaymentController::class);
+// Route::resource('/categories', CategoryController::class);
+// Route::resource('/products', ProductController::class);
+// Route::resource('/admins', AdminController::class);
+// Route::resource('/contacts', ContactController::class);
+// Route::resource('/coupons', CouponController::class);
+// Route::resource('/customers', CustomerController::class);
+// Route::resource('/orders', OrderController::class);
+// Route::resource('/ordersitem', OrderItemController::class);
+// Route::resource('/reviews', ReviewController::class);
+// Route::resource('/address', AddressController::class);
+// Route::resource('/paymant', PaymentController::class);
 
 
 // ************************* cart routes *************************
@@ -81,11 +95,21 @@ Route::post('/cart/remove-all-items', [CartController::class, 'removeAllItems'])
 Route::get('/increaseQuantity/{id}', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
 Route::get('/decreaseQuantity/{id}', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+Route::get('/checkout', function () {
+    return view('Pages.checkout');
+})->name('checkout');
 
 
 
 // ************************* Addtional routes *************************
+// Route::get('/contact', function () {
+//     return view('Pages.contact');
+// })->name('contact');
+Route::resource('contact', ContactController::class);
 
+
+
+// 
 
 Route::get('/', function () {
     return view('welcome');
@@ -106,9 +130,6 @@ Route::get('/about', function () {
     return view('Pages.about');
 })->name('about');
 
-Route::get('/checkout', function () {
-    return view('Pages.checkout');
-})->name('checkout');
 
 Route::get('/contact', function () {
     return view('Pages.contact');

@@ -20,11 +20,8 @@
                                 Smartify is leading the way in the smart home revolution.</p>
                         </div>
 
-
                         <div class="promo-video">
-                            <img src="assets/images/about/Smart-home-devices.jpg" alt="">
-                            <!-- <a href="assets/images/about/Smart-home-devices.jpgA" class="venobox overlay-box" data-vbtype="video"><span
-                                        class="fa fa-play"><i class="ripple"></i></span></a> -->
+                            <img src="{{ asset('images/about/Smart-home-devices.jpg') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -44,29 +41,35 @@
                 </div>
             </div>
             <div class="row mb-n-30px">
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-lm-30px mb-lg-30px mb-md-30px">
+                <div class="col-xl-12 col-lg-4 col-md-6 col-sm-6 mb-lm-30px mb-lg-30px mb-md-30px">
                     <!-- Single Team -->
-                    <div class="team-wrapper ">
-                        <div class="team-image overflow-hidden">
-                            <img src="assets/images/logo/tab logo.png" alt="">
+                    <div class="team-wrapper text-center">
+                        <div class="team-image overflow-hidden mx-auto">
+                            <!-- Added mx-auto class for horizontal centering -->
+                            <img src="{{ asset('images\profile\image.png') }}" alt=""
+                                style="height: 200px; width: 200px;">
                             <ul class="team-social d-flex">
                                 <li>
                                     <a class="m-0" title="Twitter" target="_blank" rel="noopener noreferrer"
                                         href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
-                                    <a title="Tumblr" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-tumblr" aria-hidden="true"></i>
+                                    <a title="linkedin" target="_blank" rel="noopener noreferrer"
+                                        href="https://www.linkedin.com/in/sajeda-momani/"><i class="fa fa-linkedin"
+                                            aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="Facebook" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-twitter" aria-hidden="true"></i>
+                                    <a title="Email" target="_blank" rel="noopener noreferrer"
+                                        href="mailto:sajeda.momani20@gmail.com">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
                                     </a>
                                 </li>
+
                                 <li>
-                                    <a title="Instagram" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i>
+                                    <a title="github" target="_blank" rel="noopener noreferrer"
+                                        href="https://github.com/Sajeda-Momani"><i class="fa fa-github"
+                                            aria-hidden="true"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -80,74 +83,11 @@
                     </div>
                     <!-- Single Team -->
                 </div>
-                <!-- <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-lm-30px mb-lg-30px mb-md-30px"> -->
-                <!-- Single Team -->
-                <!-- <div class="team-wrapper">
-                                <div class="team-image overflow-hidden">
-                                    <img src="assets/images/team/2.webp" alt="">
-                                    <ul class="team-social d-flex">
-                                        <li>
-                                            <a class="m-0" title="Twitter" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-facebook"
-                                                aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a title="Tumblr" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-tumblr" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a title="Facebook" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-twitter" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a title="Instagram" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-instagram" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="team-inner">
-                                    <div class="team-content">
-                                        <h6 class="title">Anaiah Whitten</h6>
-                                        <span class="sub-title">Team Member</span>
-                                    </div>
-                                </div>
-                            </div> -->
-                <!-- Single Team -->
-                <!-- </div>
-                        <div class="col-xl-4 col-lg-4 col-sm-6 col-md-6 mb-lm-30px "> -->
-                <!-- Single Team -->
-                <!-- <div class="team-wrapper">
-                                <div class="team-image overflow-hidden">
-                                    <img src="assets/images/team/3.webp" alt="">
-                                    <ul class="team-social d-flex">
-                                        <li>
-                                            <a class="m-0" title="Twitter" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-facebook"
-                                                aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a title="Tumblr" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-tumblr" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a title="Facebook" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-twitter" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a title="Instagram" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-instagram" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="team-inner">
-                                    <div class="team-content">
-                                        <h6 class="title">Rachel Leonard</h6>
-                                        <span class="sub-title">Team Member</span>
-                                    </div>
-                                </div>
-                            </div> -->
-                <!-- Single Team -->
-                <!-- </div> -->
             </div>
+
+
         </div>
+    </div>
     </div>
     <!-- Team Area End -->
     <!-- Feature Area Srart -->
@@ -176,13 +116,15 @@
                                 <div class="testi-inner">
                                     <div class="testi-content">
                                         <p>Impressive value! Clear video, loud siren, night vision. Easy phone playback,
-                                            police/fire connection. With backup batteries. Strongly recommend from Smartify.
+                                            police/fire connection. With backup batteries. Smartify devices, are highly
+                                            recommended for their
+                                            outstanding performance and
+                                            reliability.
                                         </p>
                                     </div>
                                     <div class="testi-author">
                                         <div class="author-image">
-                                            <img class="img-responsive"
-                                                src="../Smartify/assets/images/review-image/Screenshot 2023-08-26 202155.png"
+                                            <img class="img-responsive" src="{{ asset('images\profile\Sajeda.png') }}"
                                                 alt="" height="50px" width="50px">
                                         </div>
                                         <div class="author-name">
@@ -194,14 +136,15 @@
                             <div class="swiper-slide">
                                 <div class="testi-inner">
                                     <div class="testi-content">
-                                        <p>Impressive value! Clear video, loud siren, night vision. Easy phone playback,
-                                            police/fire connection. With backup batteries. Strongly recommend from Smartify.
-                                        </p>
+                                        <p>Exceptional value! The video quality is superb, the siren is attention-grabbing,
+                                            and night vision works seamlessly. Smartify devices, come highly recommended for
+                                            their overall performance and
+                                            reliability.</p>
+
                                     </div>
                                     <div class="testi-author">
                                         <div class="author-image">
-                                            <img class="img-responsive"
-                                                src="../Smartify/assets/images/review-image/Screenshot 2023-08-26 202155.png"
+                                            <img class="img-responsive" src="{{ asset('images\profile\Sajeda.png') }}"
                                                 alt="" height="50px" width="50px">
                                         </div>
                                         <div class="author-name">
@@ -213,14 +156,15 @@
                             <div class="swiper-slide">
                                 <div class="testi-inner">
                                     <div class="testi-content">
-                                        <p>Impressive value! Clear video, loud siren, night vision. Easy phone playback,
-                                            police/fire connection. With backup batteries. Strongly recommend from Smartify.
-                                        </p>
+                                        <p>Outstanding value! The video clarity is remarkable, the siren is impressively
+                                            loud, and night vision ensures visibility even in low light.
+                                            Smartify devices, are a strong recommendation for their
+                                            reliability and performance.</p>
+
                                     </div>
                                     <div class="testi-author">
                                         <div class="author-image">
-                                            <img class="img-responsive"
-                                                src="../Smartify/assets/images/review-image/Screenshot 2023-08-26 202155.png"
+                                            <img class="img-responsive" src="{{ asset('images\profile\Sajeda.png') }}"
                                                 alt="" height="50px" width="50px">
                                         </div>
                                         <div class="author-name">
@@ -232,14 +176,15 @@
                             <div class="swiper-slide">
                                 <div class="testi-inner">
                                     <div class="testi-content">
-                                        <p>Impressive value! Clear video, loud siren, night vision. Easy phone playback,
-                                            police/fire connection. With backup batteries. Strongly recommend from Smartify.
-                                        </p>
+                                        <p>Remarkable value! The video is crystal clear, the siren is impressively loud, and
+                                            night vision is exceptional. Smartify devices, are highly recommended for their
+                                            outstanding performance and
+                                            reliability.</p>
+
                                     </div>
                                     <div class="testi-author">
                                         <div class="author-image">
-                                            <img class="img-responsive"
-                                                src="../Smartify/assets/images/review-image/Screenshot 2023-08-26 202155.png"
+                                            <img class="img-responsive" src="{{ asset('images\profile\Sajeda.png') }}"
                                                 alt="" height="50px" width="50px">
                                         </div>
                                         <div class="author-name">
@@ -266,7 +211,7 @@
                     <!-- single item -->
                     <div class="single-feature">
                         <div class="feature-icon">
-                            <img src="assets/images/icons/1.png" alt="">
+                            <img src="{{ asset('images/icons/1.png') }}" alt="">
                         </div>
                         <div class="feature-content">
                             <h4 class="title">Free Shipping</h4>
@@ -278,7 +223,7 @@
                 <div class="single-feture-col mb-md-30px mb-lm-30px">
                     <div class="single-feature">
                         <div class="feature-icon">
-                            <img src="assets/images/icons/2.png" alt="">
+                            <img src="{{ asset('images/icons/2.png') }}" alt="">
                         </div>
                         <div class="feature-content">
                             <h4 class="title">Card Payments</h4>
@@ -290,7 +235,7 @@
                 <div class="single-feture-col">
                     <div class="single-feature">
                         <div class="feature-icon">
-                            <img src="assets/images/icons/3.png" alt="">
+                            <img src="{{ asset('images/icons/3.png') }}" alt="">
                         </div>
                         <div class="feature-content">
                             <h4 class="title">Easy Returns</h4>
@@ -303,57 +248,5 @@
         </div>
     </div>
     <br>
-    <!-- Testimonial area end-->
-    <!-- Blog area start from here -->
-    <!-- <div class="main-blog-area pb-100px pt-100px">
-                <div class="container"> -->
-    <!-- section title start -->
-    <!-- <div class="row">
-                        <div class="col-md-12">
-                            <div class="section-title text-center mb-30px0px">
-                                <h2 class="title">Latest Blog</h2>
-                                <p> There are many variations of passages of Lorem Ipsum available</p>
-                            </div>
-                        </div>
-                    </div> -->
-    <!-- section title start -->
-    <!-- <div class="row">
-                        <div class="col-lg-6 col-sm-6 mb-xs-30px">
-                            <div class="single-blog">
-                                <div class="blog-image">
-                                    <a href="blog-single-left-sidebar.html"><img src="assets/images/blog-image/1.webp" class="img-responsive w-100" alt=""></a>
-                                </div>
-                                <div class="blog-text">
-                                    <div class="blog-athor-date line-height-1">
-                                        <span class="blog-date"><i class="fa fa-calendar" aria-hidden="true"></i> 27,Jun 2030</span>
-                                        <span><a class="blog-author" href="blog-grid.html"><i class="fa fa-user" aria-hidden="true"></i> Oaklee Odom</a></span>
-                                    </div>
-                                    <h5 class="blog-heading"><a class="blog-heading-link" href="blog-single-left-sidebar.html">Lorem ipsum dolor sit amet conse adip</a></h5>
-                                    <p>Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod templ incididunt ut labore</p>
-                                    <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
-                                </div>
-                            </div>
-                        </div> -->
-    <!-- End single blog -->
-    <!-- <div class="col-lg-6 col-sm-6">
-                            <div class="single-blog">
-                                <div class="blog-image">
-                                    <a href="blog-single-left-sidebar.html"><img src="assets/images/blog-image/2.webp" class="img-responsive w-100" alt=""></a>
-                                </div>
-                                <div class="blog-text">
-                                    <div class="blog-athor-date line-height-1">
-                                        <span class="blog-date"><i class="fa fa-calendar" aria-hidden="true"></i> 27,Jun 2030</span>
-                                        <span><a class="blog-author" href="blog-grid.html"><i class="fa fa-user" aria-hidden="true"></i> Oaklee Odom</a></span>
-                                    </div>
-                                    <h5 class="blog-heading"><a class="blog-heading-link" href="blog-single-left-sidebar.html">Lorem ipsum dolor sit amet conse adip</a></h5>
-                                    <p>Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod templ incididunt ut labore</p>
-                                    <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
-                                </div>
-                            </div>
-                        </div> -->
-    <!-- End single blog -->
-    <!-- </div> -->
-    <!-- </div>
-            </div> -->
-    <!-- Blog area end here -->
+    
 @endsection

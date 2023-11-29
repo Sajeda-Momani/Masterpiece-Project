@@ -29,20 +29,21 @@
                                             </td>
                                             <td>{{ $cartItem['product']['name'] }}</td>
                                             <td>${{ $cartItem['product']['price'] }}</td>
-                                            
+
                                             <td>
                                                 <div class="border">
                                                     <button type="button" style="display: inline-block;">
                                                         <a href="{{ route('decreaseQuantity', $cartItem->id) }}">-</a>
                                                     </button>
-                                                    <p style="display: inline-block; margin: 0 30px;">{{ $cartItem['quantity'] }}</p>
+                                                    <p style="display: inline-block; margin: 0 30px;">
+                                                        {{ $cartItem['quantity'] }}</p>
                                                     <button type="button" style="display: inline-block;">
                                                         <a href="{{ route('increaseQuantity', $cartItem->id) }}">+</a>
                                                     </button>
                                                 </div>
-                                                
-                                                
-                                              </td>
+
+
+                                            </td>
 
                                             <td>
                                                 {{ $cartItem['product']['price'] * $cartItem['quantity'] }}
@@ -52,8 +53,8 @@
                                                     method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="delete-button"><i
-                                                            class="fa fa-times" style="color: #dc3545" ></i></button>
+                                                    <button type="submit" class="delete-button"><i class="fa fa-times"
+                                                            style="color: #dc3545"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -73,10 +74,11 @@
                                     <div class="">
                                         <form action="{{ route('cart.removeAllItems') }}" method="POST">
                                             @csrf
-                                            <button style="background-color: #dc3545; border-radius: 0px; color: white; display: inline-block; font-size: 14px; font-weight: 600; line-height: 1; padding: 18px 63px 17px; text-transform: uppercase;">
+                                            <button
+                                                style="background-color: #dc3545; border-radius: 0px; color: white; display: inline-block; font-size: 14px; font-weight: 600; line-height: 1; padding: 18px 63px 17px; text-transform: uppercase;">
                                                 Clear Cart
                                             </button>
-                                             </form>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -102,17 +104,15 @@
 
                         </div>
                         <br>
-                        <?php
-                        
-                        $totalPrice = array_sum(array_column($carts->toArray(), 'total'));
-                        
-                        ?>
+
+                        {{-- $totalPrice = array_sum(array_column($carts->toArray(), 'total')); --}}
+
                         <div class="col-lg-4 col-md-12 mt-md-30px">
                             <div class="grand-totall">
                                 <div class="title-wrap">
                                     <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
                                 </div>
-                                <h5>Total products <span>${{ $totalPrice }}</span></h5>
+                                {{-- <h5>Total products <span>${{ $totalPrice }}</span></h5> --}}
                                 <div class="total-shipping">
                                     <h5>Total shipping</h5>
                                     <ul>
@@ -122,11 +122,17 @@
 
                                 </div>
 
-                                <h4>Grand Total:   
-                                    <span style="color: green; margin-left: 15%">${{ $totalPrice }}</span>
+                                <h4>Grand Total:
+                                    {{-- <span style="color: green; margin-left: 15%">${{ $totalPrice }}</span> --}}
                                 </h4>
                                 <br>
-                                <a  style="background-color: green; border-radius: 0px; color: white; display: inline-block; font-size: 14px; font-weight: 600; line-height: 1; padding: 18px 63px 17px; text-transform: uppercase;"href="{{ route('checkout') }}">Proceed to Checkout</a>
+                                @if (Auth::check())
+                                    <a style="background-color: green; border-radius: 0px; color: white; display: inline-block; font-size: 14px; font-weight: 600; line-height: 1; padding: 18px 63px 17px; text-transform: uppercase;"
+                                        href="{{ route('checkout') }}">Proceed to Checkout</a>
+                                @else
+                                    <a style="background-color: red; border-radius: 0px; color: white; display: inline-block; font-size: 14px; font-weight: 600; line-height: 1; padding: 18px 63px 17px; text-transform: uppercase;"
+                                        href="{{ route('login') }}">Log In to Checkout</a>
+                                @endif
                             </div>
                         </div>
                     </div>

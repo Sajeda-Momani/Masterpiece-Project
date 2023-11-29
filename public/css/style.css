@@ -2417,6 +2417,7 @@ border: 1px solid #233B6E;
   border-radius: 5px;
   background-color: #707070;
   font-size: 24px;
+  margin-right: 15px;
 }
 .product .actions .action + .action {
   margin-left: 10px;

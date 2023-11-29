@@ -12,8 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories', ['categories' => $categories]);
+        $categories = Category::paginate(5);
+        return view('admin.categories.categories', ['categories' => $categories]);
     }
 
     /**
@@ -30,27 +30,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
 
-        // Category::create($request->all());
-        // return redirect ('categories')->withSuccess('Added Successfully');
-
-
-        // Validate the incoming request data
-        // $validatedData = $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'description' => 'required|string|max:255',
-        //     'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        // ]);
-
         // Create a new category object
         $category = Category::create(([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
+            'image' => $request->input('image'),
         ]));
 
         // Handle main image
         if ($request->hasFile('image')) {
             $mainImageName = time() . '_' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('images\categories'), $mainImageName);
+            $request->file('image')->move(public_path('storage\images\categories'), $mainImageName);
 
             $category->image = $mainImageName;
         }

@@ -16,11 +16,7 @@ class CategoriesTableSeeder extends Seeder
                 'description' => 'Voice-activated smart assistants for your home.',
                 'image' => 'images/banner/Smart Assistants.png',
             ],
-            [
-                'name' => 'Streaming Devices',
-                'description' => 'Programmable and energy-efficient Streaming Devices.',
-                'image' => 'images/banner/Streaming Devices.png',
-            ],
+            
             [
                 'name' => 'Smart Lighting',
                 'description' => 'Wireless and controllable lighting solutions.',
@@ -31,11 +27,7 @@ class CategoriesTableSeeder extends Seeder
                 'description' => 'Smart plugs and outlets for remote control of appliances.',
                 'image' => 'images/banner/Smart Switches.png',
             ],
-            [
-                'name' => 'Smart Sensors',
-                'description' => 'Sensors for monitoring and automation.',
-                'image' => 'images/banner/Smart Sensors.png',
-            ],
+            
             [
                 'name' => 'Security Cameras',
                 'description' => 'Security cameras for home surveillance.',

@@ -10,30 +10,36 @@
                     <div class="swiper-container zoom-top">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="images/product-image/3.png" alt="">
+                                {{-- <img class="img-responsive m-auto" src="images/product-image/3.png" alt=""> --}}
+                                <img class="img-responsive  m-auto" src="{{ asset($product->image1) }}" />
                                 <a class="venobox full-preview" data-gall="myGallery" href="images/product-image/3.png">
                                     <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
                             <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="images/product-image/small-image/1.jpg"
-                                    alt="">
+                                {{-- <img class="img-responsive m-auto" src="images/product-image/small-image/1.jpg"
+                                    alt=""> --}}
+                                <img class="img-responsive  m-auto" src="{{ asset($product->image2) }}" />
                                 <a class="venobox full-preview" data-gall="myGallery"
                                     href="images/product-image/small-image/1.jpg">
                                     <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
                             <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="images/product-image/small-image/2.jpg"
-                                    alt="">
+                                {{-- <img class="img-responsive m-auto" src="images/product-image/small-image/2.jpg"
+                                    alt=""> --}}
+                                <img class="img-responsive  m-auto" src="{{ asset($product->image3) }}" />
+
                                 <a class="venobox full-preview" data-gall="myGallery"
                                     href="images/product-image/small-image/2.jpg">
                                     <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
                             <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="images/product-image/small-image/3.jpg"
-                                    alt="">
+                                {{-- <img class="img-responsive m-auto" src="images/product-image/small-image/3.jpg"
+                                    alt=""> --}}
+                                <img class="img-responsive  m-auto" src="{{ asset($product->image4) }}" />
+
                                 <a class="venobox full-preview" data-gall="myGallery"
                                     href="images/product-image/small-image/3.jpg">
                                     <i class="fa fa-arrows-alt" aria-hidden="true"></i>
@@ -44,18 +50,18 @@
                     <div class="swiper-container mt-20px zoom-thumbs slider-nav-style-1 small-nav">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="images/product-image/3.png" alt="">
+                                <img class="img-responsive m-auto" src="{{ asset($product->image1) }}" alt="">
                             </div>
                             <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="images/product-image/small-image/1.jpg"
+                                <img class="img-responsive m-auto" src="{{ asset($product->image2) }}"
                                     alt="">
                             </div>
                             <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="images/product-image/small-image/2.jpg"
+                                <img class="img-responsive m-auto" src="{{ asset($product->image3) }}"
                                     alt="">
                             </div>
                             <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="images/product-image/small-image/3.jpg"
+                                <img class="img-responsive m-auto" src="{{ asset($product->image4) }}"
                                     alt="">
                             </div>
 

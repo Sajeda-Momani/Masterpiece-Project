@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,52 +14,58 @@ class HomeController extends Controller
 {
     public function showhome()
     {
-        if (Auth::id()) {
+        if (true) {
 
-            if (Auth::user()->role == 'customer') {
+            // if (Auth::user()->role == 'customer') {
 
-                $categories = Category::all();
-                $categoryIds = $categories->pluck('id');
+            $categories = Category::all();
+            $categoryIds = $categories->pluck('id');
 
-                $lowestPrices = Product::whereIn('category_id', $categoryIds)
-                    ->selectRaw('MIN(price) as lowest_price, category_id')
-                    ->groupBy('category_id')
-                    ->get();
+            $lowestPrices = Product::whereIn('category_id', $categoryIds)
+                ->selectRaw('MIN(price) as lowest_price, category_id')
+                ->groupBy('category_id')
+                ->get();
 
-                $products = Product::all();
+            $products = Product::all();
 
-                return view('Pages.home', ['categories' => $categories, 'lowestPrices' => $lowestPrices, 'products' => $products]);
-           
-            } 
-            
-            else if (Auth::user()->role == 'admin') {
+            return view('Pages.Home.Index', ['categories' => $categories, 'lowestPrices' => $lowestPrices, 'products' => $products]);
+            // } else if (Auth::user()->role == 'admin') {
 
-                $recentCustomers = Customer::latest()->take(5)->get(); // Retrieve the most recent 5 customers (adjust as needed)
-                $recentOrders = Order::orderBy('order_date', 'desc')->take(5)->get();
+            //     $recentCustomers = Customer::latest()->take(5)->get(); // Retrieve the most recent 5 customers (adjust as needed)
+            //     $recentOrders = Order::orderBy('order_date', 'desc')->take(5)->get();
 
-                return view('Admin.dashboard', [
-                    'recentCustomers' => $recentCustomers,
-                    'recentOrders' => $recentOrders
-                ]);
-            } 
-            
-            else {
+            //     return view('Admin.dashboard', [
+            //         'recentCustomers' => $recentCustomers,
+            //         'recentOrders' => $recentOrders
+            //     ]);
+            // } else {
 
-                return redirect()->back();
-            }
+            //     return redirect()->back();
+            // }
         }
         // Handle the case when the user is not authenticated (Auth::id() is null or false)
         // You might want to redirect the user to a login page or take other actions here.
     }
 
     public function Recent()
-    {
-        $recentCustomers = Customer::latest()->take(5)->get(); // Retrieve the most recent 5 customers (adjust as needed)
-        $recentOrders = Order::orderBy('order_date', 'desc')->take(5)->get();
+{
+    if (Auth::check()) {
+        $user = Auth::user();
+        $name = $user->name;
+        $email = $user->email;
 
-        return view('Admin.dashboard', [
-            'recentCustomers' => $recentCustomers,
-            'recentOrders' => $recentOrders
-        ]);
+        if ($user->role != 'customer') {
+            $recentCustomers = Customer::latest()->take(5)->get(); // Retrieve the most recent 5 customers (adjust as needed)
+            $recentOrders = Order::orderBy('order_date', 'desc')->take(5)->get();
+
+            return view('Admin.dashboard', [
+                'recentCustomers' => $recentCustomers,
+                'recentOrders' => $recentOrders,
+                'name' => $name,
+                'email' => $email
+            ]);
+        }
     }
+
+}
 }

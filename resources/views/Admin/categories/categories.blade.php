@@ -15,10 +15,10 @@
                         @endif
                     </div>
                     <div class="col-sm-6">
-                        <h1>Products</h1>
+                        <h1>Categories</h1>
                     </div>
                     <div class="col-sm-6 text-right">
-                        <a href="{{ route('products.create') }}" class="btn btn-primary">Add New Product</a>
+                        <a href="{{ route('categories.create') }}" class="btn btn-primary">Add New Category</a>
                     </div>
                 </div>
             </div>
@@ -29,49 +29,47 @@
             <!-- Default box -->
             <div class="container-fluid">
                 <div class="card">
-                    
+                    <div class="card-header">
+                        <div class="card-tools">
+                            <div class="input-group input-group" style="width: 250px;">
+                                <input type="text" name="table_search" class="form-control float-right"
+                                    placeholder="Search">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Brand</th>
-                                    <th>Category Name</th>
                                     <th>Brief</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Qty</th>
-                                    <th>Images</th>
+                                    <th>Image</th>
                                     <th>Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
+                                @foreach ($categories as $category)
                                     <tr>
-                                        <td>{{ $product->id }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->brand }}</td>
-                                        <td>{{ $product->category->name }}</td>
-                                        <td>{{ $product->brief }}</td>
-                                        <td>{{ $product->description }}</td>
-                                        <td>{{ $product->price }}</td>
-                                        <td>{{ $product->quantity_in_stock }}</td>
+                                        <td>{{ $category->id }}</td>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->description }}</td>
                                         <td>
-                                            <img src="{{ asset($product->image1) }}" width='60' height='60'
-                                                class="img img-responsive" />
-                                       
-                                            <img src="{{ asset($product->image2) }}" width='60' height='60'
-                                                class="img img-responsive" />
-                                       
-                                            <img src="{{ asset($product->image3) }}" width='60' height='60'
-                                                class="img img-responsive" />
-                                            <img src="{{ asset($product->image4) }}" width='60' height='60'
-                                                class="img img-responsive" />
+                            
+                                            <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" style="height: 60px; width: 60px;" />
+
                                         </td>
 
+
                                         <td>
-                                            <form action="{{ route('products.edit', ['product' => $product->id]) }}"
+                                            <form action="{{ route('categories.edit', ['category' => $category->id]) }}"
                                                 method="">
                                                 @csrf
                                                 @method('')
@@ -86,7 +84,8 @@
                                                     </svg>
                                                 </button>
                                             </form>
-                                            <form action="{{ route('products.destroy', ['product' => $product->id]) }}"
+
+                                            <form action="{{ route('categories.destroy', ['category' => $category->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -113,9 +112,9 @@
                     </div>
                     <div class="card-footer clearfix">
                         <ul class="pagination pagination m-0 float-right">
-                            <div class="pagination">
-                                {{ $products->links() }}
-                            </div>
+                            
+                            {{ $categories->links('vendor.pagination.tailwind') }}
+
                         </ul>
                     </div>
                 </div>

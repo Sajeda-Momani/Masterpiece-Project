@@ -11,30 +11,11 @@
                                 <a href="{{ url('home') }}"><img src="{{ asset('images/logo/footer-logo.png') }}"
                                         style="height: 50px;width: auto;" alt=""></a>
                             </div>
-                            <p class="about-text"> Embark on Your Smart Home Journey with Smartify: Pioneering Your
+                            <p class="about-text"> Embark on Your Smart Home Journey with Smartify:  
                                 Home's Intelligent Transformation
                             </p>
-                            <ul class="link-follow">
-                                <li>
-                                    <a class="m-0" title="Twitter" target="_blank" rel="noopener noreferrer"
-                                        href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                </li>
-                                <li>
-                                    <a title="Tumblr" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-tumblr" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Facebook" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-twitter" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Instagram" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                            
+                            
                         </div>
                     </div>
                     <!-- End single blog -->
@@ -90,9 +71,9 @@
                             <h4 class="footer-herading">Contact Info</h4>
                             <div class="footer-links">
                                 <!-- News letter area -->
-                                <p class="address">Address: Amman / Jordan</p>
-                                <p class="phone">Phone:<a href="tel:0775606712"> 0775606712</a></p>
-                                <p class="mail">Email:<a href="mailto:sajeda.momani20@gmail.com">
+                                <p class="address"> Amman / Jordan</p>
+                                <p class="phone"><a href="tel:0775606712"> 0775606712</a></p>
+                                <p class="mail"><a href="mailto:sajeda.momani20@gmail.com">
                                         sajeda.momani20@gmail.com</a>
                                 </p>
 

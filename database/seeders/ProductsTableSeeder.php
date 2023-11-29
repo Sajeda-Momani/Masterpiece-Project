@@ -16,12 +16,12 @@ class ProductsTableSeeder extends Seeder
     {
         // Define category variables
         $categorySmartAssistants = Category::where('name', 'Smart Assistants')->first();
-        $categoryStreamingDevices = Category::where('name', 'Streaming Devices')->first();
         $categorySmartLighting = Category::where('name', 'Smart Lighting')->first();
         $categorySmartPlugs = Category::where('name', 'Smart Plugs')->first();
-        $categorySmartSensors = Category::where('name', 'Smart Sensors')->first();
         $categorySecurityCameras = Category::where('name', 'Security Cameras')->first();
         $categorySmartDoorbells = Category::where('name', 'Smart Doorbells')->first();
+        $categorySmartKits = Category::where('name', 'Smart Kits')->first();
+
 
         // Define products array
         $products = [
@@ -38,19 +38,7 @@ class ProductsTableSeeder extends Seeder
                 'image3' => 'images\product-image\small-image\Amazon Echo Dot\13.jpg',
                 'image4' => 'images\product-image\small-image\Amazon Echo Dot\14.jpg',
             ],
-            [
-                'name' => 'Roku Streaming Stick',
-                'description' => 'Streaming media player with 4K streaming support.',
-                'price' => 49.99,
-                'category_id' => $categoryStreamingDevices->id,
-                'brand' => 'Roku',
-                'brief' => 'Enjoy your favorite shows and movies in 4K HDR.',
-                'quantity_in_stock' => 80,
-                'image1' => 'images\product-image\small-image\Roku Streaming Stick\21.jpg',
-                'image2' => 'images\product-image\small-image\Roku Streaming Stick\22.jpg',
-                'image3' => 'images\product-image\small-image\Roku Streaming Stick\23.jpg',
-                'image4' => 'images\product-image\small-image\Roku Streaming Stick\24.jpg',
-            ],
+
             [
                 'name' => 'Philips Hue Smart Bulb',
                 'description' => 'Wireless LED smart bulb for smart lighting solutions.',
@@ -104,6 +92,74 @@ class ProductsTableSeeder extends Seeder
                 'image3' => 'images\product-image\small-image\Security Camera eufy\6.png',
                 'image4' => 'images\product-image\small-image\Security Camera eufy\6.png',
             ],
+
+            [
+                'name' => 'Smart Life Super Package',
+                'description' => '1 Security Indoor Camera,
+                1 Smart Wi-Fi Plug,
+                1 Smart switch,
+                1 Smart IR Remote Control',
+                'price' => 29.99,
+                'category_id' => $categorySmartKits->id,
+                'brand' => 'SecurityCam Inc.',
+                'brief' => 'Super package that includes camera, plug, switch, IR remote to automate your home.',
+                'quantity_in_stock' => 20,
+                'image1' => 'images\product-image\kit1_1.png',
+                'image2' => 'images\product-image\kit1_1.png',
+                'image3' => 'images\product-image\kit1_1.png',
+                'image4' => 'images\product-image\kit1_1.png',
+            ],
+            [
+                'name' => 'Smart Life Master Package',
+                'description' => '1 Security Indoor Camera, 
+                2 Smart Wi-Fi Plug, 
+                3 Smart switch, 
+                2 Smart IR Remote Control, 
+                1 Smart Video Doorbell, 
+                3 Switch Button Keypad',
+                'price' => 49.99,
+                'category_id' => $categorySmartKits->id,
+                'brand' => 'SecurityCam Inc.',
+                'brief' => ' Master package that includes camera, plug, switch, IR remote, video doorbell, and 3 gang switch button keypad to automate your home.',
+                'quantity_in_stock' => 20,
+                'image1' => 'images\product-image\kit2_1.png',
+                'image2' => 'images\product-image\kit2_1.png',
+                'image3' => 'images\product-image\kit2_1.png',
+                'image4' => 'images\product-image\kit2_1.png',
+            ],
+            [
+                'name' => 'Connected Security 1',
+                'description' => '1 Main Control Unit, 1 Motion Sensor, 1 Door/Window Sensor, 1 SIM Card, Mobile application',
+                'price' => 59.99,
+                'category_id' => $categorySmartKits->id,
+                'brand' => 'SecurityCam Inc.',
+                'brief' => ' The kit includes a Main Control Unit, Motion Sensor, Door/Window Sensor, SIM Card, and a mobile application for easy monitoring.',
+                'quantity_in_stock' => 20,
+                'image1' => 'images\product-image\kit3_1.png',
+                'image2' => 'images\product-image\kit3_1.png',
+                'image3' => 'images\product-image\kit3_1.png',
+                'image4' => 'images\product-image\kit3_1.png',
+            ],
+
+            [
+                [
+                    'name' => 'Connected Security 3',
+                    'description' => '1 Main Control Unit, 2 Motion Sensors, 2 Door/Window Sensors, 1 Wired External Siren, 1 Remote Control, 1 SIM Card, Mobile application',
+                    'price' => 69.99,
+                    'category_id' => $categorySmartKits->id,
+                    'brand' => 'SecurityCam Inc.',
+                    'brief' => ' The kit includes a Main Control Unit, 2 Motion Sensors, 2 Door/Window Sensors, 1 Wired External Siren, 1 Remote Control, 1 SIM Card, and a mobile application for easy monitoring.',
+                    'quantity_in_stock' => 20,
+                    'image1' => 'images\product-image\kit4_1.png',
+                    'image2' => 'images\product-image\kit4_1.png',
+                    'image3' => 'images\product-image\kit4_1.png',
+                    'image4' => 'images\product-image\kit4_1.png',
+                ],
+
+            ],
+
+
+
         ];
 
         // Loop through products and insert into the database
