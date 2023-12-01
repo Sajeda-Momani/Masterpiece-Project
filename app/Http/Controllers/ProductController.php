@@ -34,10 +34,60 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create($request->all());
-        return redirect('products')->withSuccess(' Product Added Successfully');
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'brand' => 'required',
+            'brief' => 'required',
+            'quantity_in_stock' => 'required|integer',
+            'category_id' => 'required|exists:categories,id',
+            'image1' => 'required|image',
+            'image2' => 'image',
+            'image3' => 'image',
+            'image4' => 'image',
+        ]);
+    
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->brand = $request->input('brand');
+        $product->brief = $request->input('brief');
+        $product->quantity_in_stock = $request->input('quantity_in_stock');
+        $product->category_id = $request->input('category_id');
+    
+        // Handle image uploads
+        $product->image1 = $this->uploadImage($request->file('image1'), 'uploads');
+        $product->image2 = $this->uploadImage($request->file('image2'), 'uploads');
+        $product->image3 = $this->uploadImage($request->file('image3'), 'uploads');
+        $product->image4 = $this->uploadImage($request->file('image4'), 'uploads');
+    
+        $product->save();
+    
+        return redirect('products')->withSuccess('Product Added Successfully');
     }
+    
+    // public function uploadImage(Request $request, $inputName, $path)
+    // {
+    //     if ($request->hasFile($inputName)) {
 
+    //         $image = $request->{$inputName};
+    //         $ext = $image->getClientOriginalExtension();
+    //         $imageName = 'media_' . uniqid() . '.' . $ext;
+    //         $image->move(public_path($path), $imageName);
+
+    //         return asset($path . "/" . $imageName);
+    //     }
+    // }
+    public function uploadImage($file, $path)
+    {
+        $imageName = 'media_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path($path), $imageName);
+    
+        return asset($path . '/' . $imageName);
+    }
+    
     /**
      * Display the specified resource.
      */
@@ -64,8 +114,52 @@ class ProductController extends Controller
         return view('Pages.shop', ['products' => $products, 'categories' => $categories]);
     }
 
-
-
+    // public function sortBy(Request $request)
+    // {
+    //     $sortOption = $request->input('sort_option');
+    
+    //     // Implement logic to retrieve products based on the sort option
+    //     $products = Product::orderBy('name', 'asc')->get(); // Adjust this based on your needs
+    
+    //     return view('Pages.shop', ['products' => $products]);
+    // }
+    public function sortBy(Request $request)
+    {
+        // Get all products initially
+        $products = Product::all();
+    
+        // Check if a sorting option is provided in the request
+        $sortOption = $request->input('sort_option');
+    
+        if ($sortOption) {
+            // Implement sorting logic based on the selected option
+            switch ($sortOption) {
+                case 'name_asc':
+                    $products = $products->sortBy('name');
+                    break;
+                case 'name_desc':
+                    $products = $products->sortByDesc('name');
+                    break;
+                case 'price_low_high':
+                    $products = $products->sortBy('price');
+                    break;
+                case 'price_high_low':
+                    $products = $products->sortByDesc('price');
+                    break;
+                case 'created_at_new':
+                    $products = $products->sortByDesc('created_at');
+                    break;
+                case 'created_at_old':
+                    $products = $products->sortBy('created_at');
+                    break;
+                // Add more cases as needed for additional sorting options
+            }
+        }
+    
+        $categories = Category::all();
+        
+        return view('Pages.shop', ['products' => $products, 'categories' => $categories]);
+    }
     /**
      * Show the form for editing the specified resource.
      */

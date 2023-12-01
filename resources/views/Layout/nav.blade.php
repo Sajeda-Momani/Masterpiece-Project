@@ -49,25 +49,20 @@
                         </div>
                         <div class="col-lg-6 d-none d-lg-block">
                             <div class="search-element">
-                                <form action="#">
-                                    <input type="text" placeholder="Search" />
+                                <form action="{{ url('search') }}" method="GET" role="search">
+                                    <input type="text" placeholder="Search" name='search' value="" />
                                     <button><i class="pe-7s-search"></i></button>
                                 </form>
                             </div>
                         </div>
                         <div class="col-lg-3 col">
                             <div class="header-actions">
-                                <!-- Single Wedge Start -->
-                                <a href="#offcanvas-wishlist" class="header-action-btn offcanvas-toggle">
-                                    <i class="pe-7s-like"></i>
-                                </a>
-                                <!-- Single Wedge End -->
-                                <a href="#offcanvas-cart"
-                                    class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
+                           
+                                <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
                                     <i class="pe-7s-shopbag"></i>
-                                    <span class="header-action-num">03</span>
-                                    <!-- <span class="cart-amount">€30.00</span> -->
+                                    <span class="header-action-num">{{ \App\Models\Cart::count() }}</span>
                                 </a>
+                                
                                 <!-- User Profile Dropdown -->
                                 <div class="dropdown">
                                     {{-- <a href="#" class="dropdown-toggle" id="userDropdown"
@@ -90,7 +85,7 @@
 
 
                                 @if (Auth::check())
-                                    <li><a href="{{ route('account') }}" style="color: white;"><i class="fa fa-user fa-lg" style="color: white;"></i> 
+                                    <li><a href="{{ url('/profile') }}" style="color: white;"><i class="fa fa-user fa-lg" style="color: white;"></i> 
                                             </a></li>
                                     <li><a href="{{ route('logout') }}" style="color: white;" ><i class="fas fa-sign-out-alt fa-lg" style="color: white;"></i>
                                             Logout</a></li>

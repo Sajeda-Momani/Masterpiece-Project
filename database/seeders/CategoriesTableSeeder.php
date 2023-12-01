@@ -14,29 +14,29 @@ class CategoriesTableSeeder extends Seeder
             [
                 'name' => 'Smart Assistants',
                 'description' => 'Voice-activated smart assistants for your home.',
-                'image' => 'images/banner/Smart Assistants.png',
+                'image' => 'http://127.0.0.1:8000/uploads/Smart Assistants.png',
             ],
             
             [
                 'name' => 'Smart Lighting',
                 'description' => 'Wireless and controllable lighting solutions.',
-                'image' => 'images/banner/Smart Lights.png',
+                'image' => 'http://127.0.0.1:8000/uploads/Smart Lights.png',
             ],
             [
                 'name' => 'Smart Plugs',
                 'description' => 'Smart plugs and outlets for remote control of appliances.',
-                'image' => 'images/banner/Smart Switches.png',
+                'image' => 'http://127.0.0.1:8000/uploads/Smart Switches.png',
             ],
             
             [
                 'name' => 'Security Cameras',
                 'description' => 'Security cameras for home surveillance.',
-                'image' => 'images/banner/Security Cameras.png',
+                'image' => 'http://127.0.0.1:8000/uploads/Security Cameras.png',
             ],
             [
                 'name' => 'Smart Doorbells',
                 'description' => 'Video doorbells with smart features.',
-                'image' => 'images/banner/Smart Entry.png',
+                'image' => 'http://127.0.0.1:8000/uploads/Smart Entry.png',
             ],
             [
                 'name' => 'Smart Kits',

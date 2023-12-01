@@ -21,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('Admin.create-category');
+        return view('Admin.categories.create-category');
     }
 
     /**
@@ -29,28 +29,38 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        // Process image upload
+        $imagePath = $this->uploadImage($request, 'image', 'uploads');
+
 
         // Create a new category object
-        $category = Category::create(([
+        $category = Category::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'image' => $request->input('image'),
-        ]));
+            'image' => $imagePath,
+        ]);
 
-        // Handle main image
-        if ($request->hasFile('image')) {
-            $mainImageName = time() . '_' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('storage\images\categories'), $mainImageName);
-
-            $category->image = $mainImageName;
-        }
-
-        // Save the category object to the database
-        $category->save();
 
         // Redirect or return a response as needed
-
         return redirect('categories')->withSuccess('Category added successfully!');
+    }
+    
+    public function uploadImage(Request $request, $inputName, $path)
+    {
+        if ($request->hasFile($inputName)) {
+
+            $image = $request->{$inputName};
+            $ext = $image->getClientOriginalExtension();
+            $imageName = 'media_' . uniqid() . '.' . $ext;
+            $image->move(public_path($path), $imageName);
+
+            return asset($path . "/" . $imageName);
+        }
     }
 
 
@@ -62,12 +72,7 @@ class CategoryController extends Controller
         //
     }
 
-    // public function showhome()
-    // {
-    //     $categories = Category::all();
-    //     return view('Pages.home', ['categories'=>$categories]);
 
-    // }
 
     /**
      * Show the form for editing the specified resource.

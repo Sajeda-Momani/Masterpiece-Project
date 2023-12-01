@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Order;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -48,24 +49,39 @@ class HomeController extends Controller
     }
 
     public function Recent()
-{
-    if (Auth::check()) {
-        $user = Auth::user();
-        $name = $user->name;
-        $email = $user->email;
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $name = $user->name;
+            $email = $user->email;
 
-        if ($user->role != 'customer') {
-            $recentCustomers = Customer::latest()->take(5)->get(); // Retrieve the most recent 5 customers (adjust as needed)
-            $recentOrders = Order::orderBy('order_date', 'desc')->take(5)->get();
+            if ($user->role != 'customer') {
+                $recentCustomers = Customer::latest()->take(5)->get(); // Retrieve the most recent 5 customers (adjust as needed)
+                $recentOrders = Order::orderBy('order_date', 'desc')->take(5)->get();
 
-            return view('Admin.dashboard', [
-                'recentCustomers' => $recentCustomers,
-                'recentOrders' => $recentOrders,
-                'name' => $name,
-                'email' => $email
-            ]);
+                return view('Admin.dashboard', [
+                    'recentCustomers' => $recentCustomers,
+                    'recentOrders' => $recentOrders,
+                    'name' => $name,
+                    'email' => $email
+                ]);
+            }
         }
     }
 
-}
+    public function searchProducts(Request $request)
+    {
+        if ($request->search) {
+            $searchProducts = Product::where('name', 'like', '%' . $request->search . '%')->latest()->paginate(3);
+            if ($searchProducts->items() == []) {
+                // Alert::e rror('Error', 'There is No Restaurant');
+                return redirect()->route('restaurants.index');
+            } else {
+                return view('Pages.Home.search', compact('searchProducts'));
+            }
+        } else {
+            // Alert::error('Error', 'Empty search');
+            return redirect()->back();
+        }
+    }
 }

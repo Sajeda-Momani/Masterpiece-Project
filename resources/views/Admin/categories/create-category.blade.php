@@ -43,11 +43,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="image">{{ __('Upload new image') }}</label>
-                                        <input id="image" name="image" type="file" accept="image/*"
-                                            class="form-control-file" autocomplete="image"
-                                            store_as="public/images/categories/" />
-                                        <x-input-error class="mt-2" :messages="$errors->get('image.*')" />
+                                        <label for="image">Category Image</label>
+                                        <input type="file" name="image" class="form-control-file" id="image" required>
                                     </div>
 
                                 </div>

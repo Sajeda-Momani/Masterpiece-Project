@@ -64,6 +64,7 @@ require __DIR__ . '/auth.php';
 Route::get('/home', [HomeController::class, 'showhome']);
 
 Route::get('/shop', [ProductController::class, 'showshop'])->name('shop');
+Route::get('/shop/sort', [ProductController::class, 'sortBy'])->name('products.sort');
 
 Route::get('/singleproduct/{id}', [ProductController::class, 'showsingle'])->name('singleproduct');
 
@@ -100,7 +101,7 @@ Route::get('/checkout', function () {
 })->name('checkout');
 
 
-
+Route::get('search', [HomeController::class,'searchProducts'])->name('searchProducts');
 // ************************* Addtional routes *************************
 // Route::get('/contact', function () {
 //     return view('Pages.contact');

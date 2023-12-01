@@ -62,9 +62,10 @@
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->description }}</td>
                                         <td>
-                            
-                                            <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" style="height: 60px; width: 60px;" />
-
+                                            
+                                            <img src="{{ asset($category->image) }}" alt=""
+                                                style="height: 60px; width: 60px;"/>
+                                               
                                         </td>
 
 
@@ -112,7 +113,7 @@
                     </div>
                     <div class="card-footer clearfix">
                         <ul class="pagination pagination m-0 float-right">
-                            
+
                             {{ $categories->links('vendor.pagination.tailwind') }}
 
                         </ul>
