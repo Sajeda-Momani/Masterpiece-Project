@@ -1,7 +1,9 @@
 @extends('Layout.master')
 
+@section('title', 'Shop')
 
-{{-- @section('title', '404') --}}
+@section('header_title', 'Shop')
+
 @section('content')
     <!-- Shop Page Start  -->
     <div class="shop-category-area pt-100px pb-100px">
@@ -52,7 +54,6 @@
                                 </ul>
                             </div>
                         </div>
-
                         <!-- Right Side End -->
                     </div>
                     <!-- Shop Top Area End -->
@@ -67,7 +68,6 @@
                                             @foreach ($products as $product)
                                                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-40px mt-20px product-item"
                                                     data-category="{{ $product->category->name }}, {{ $product->brand }}">
-
                                                     <!-- Single Prodect -->
                                                     <div class="product" style="  height: 400px;">
 
@@ -89,7 +89,7 @@
                                                             </h5>
 
                                                             <span class="price">
-                                                                <span class="new">${{ $product->price }}</span>
+                                                                <span class="new">JOD {{ $product->price }}</span>
                                                             </span>
                                                         </div>
                                                         <div class="actions">
@@ -125,7 +125,7 @@
                                                     <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
                                                         <div class="product">
                                                             <div class="thumb">
-                                                                <a href="single-product.html" class="image">
+                                                                <a href="{{ url('singleproduct', $product->id) }}" class="image">
                                                                     <img src="{{ asset($product->image1) }}"
                                                                         alt="{{ $product->name }}" />
                                                                     <img class="hover-image"
@@ -153,7 +153,7 @@
                                                             </div>
                                                             <div class="box-inner">
                                                                 <span class="price">
-                                                                    <span class="new">${{ $product->price }}</span>
+                                                                    <span class="new">JOD {{ $product->price }}</span>
                                                                 </span>
                                                                 <div class="actions">
 
@@ -195,18 +195,33 @@
                             data-aos-delay="200">
                             <div class="pages">
                                 <ul>
-                                    <li class="li"><a class="page-link" href="#"><i
-                                                class="fa fa-angle-left"></i></a>
-                                    </li>
-                                    <li class="li"><a class="page-link" href="#">1</a></li>
-                                    <li class="li"><a class="page-link active" href="#">2</a></li>
-                                    <li class="li"><a class="page-link" href="#">3</a></li>
-                                    <li class="li"><a class="page-link" href="#"><i
-                                                class="fa fa-angle-right"></i></a>
-                                    </li>
+                                    {{-- Previous Page Link --}}
+                                    @if ($products->onFirstPage())
+                                        <li class="li disabled"><span><i class="fa fa-angle-left"></i></span></li>
+                                    @else
+                                        <li class="li"><a class="page-link"
+                                                href="{{ $products->previousPageUrl() }}"><i
+                                                    class="fa fa-angle-left"></i></a></li>
+                                    @endif
+
+                                    {{-- Pagination Links --}}
+                                    @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                                        <li class="li"><a
+                                                class="page-link {{ $page == $products->currentPage() ? 'active' : '' }}"
+                                                href="{{ $url }}">{{ $page }}</a></li>
+                                    @endforeach
+
+                                    {{-- Next Page Link --}}
+                                    @if ($products->hasMorePages())
+                                        <li class="li"><a class="page-link" href="{{ $products->nextPageUrl() }}"><i
+                                                    class="fa fa-angle-right"></i></a></li>
+                                    @else
+                                        <li class="li disabled"><span><i class="fa fa-angle-right"></i></span></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
+
                         <!--  Pagination Area End -->
                     </div>
                     <!-- Shop Bottom Area End -->

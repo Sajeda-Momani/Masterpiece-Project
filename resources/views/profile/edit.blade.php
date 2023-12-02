@@ -1,8 +1,11 @@
 @extends('Layout.master')
 
+@section('title', 'profile')
 
-{{-- @section('title', '404') --}}
+@section('header_title', 'profile')
+
 @section('content')
+
     <!-- account area start -->
     <div class="account-dashboard pt-100px pb-100px">
         <div class="container">

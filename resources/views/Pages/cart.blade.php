@@ -28,7 +28,7 @@
                                                     alt="" style="width: 100px; height: 100px; margin-left: 40px;" />
                                             </td>
                                             <td>{{ $cartItem['product']['name'] }}</td>
-                                            <td>${{ $cartItem['product']['price'] }}</td>
+                                            <td>JOD {{ $cartItem['product']['price'] }}</td>
 
                                             <td>
                                                 <div class="border">
@@ -87,7 +87,7 @@
                     <div class="row">
 
                         <div class="col-lg-4 col-md-6 mb-lm-30px">
-                            <div class="discount-code-wrapper">
+                            {{-- <div class="discount-code-wrapper">
                                 <div class="title-wrap">
                                     <h4 class="cart-bottom-title section-bg-gray">Use Coupon Code</h4>
                                 </div>
@@ -98,7 +98,7 @@
                                         <button class="cart-btn-2" type="submit">Apply Coupon</button>
                                     </form>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-lg-4 col-md-6 mb-lm-30px">
 
@@ -112,18 +112,44 @@
                                 <div class="title-wrap">
                                     <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
                                 </div>
-                                {{-- <h5>Total products <span>${{ $totalPrice }}</span></h5> --}}
-                                <div class="total-shipping">
-                                    <h5>Total shipping</h5>
-                                    <ul>
-                                        <li><input type="checkbox" /> Standard <span>$20.00</span></li>
-                                        <li><input type="checkbox" /> Express <span>$30.00</span></li>
-                                    </ul>
+                                <h5>Total products <span>@php
+                                    $grandTotal = 0;
+                                @endphp
 
+                                        @foreach ($carts as $key => $cartItem)
+                                            @php
+                                                $grandTotal += $cartItem['product']['price'] * $cartItem['quantity'];
+                                            @endphp
+                                        @endforeach
+
+                                        JOD {{ $grandTotal }}
+                                    </span></h5>
+                                <div class="title-wrap">
+                                    <h4 class="cart-bottom-title section-bg-gary-cart">Shipping Cost</h4>
                                 </div>
+                                <div class="total-shipping">
+                                    <ul>
+                                        <li> Delevery <span>JOD 07.00</span></li>
+                                        <li> Sales Tax <span> 16 % </span></li>
+                                    </ul>
+                                </div>
+                                <div class="title-wrap">
+                                    <h4 class="cart-bottom-title section-bg-gary-cart">Grand Total:</h4>
+                                </div>
+                                <br>
+                                <h4 style="color: green; text-align: right;">
 
-                                <h4>Grand Total:
-                                    {{-- <span style="color: green; margin-left: 15%">${{ $totalPrice }}</span> --}}
+                                    @php
+                                        $grandTotal = 0;
+                                    @endphp
+
+                                    @foreach ($carts as $key => $cartItem)
+                                        @php
+                                            $grandTotal += $cartItem['product']['price'] * $cartItem['quantity'] + 7 + 0.16 * $cartItem['product']['price'] * $cartItem['quantity'];
+                                        @endphp
+                                    @endforeach
+
+                                    JOD {{ number_format($grandTotal, 2) }}
                                 </h4>
                                 <br>
                                 @if (Auth::check())

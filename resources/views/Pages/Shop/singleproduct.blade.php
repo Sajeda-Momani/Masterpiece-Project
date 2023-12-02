@@ -1,5 +1,9 @@
 @extends('Layout.master')
 
+@section('title', 'Product Details')
+
+@section('header_title', 'Product Details')
+
 @section('content')
     <!-- Product Details Area Start -->
     <div class="product-details-area pt-100px pb-100px">
@@ -10,38 +14,29 @@
                     <div class="swiper-container zoom-top">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                {{-- <img class="img-responsive m-auto" src="images/product-image/3.png" alt=""> --}}
                                 <img class="img-responsive  m-auto" src="{{ asset($product->image1) }}" />
-                                <a class="venobox full-preview" data-gall="myGallery" href="images/product-image/3.png">
+                                <a class="venobox full-preview" data-gall="myGallery" href="{{ asset($product->image1) }}">
                                     <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
                             <div class="swiper-slide">
-                                {{-- <img class="img-responsive m-auto" src="images/product-image/small-image/1.jpg"
-                                    alt=""> --}}
                                 <img class="img-responsive  m-auto" src="{{ asset($product->image2) }}" />
                                 <a class="venobox full-preview" data-gall="myGallery"
-                                    href="images/product-image/small-image/1.jpg">
+                                href="{{ asset($product->image2) }}">
                                     <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
                             <div class="swiper-slide">
-                                {{-- <img class="img-responsive m-auto" src="images/product-image/small-image/2.jpg"
-                                    alt=""> --}}
                                 <img class="img-responsive  m-auto" src="{{ asset($product->image3) }}" />
-
                                 <a class="venobox full-preview" data-gall="myGallery"
-                                    href="images/product-image/small-image/2.jpg">
+                                href="{{ asset($product->image3) }}">
                                     <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
                             <div class="swiper-slide">
-                                {{-- <img class="img-responsive m-auto" src="images/product-image/small-image/3.jpg"
-                                    alt=""> --}}
                                 <img class="img-responsive  m-auto" src="{{ asset($product->image4) }}" />
-
                                 <a class="venobox full-preview" data-gall="myGallery"
-                                    href="images/product-image/small-image/3.jpg">
+                                href="{{ asset($product->image4) }}">
                                     <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -79,7 +74,7 @@
                         </h2>
                         <div class="pricing-meta">
                             <ul class="d-flex">
-                                <li class="new-price">${{ $product->price }}</li>
+                                <li class="new-price">JOD {{ $product->price }}</li>
                             </ul>
                         </div>
                         <div class="pro-details-rating-wrap">
@@ -102,7 +97,7 @@
                             <span>Brand Name:</span>
                             <ul class="d-flex">
                                 <li>
-                                    <a href="#">{{ $product->brand }}</a>
+                                    {{ $product->brand }}
                                 </li>
                             </ul>
                         </div>
@@ -110,16 +105,14 @@
                             <span>Category: </span>
                             <ul class="d-flex">
                                 <li>
-                                    <a href="#">{{ $product->category->name }} </a>
+                                    {{ $product->category->name }}
                                 </li>
 
                             </ul>
                         </div>
 
                         <div class="pro-details-quality">
-                            <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                            </div>
+                            
                             <div class="pro-details-cart">
                                 <form action="/cart/add/{{ $product->id }}" method="post">
                                     @csrf
@@ -127,12 +120,7 @@
                                     <button type="submit" class="add-cart">Add To Cart</button>
                                 </form>
                             </div>
-                            <div class="pro-details-compare-wishlist pro-details-wishlist ">
-                                <a href="wishlist.html"><i class="pe-7s-like"></i></a>
-                            </div>
-                            <div class="pro-details-compare-wishlist pro-details-wishlist ">
-                                <a href="compare.html"><i class="pe-7s-refresh-2"></i></a>
-                            </div>
+                            
                         </div>
                     </div>
                     <!-- product details description area start -->

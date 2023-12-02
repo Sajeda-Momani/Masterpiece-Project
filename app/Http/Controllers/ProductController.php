@@ -101,7 +101,7 @@ class ProductController extends Controller
             ->get();
         $averageRating = $product->reviews->avg('rating');
 
-        return view('Pages.singleproduct', compact('product', 'reviews', 'relatedProducts', 'averageRating'));
+        return view('Pages.Shop.singleproduct', compact('product', 'reviews', 'relatedProducts', 'averageRating'));
     }
 
 
@@ -110,8 +110,8 @@ class ProductController extends Controller
     {
 
         $categories = Category::all();
-        $products = Product::all();
-        return view('Pages.shop', ['products' => $products, 'categories' => $categories]);
+        $products = Product::paginate(6); 
+        return view('Pages.Shop.shop', ['products' => $products, 'categories' => $categories]);
     }
 
     // public function sortBy(Request $request)

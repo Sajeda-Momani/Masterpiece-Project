@@ -52,11 +52,8 @@
                                                 Account</a></li>
                                         <li class="li"><a class="single-link" href="{{ route('login') }}"> Login</a>
                                         </li>
-                                        <li class="li"><a class="single-link" href="{{ url('singleproduct') }}">Shopping
+                                        <li class="li"><a class="single-link" href="{{ url('/cart') }}">Shopping
                                                 cart</a>
-                                        </li>
-                                        <li class="li"><a class="single-link"
-                                                href="{{ route('wishlist') }}">Wishlist</a>
                                         </li>
 
                                     </ul>

@@ -27,14 +27,9 @@ use App\Models\Admin;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -61,29 +56,11 @@ require __DIR__ . '/auth.php';
 
 // ************************* Main routes ********************************
 
-Route::get('/home', [HomeController::class, 'showhome']);
 
+Route::get('/home', [HomeController::class, 'showhome']);
 Route::get('/shop', [ProductController::class, 'showshop'])->name('shop');
 Route::get('/shop/sort', [ProductController::class, 'sortBy'])->name('products.sort');
-
 Route::get('/singleproduct/{id}', [ProductController::class, 'showsingle'])->name('singleproduct');
-
-
-// ************************* Dashboard routes *************************
-
-// Route::get('/dashboard', [HomeController::class, 'Recent', 'showUserInfo']);
-
-// Route::resource('/categories', CategoryController::class);
-// Route::resource('/products', ProductController::class);
-// Route::resource('/admins', AdminController::class);
-// Route::resource('/contacts', ContactController::class);
-// Route::resource('/coupons', CouponController::class);
-// Route::resource('/customers', CustomerController::class);
-// Route::resource('/orders', OrderController::class);
-// Route::resource('/ordersitem', OrderItemController::class);
-// Route::resource('/reviews', ReviewController::class);
-// Route::resource('/address', AddressController::class);
-// Route::resource('/paymant', PaymentController::class);
 
 
 // ************************* cart routes *************************
@@ -100,17 +77,20 @@ Route::get('/checkout', function () {
     return view('Pages.checkout');
 })->name('checkout');
 
+Route::get('/thankyou', function () {
+    return view('Pages.thankyou');
+})->name('thankyou');
+
+
+// ************************* Addtional routes *************************
 
 Route::get('search', [HomeController::class,'searchProducts'])->name('searchProducts');
-// ************************* Addtional routes *************************
-// Route::get('/contact', function () {
-//     return view('Pages.contact');
-// })->name('contact');
 Route::resource('contact', ContactController::class);
+Route::get('/about', function () { return view('Pages.about');})->name('about');
+Route::get('/contact', function () { return view('Pages.contact');})->name('contact');
 
 
-
-// 
+// ************************* Advanced routes *************************
 
 Route::get('/', function () {
     return view('welcome');
@@ -127,15 +107,6 @@ Route::get('/404', function () {
     return view('Pages.404');
 })->name('404');
 
-Route::get('/about', function () {
-    return view('Pages.about');
-})->name('about');
-
-
-Route::get('/contact', function () {
-    return view('Pages.contact');
-})->name('contact');
-
 Route::get('/emptycart', function () {
     return view('Pages.emptycart');
 })->name('emptycart');
@@ -144,10 +115,10 @@ Route::get('/faq', function () {
     return view('Pages.faq');
 })->name('faq');
 
-Route::get('/thankyou', function () {
-    return view('Pages.thankyou');
-})->name('thankyou');
-
 Route::get('/wishlist', function () {
     return view('Pages.wishlist');
 })->name('wishlist');
+
+Route::get('/', function () {
+    return view('welcome');
+});
