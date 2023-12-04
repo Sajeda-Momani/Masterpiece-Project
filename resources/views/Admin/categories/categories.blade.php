@@ -31,7 +31,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-tools">
-                            <div class="input-group input-group" style="width: 250px;">
+                            {{-- <div class="input-group input-group" style="width: 250px;">
                                 <input type="text" name="table_search" class="form-control float-right"
                                     placeholder="Search">
 
@@ -40,7 +40,7 @@
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="card-body table-responsive p-0">

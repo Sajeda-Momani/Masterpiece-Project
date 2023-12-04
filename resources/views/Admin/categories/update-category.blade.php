@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('categories.update', ['category' => $category->id]) }}" method="POST">
+                        <form method="POST" action="{{ route('customers.update', $customer->id) }}">
                             @csrf
                             @method('PUT')
                             <div class="row">

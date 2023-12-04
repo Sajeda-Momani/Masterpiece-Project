@@ -29,7 +29,7 @@
                 </button>
 
                 <div class="social-media">
-                    <a href="" class="social-text">Forget your password?</a>
+                    <a href="{{ route('password.request') }}" class="social-text">Forget your password?</a>
                 </div>
             </form>
             <form action="{{ route('register') }}" method="POST" class="sign-up-form">
@@ -55,8 +55,8 @@
                 <button type="submit" class="btn" value="Sign up">
                     Register
                 </button>
-                <p class="social-text">Or Sign up with social platforms</p>
-                <div class="social-media">
+                {{-- <p class="social-text">Or Sign up with social platforms</p> --}}
+                {{-- <div class="social-media">
                     <a href="#" class="social-icon">
                         <i class="fab fa-facebook-f"></i>
                     </a>
@@ -69,7 +69,7 @@
                     <a href="#" class="social-icon">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                </div>
+                </div> --}}
             </form>
         </div>
     </div>

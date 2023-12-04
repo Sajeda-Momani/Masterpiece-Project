@@ -80,7 +80,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
 
-        return view('Admin.update-category', ['category' => $category]);
+        return view('Admin.categories.update-category', ['category' => $category]);
     }
 
     /**
@@ -91,6 +91,7 @@ class CategoryController extends Controller
         $category->update($request->all());
         return redirect('categories')->withSuccess('Updated Successfully');
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Payment;
 
 class CartController extends Controller
@@ -19,6 +20,12 @@ class CartController extends Controller
     }
     public function addToCart(Request $request, $productId)
     {
+        if (!$request->user()) {
+            // Handle the case where the user is not authenticated
+            // For example, you can redirect them to the login page
+            return redirect()->route('login');
+        }
+
         $product = Product::findOrFail($productId);
 
         $cart = Cart::where('customer_id', $request->user()->id)
@@ -116,9 +123,24 @@ class CartController extends Controller
         // Save the order
         $order->save();
 
+        foreach ($request->user()->carts as $cartItem) {
+            $orderItem = new OrderItem();
+            $orderItem->quantity = $cartItem->quantity;
+            $orderItem->unit_price = $cartItem->product->price; // Adjust if necessary
+            $orderItem->order_id = $order->id;
+            $orderItem->product_id = $cartItem->product->id;
+            $orderItem->save();
+        }
+
+        $request->user()->carts()->delete();
+
         // Redirect to the order confirmation page
         return redirect()->route('thankyou', $order->id);
+        
+        
     }
+
+    
 
     // public function checkout(Request $request)
     // {

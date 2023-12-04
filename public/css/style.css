@@ -44,6 +44,23 @@ html,
 body {
   height: 100%;
 }
+.cust{
+
+  background-color: #233B6E;
+  color: #fff;
+  display: block;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1;
+  padding: 18px 20px;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 0px;
+  z-index: 9;
+  width: 100%;
+
+}
+
 
 /*************************
  Bootstrap Custom Container

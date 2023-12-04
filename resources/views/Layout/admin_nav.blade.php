@@ -125,30 +125,30 @@
                                 <p>Messages</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->is('reviews*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->is('reviews*') ? 'active' : '' }}">
                             <a href="{{ url('/reviews') }}" class="nav-link">
                                 <ion-icon name="star-outline"class="custom-icon-size"></ion-icon>
                                 <p>Reviwes</p>
                             </a>
-                        </li>
-                        <li class="nav-item {{ request()->is('coupons*') ? 'active' : '' }}">
+                        </li> --}}
+                        {{-- <li class="nav-item {{ request()->is('coupons*') ? 'active' : '' }}">
                             <a href="{{ url('/coupons') }}" class="nav-link">
                                 <ion-icon name="pricetag-outline"class="custom-icon-size"></ion-icon>
                                 <p>Discount</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item {{ request()->is('address*') ? 'active' : '' }}">
                             <a href="{{ url('/address') }}" class="nav-link">
                                 <ion-icon name="location-outline"class="custom-icon-size"></ion-icon>
                                 <p>Address</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->is('paymant*') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->is('paymant*') ? 'active' : '' }}">
                             <a href="{{ url('/paymant') }}" class="nav-link">
                                 <ion-icon name="card-outline"class="custom-icon-size"></ion-icon>
                                 <p>Paymant</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('logout') }}" class="nav-link">
                                 <ion-icon name="log-out-outline"class="custom-icon-size"></ion-icon>

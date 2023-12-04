@@ -32,14 +32,7 @@
                     <div class="card-header">
                         <div class="card-tools">
                             <div class="input-group input-group" style="width: 250px;">
-                                <input type="text" name="table_search" class="form-control float-right"
-                                    placeholder="Search">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -51,7 +44,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
-                                    <th>Image</th>
+                                    {{-- <th>Image</th> --}}
                                     <th width="100">Actions</th>
                                 </tr>
                             </thead>
@@ -63,10 +56,10 @@
                                         <td>{{ $customer->email }}</td>
                                         <td>{{ $customer->role }}</td>
 
-                                        <td>
+                                        {{-- <td>
                                             <img src="{{ asset($customer->image) }}" width='60' height='60'
                                                 class="img img-responsive" />
-                                        </td>
+                                        </td> --}}
                                         <td>
 											<form action="{{ route('customers.destroy', ['customer' => $customer->id]) }}" method="POST">
 												@csrf
@@ -83,20 +76,20 @@
 													</svg>
 												</button>
 											</form>
+                                            
                                         </td>
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="card-footer clearfix">
-                        <ul class="pagination pagination m-0 float-right">
-                            <li class="page-item"><a class="page-link" href="#">«</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">»</a></li>
-                        </ul>
+                        {{-- <ul class="pagination pagination m-0 float-right">
+
+                            {{ $customer->links('vendor.pagination.tailwind') }}
+
+                        </ul> --}}
                     </div>
                 </div>
             </div>

@@ -26,11 +26,7 @@
 									<div class="input-group input-group" style="width: 250px;">
 										<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 					
-										<div class="input-group-append">
-										  <button type="submit" class="btn btn-default">
-											<i class="fas fa-search"></i>
-										  </button>
-										</div>
+										
 									  </div>
 								</div>
 							</div>
@@ -38,11 +34,11 @@
 								<table class="table table-hover text-nowrap">
 									<thead>
 										<tr>
-											<th>Orders #</th>											
-                                            <th>Image</th>
+											{{-- <th>Orders #</th>											 --}}
+                                            {{-- <th>Image</th> --}}
                                             <th>Customer</th>
                                             <th>Email</th>
-											<th>Status</th>
+											{{-- <th>Status</th> --}}
                                             <th>Total</th>
                                             <th>Date Purchased</th>
 										</tr>
@@ -50,13 +46,13 @@
 									<tbody>
 										@foreach ($orders as $order)
                                         <tr>
-											<td><a href="/ordersitem/{{ $order->id }}">{{ $order->id }}</a></td>
-                                            <td>{{ $order->customer->image  }}</td>
+											{{-- <td><a href="/ordersitem/{{ $order->id }}">{{ $order->id }}</a></td>
+                                            <td>{{ $order->customer->image  }}</td> --}}
 											<td>{{ $order->customer->name  }}</td>
                                             <td>{{ $order->customer->email  }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 <span class="status {{ $order->statusClass }}">{{ $order->status }}</span>
-                                            </td>
+                                            </td> --}}
 											<td>${{ number_format($order->total_price, 2) }}</td>
                                             <td>{{ $order->order_date }}</td>
 
@@ -68,11 +64,9 @@
 							</div>
 							<div class="card-footer clearfix">
 								<ul class="pagination pagination m-0 float-right">
-								  <li class="page-item"><a class="page-link" href="#">«</a></li>
-								  <li class="page-item"><a class="page-link" href="#">1</a></li>
-								  <li class="page-item"><a class="page-link" href="#">2</a></li>
-								  <li class="page-item"><a class="page-link" href="#">3</a></li>
-								  <li class="page-item"><a class="page-link" href="#">»</a></li>
+		
+									{{ $orders->links('vendor.pagination.tailwind') }}
+		
 								</ul>
 							</div>
 						</div>

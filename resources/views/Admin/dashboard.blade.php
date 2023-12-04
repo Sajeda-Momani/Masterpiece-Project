@@ -63,7 +63,7 @@
                         <div class="card">
                             <div class="d-flex align-items-center">
                                 @php
-                                    $PaymentsTotal = \App\Models\Payment::sum('amount');
+                                    $PaymentsTotal = \App\Models\order::sum('total_price');
                                 @endphp
                                 <div>
                                     <div class="numbers">{{ $PaymentsTotal }}</div>
@@ -90,7 +90,7 @@
                                     <tr>
                                         <td>Name</td>
                                         <td>Payment</td>
-                                        <td>Status</td>
+                                        {{-- <td>Status</td> --}}
                                         <td>Date Purchased</td>
                                     </tr>
                                 </thead>
@@ -100,9 +100,9 @@
                                         <tr>
                                             <td>{{ $order->customer->name }}</td>
                                             <td>${{ number_format($order->total_price, 2) }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 <span class="status {{ $order->statusClass }}">{{ $order->status }}</span>
-                                            </td>
+                                            </td> --}}
                                             <td>{{ $order->order_date }}</td>
                                         </tr>
                                     @endforeach
@@ -120,12 +120,12 @@
                             <table>
                                 @foreach ($recentCustomers as $customer)
                                     <tr>
-                                        <td width="60px">
+                                        {{-- <td width="60px">
                                             <div class="imgBx">
                                                 <img src="{{ asset($customer->profile_image) }}"
                                                     alt="{{ $customer->name }} Image">
                                             </div>
-                                        </td>
+                                        </td> --}}
                                         <td>
                                             <h4>{{ $customer->name }} <br> <span>{{ $customer->email }}</span></h4>
                                         </td>

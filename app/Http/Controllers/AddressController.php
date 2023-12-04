@@ -12,7 +12,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $addresses = Address::all();
+        $addresses = Address::paginate(3);
         return view('admin.address', ['addresses' => $addresses]);
     }
 

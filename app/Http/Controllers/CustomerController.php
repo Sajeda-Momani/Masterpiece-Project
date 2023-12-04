@@ -14,7 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::paginate(5);
         return view('admin.customers', ['customers' => $customers]);
     }
 
@@ -48,16 +48,15 @@ class CustomerController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Customer $customer)
-    {
-        //
-    }
+    {    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        
+
     }
 
     /**

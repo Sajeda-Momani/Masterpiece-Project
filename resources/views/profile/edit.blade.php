@@ -16,8 +16,8 @@
                         <ul role="tablist" class="nav flex-column dashboard-list">
                             <li><a href="#account-details" data-bs-toggle="tab" class="nav-link active">Account details</a>
                             </li>
-                            <li> <a href="#orders" data-bs-toggle="tab" class="nav-link">Orders</a></li>
-                            <li><a href="#address" data-bs-toggle="tab" class="nav-link">Addresses</a></li>
+                            {{-- <li> <a href="#orders" data-bs-toggle="tab" class="nav-link">Orders</a></li>
+                            <li><a href="#address" data-bs-toggle="tab" class="nav-link">Addresses</a></li> --}}
                             <li><a href="{{ route('logout') }}" class="nav-link">logout</a></li>
                         </ul>
                     </div>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="orders">
+                        {{-- <div class="tab-pane fade" id="orders">
                             <h4>Orders</h4>
                             <div class="table_page table-responsive">
                                 <table>
@@ -68,7 +68,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr> --}}
                                             {{-- @foreach ($orders as $order)
                                             <div class="order">
                                                 <p>Order ID: {{ $order->id }}</p>
@@ -78,14 +78,14 @@
                                                 <a href="{{ route('order.view', ['id' => $order->id]) }}">View Order Details</a>
                                             </div>
                                         @endforeach --}}
-                                        </tr>
+                                        {{-- </tr>
 
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="tab-pane" id="address">
+                        {{-- <div class="tab-pane" id="address">
                             <p>The following addresses will be used on the checkout page by default.</p>
                             <h5 class="billing-address">Billing address</h5>
                             <a href="#" class="view">Edit</a>
@@ -99,7 +99,7 @@
                                 <br>
                                 <span><strong>Country:</strong> USA</span>
                             </address>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>

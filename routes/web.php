@@ -65,22 +65,22 @@ Route::get('/singleproduct/{id}', [ProductController::class, 'showsingle'])->nam
 
 // ************************* cart routes *************************
 
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::delete('/cart/remove/{itemId}', [CartController::class, 'removeItem'])->name('cart.remove');
+    Route::post('/cart/remove-all-items', [CartController::class, 'removeAllItems'])->name('cart.removeAllItems');
+    Route::get('/increaseQuantity/{id}', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
+    Route::get('/decreaseQuantity/{id}', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/checkout', function () {
+        return view('Pages.checkout');
+    })->name('checkout');
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
-Route::delete('/cart/remove/{itemId}', [CartController::class, 'removeItem'])->name('cart.remove');
-Route::post('/cart/remove-all-items', [CartController::class, 'removeAllItems'])->name('cart.removeAllItems');
-Route::get('/increaseQuantity/{id}', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
-Route::get('/decreaseQuantity/{id}', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
-Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-Route::get('/checkout', function () {
-    return view('Pages.checkout');
-})->name('checkout');
-
-Route::get('/thankyou', function () {
-    return view('Pages.thankyou');
-})->name('thankyou');
-
+    Route::get('/thankyou', function () {
+        return view('Pages.thankyou');
+    })->name('thankyou');
+});
 
 // ************************* Addtional routes *************************
 
